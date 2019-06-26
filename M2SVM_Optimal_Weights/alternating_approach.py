@@ -43,31 +43,54 @@ def alternating_approach(maximum_number_iterations_alternating_approach,
     new_objective_value_second_step = default_new_objective_value_second_step
     output_alternating_approach_by_iteration = {}
     while iteration_alternating_approach <= maximum_number_iterations_alternating_approach or default_difference_objective_values_second_step <= threshold_difference_objective_values_second_step:
+        ###################################################################################################################################################################################################
+        # ASUN: The alpha variables are the optimal solution of the Multiclass Support Vector Machine optimization problem. Such a problem is a convex quadratic problem which is solved using Cplex.
+        # Since the objective of this repo is to compare the performance of the different non-linear solvers, it is desirable to avoid the computation of any extra optimization problem. Hence,I copy 
+        # and fix the results of the alpha variables obtained for a toy example with 12 individuals and SVM_regularization_parameter = 1e-3, i.e., C = 1/(1e-3) = 1e3. However, the code which computes
+        # the optimal variables in a general case will be just commented and not deleted.
+        # If further information about this point is necessary, please do not hesitate to contact Asun =)
         
-        initial_variables = get_initial_variables(iteration_alternating_approach = iteration_alternating_approach,
-                                                  seed_initialize_parameters = seed_initialize_parameters,
-                                                  number_of_nodes = number_of_nodes,
-                                                  index_SVM_regularization_parameter = index_SVM_regularization_parameter,
-                                                  bounds_weights = bounds_weights,
-                                                  variables_previous_iteration = variables_previous_iteration,
-                                                  initial_weights = initial_weights,
-                                                  line = line)
-        
-        output_first_step = fsap.run_first_step_alternating_approach(SVM_regularization_parameter = SVM_regularization_parameter,
-                                                                     number_of_nodes = number_of_nodes,
-                                                                     index_SVM_regularization_parameter = index_SVM_regularization_parameter,
-                                                                     sample_to_train = sample_names[0],
-                                                                     transformed_label_all_samples = transformed_label_all_samples,
-                                                                     new_label_values = new_label_values,
-                                                                     data_all_samples = data_all_samples,
-                                                                     number_of_renewable_energy = number_of_renewable_energy,
-                                                                     correspondence_time_period_line_all_samples = correspondence_time_period_line_all_samples,
-                                                                     sample_by_line = sample_by_line,
-                                                                     initial_variables = initial_variables,
-                                                                     sample_names = sample_names,
-                                                                     line = line,
-                                                                     label_values = label_values)
-        alpha_variables = output_first_step['alpha_variables']
+#        initial_variables = get_initial_variables(iteration_alternating_approach = iteration_alternating_approach,
+#                                                  seed_initialize_parameters = seed_initialize_parameters,
+#                                                  number_of_nodes = number_of_nodes,
+#                                                  index_SVM_regularization_parameter = index_SVM_regularization_parameter,
+#                                                  bounds_weights = bounds_weights,
+#                                                  variables_previous_iteration = variables_previous_iteration,
+#                                                  initial_weights = initial_weights,
+#                                                  line = line)
+#        
+#        output_first_step = fsap.run_first_step_alternating_approach(SVM_regularization_parameter = SVM_regularization_parameter,
+#                                                                     number_of_nodes = number_of_nodes,
+#                                                                     index_SVM_regularization_parameter = index_SVM_regularization_parameter,
+#                                                                     sample_to_train = sample_names[0],
+#                                                                     transformed_label_all_samples = transformed_label_all_samples,
+#                                                                     new_label_values = new_label_values,
+#                                                                     data_all_samples = data_all_samples,
+#                                                                     number_of_renewable_energy = number_of_renewable_energy,
+#                                                                     correspondence_time_period_line_all_samples = correspondence_time_period_line_all_samples,
+#                                                                     sample_by_line = sample_by_line,
+#                                                                     initial_variables = initial_variables,
+#                                                                     sample_names = sample_names,
+#                                                                     line = line,
+#                                                                     label_values = label_values)
+#        alpha_variables = output_first_step['alpha_variables']
+        pdb.set_trace()
+        ###################################################################################################################################################################################################
+        alpha_variables = pd.DataFrame(data = {1: [1e-6, 1e-7, 0.999],
+                                              2: [1e-6, 1e-7, 0.999],
+                                              3: [1e-5, 1e-7, 0.999],
+                                              4: [0.000112, 0.203, 0.796],
+                                              5: [1e-5, 0.999, 1e-7],
+                                              6: [1e-5, 1e-6, 0.999],
+                                              7: [0.00108, 0.796, 0.203],
+                                              8: [1e-5, 0.999, 1e-7],
+                                              9: [1e-5, 0.999, 1e-7],
+                                              10: [1e-6, 0.999, 1e-7],
+                                              11: [1e-6, 0.999, 1e-7],
+                                              12: [1e-6, 0.999, 1e-7]},
+                                        index = new_label_values)
+    
+        pdb.set_trace()
         output_second_step = ssap.run_second_step_alternating_approach(alpha_variables = alpha_variables,
                                                                        initial_variables = initial_variables,
                                                                        maximum_number_iterations_multistart = maximum_number_iterations_multistart,

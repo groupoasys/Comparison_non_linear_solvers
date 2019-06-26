@@ -16,7 +16,6 @@ from system import sys
 import pandas as pd
 import numpy as np
 import pdb
-from illustrative_example import *
 import pickle
 
 
@@ -65,7 +64,7 @@ weights_choices = np.array([[1, 1, 1],
                          [5, 0, 1],
                          [0, 5, 1]],
                          dtype = float)
-SVM_regularization_parameter_grid = [10**range_element for range_element in range(-4, 5)]
+SVM_regularization_parameter_grid = [10**range_element for range_element in range(-3, -2)]
 
 #for choice in range(len(weights_choices)):
 #    weights_values[1,:] = weights_choices[choice,:]

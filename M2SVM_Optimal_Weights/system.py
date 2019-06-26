@@ -9,7 +9,6 @@ from pyomo.opt import TerminationCondition
 import pandas as pd
 from sklearn import neighbors, svm, tree
 from sklearn.cluster import KMeans
-from salva import list2dict, listlist2dict
 from datetime import datetime
 from learning import learn_line_separate
 import sampling as smp
@@ -865,7 +864,7 @@ class sys:
         lowest_label_value = -1
         highest_label_value = 1
         sample_to_get_best_parameters = sample_names[2]
-        maximum_number_iterations_alternating_approach = 10
+        maximum_number_iterations_alternating_approach = 1
         threshold_difference_objective_values_second_step = 1e-5
         default_difference_objective_values_second_step = 1e5
         seed_initialize_parameters = 1133
@@ -896,7 +895,6 @@ class sys:
         file_to_write = open(csv_file, 'a')
         file_to_write.write('data_file' + ',' + 'line' + ',' +"%zeros" +',' +"%ones" +',' +"%minus_ones" +',' + 'approach' + ',' + '% total accuracy' + ',' + 'SVM reg param' + ',' +'weights'+'\n')
         file_to_write.close()
-        output_first_step = {}
         
         pltu.plot_individuals_samples(sample_by_line = samples[line],
                                       sample_names = ['training_1', 'training_2', 'validation'],
