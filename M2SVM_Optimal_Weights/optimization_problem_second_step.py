@@ -79,15 +79,18 @@ def objective_function(model):
 def constraint_epigraph(model,
                         time_period,
                         label):
-    constraint = model.epigraph_variables[time_period]>= (1/(2*model.SVM_regularization_parameter))*sum((msvm.dirac_delta(value_1 = label,
+    constraint = model.epigraph_variables[time_period]>= ((1/(2*model.SVM_regularization_parameter))*sum((msvm.dirac_delta(value_1 = label,
                                                                                                                           value_2 = model.label_alpha_variables.iat[time_period_1 - 1, 0]) 
                                                                                                         - model.alpha_variables.at[label, time_period_1] 
-                                                                                                        - 1 
+                                                                                                        - msvm.dirac_delta(value_1 = model.label_to_train.iat[time_period - 1, 0],
+                                                                                                                          value_2 = model.label_alpha_variables.iat[time_period_1 - 1, 0]) 
                                                                                                         + model.alpha_variables.at[model.label_to_train.iat[time_period - 1, 0], time_period_1])*kernel_function_second_step(model = model,
                                                                                                                                                                                                                              time_period_1 = time_period,
-                                                                                                                                                                                                                             time_period_2 = time_period_1) for time_period_1 in model.indexes_time_periods_first_sample)- msvm.dirac_delta(value_1 = label,
-                                                                                                                                                                                                                                                                                                                      value_2 = model.label_to_train.iat[time_period - 1, 0]) + 1
-
+                                                                                                                                                                                                                             time_period_2 = time_period_1) for time_period_1 in model.indexes_time_periods_first_sample))- msvm.dirac_delta(value_1 = label,
+                                                                                                                                                                                                                                                                                                                                             value_2 = model.label_to_train.iat[time_period - 1, 0]) + 1
+                                                                                                        
+                                                                                                        
+    
     return constraint
 
 def kernel_function_second_step(model,
@@ -110,7 +113,6 @@ def kernel_function_second_step(model,
     if(model.number_of_renewable_energy > 0):
         raise error.my_custom_error("The optimization of the second step is not designed for a number of renewable energy greater than 0. Please, check the value variable in the kernel function.")
         
-    
     value = (1 + msvm.dirac_delta(value_1 = line_associated_to_time_period_1,
                                   value_2 = line_associated_to_time_period_2))*pe.exp(-sum(squared_difference_between_individuals.iloc[node - 1, 0]*model.weights_variables[node] for node in model.indexes_nodes))    
     return value

@@ -44,6 +44,15 @@ def alternating_approach(maximum_number_iterations_alternating_approach,
     new_objective_value_second_step = default_new_objective_value_second_step
     output_alternating_approach_by_iteration = {}
     while iteration_alternating_approach <= maximum_number_iterations_alternating_approach or default_difference_objective_values_second_step <= threshold_difference_objective_values_second_step:
+        
+        initial_variables = get_initial_variables(iteration_alternating_approach = iteration_alternating_approach,
+                                                  seed_initialize_parameters = seed_initialize_parameters,
+                                                  number_of_nodes = number_of_nodes,
+                                                  index_SVM_regularization_parameter = index_SVM_regularization_parameter,
+                                                  bounds_weights = bounds_weights,
+                                                  variables_previous_iteration = variables_previous_iteration,
+                                                  initial_weights = initial_weights,
+                                                  line = line)
         ###################################################################################################################################################################################################
         # ASUN: The alpha variables are the optimal solution of the Multiclass Support Vector Machine optimization problem. Such a problem is a convex quadratic problem which is solved using Cplex.
         # Since the objective of this repo is to compare the performance of the different non-linear solvers, it is desirable to avoid the computation of any extra optimization problem. Hence,I copy 
@@ -51,15 +60,6 @@ def alternating_approach(maximum_number_iterations_alternating_approach,
         # the optimal variables in a general case will be just commented and not deleted.
         # If further information about this point is necessary, please do not hesitate to contact Asun =)
         
-#        initial_variables = get_initial_variables(iteration_alternating_approach = iteration_alternating_approach,
-#                                                  seed_initialize_parameters = seed_initialize_parameters,
-#                                                  number_of_nodes = number_of_nodes,
-#                                                  index_SVM_regularization_parameter = index_SVM_regularization_parameter,
-#                                                  bounds_weights = bounds_weights,
-#                                                  variables_previous_iteration = variables_previous_iteration,
-#                                                  initial_weights = initial_weights,
-#                                                  line = line)
-#        
 #        output_first_step = fsap.run_first_step_alternating_approach(SVM_regularization_parameter = SVM_regularization_parameter,
 #                                                                     number_of_nodes = number_of_nodes,
 #                                                                     index_SVM_regularization_parameter = index_SVM_regularization_parameter,
@@ -76,6 +76,9 @@ def alternating_approach(maximum_number_iterations_alternating_approach,
 #                                                                     label_values = label_values)
 #        alpha_variables = output_first_step['alpha_variables']
         ###################################################################################################################################################################################################
+        output_first_step = {}
+        output_first_step['accuracy'] = {}
+        output_first_step['accuracy'][sample_names[1]] = 1e2
         alpha_variables = pd.DataFrame(data = {1: [1e-6, 1e-7, 0.999],
                                               2: [1e-6, 1e-7, 0.999],
                                               3: [1e-5, 1e-7, 0.999],

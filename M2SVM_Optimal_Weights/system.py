@@ -892,17 +892,19 @@ class sys:
         else:
             approach = 'random'
         csv_file = folder_results_msvm + csv_file_name +'_' + approach + '.csv'
-        file_to_write = open(csv_file, 'a')
-        file_to_write.write('data_file' + ',' + 'line' + ',' +"%zeros" +',' +"%ones" +',' +"%minus_ones" +',' + 'approach' + ',' + '% total accuracy' + ',' + 'SVM reg param' + ',' +'weights'+'\n')
-        file_to_write.close()
-        
-        pltu.plot_individuals_samples(sample_by_line = samples[line],
-                                      sample_names = ['training_1', 'training_2', 'validation'],
-                                      data = data_train_normalized,
-                                      label = y_train.copy().iloc[:,line_to_learn - 1],
-                                      label_values = label_values,
-                                      folder_results_msvm = folder_results_msvm)
-        
+        ######################################################################################
+        # This code is not necessary in the solvers comparison
+#        file_to_write = open(csv_file, 'a')
+#        file_to_write.write('data_file' + ',' + 'line' + ',' +"%zeros" +',' +"%ones" +',' +"%minus_ones" +',' + 'approach' + ',' + '% total accuracy' + ',' + 'SVM reg param' + ',' +'weights'+'\n')
+#        file_to_write.close()
+#        
+#        pltu.plot_individuals_samples(sample_by_line = samples[line],
+#                                      sample_names = ['training_1', 'training_2', 'validation'],
+#                                      data = data_train_normalized,
+#                                      label = y_train.copy().iloc[:,line_to_learn - 1],
+#                                      label_values = label_values,
+#                                      folder_results_msvm = folder_results_msvm)
+        ######################################################################################
         for line in range(1, 2):
             print("The congestion of line %d is learnt with the multiclass SVM method" % (line + 1))
             data = pd.concat([data_train_normalized, data_test_normalized])

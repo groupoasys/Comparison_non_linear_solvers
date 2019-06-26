@@ -8,7 +8,7 @@ import numpy as np
 import pdb
 import parameter_tuning_grid as ptg
 import pandas as pd
-from pyomo.opt import SolverFactory
+from pyomo.opt import SolverFactory, SolverStatus, TerminationCondition
 import optimization_problem_second_step as opss
 import pyomo.environ as pe
 import prediction as pred
@@ -73,6 +73,9 @@ def run_multistart_approach(alpha_variables,
         results_solver = solver.solve(multistart_model,
                                       tee = True,
                                       opt = 'conopt')
+#        pdb.set_trace()
+#        print(results_solver.solver.status)
+#        print(results_solver.solver.termination_condition)
         
         final_time_second_step = timeit.default_timer()
         elapsed_time_second_step = final_time_second_step - initial_time_second_step
@@ -112,6 +115,30 @@ def run_multistart_approach(alpha_variables,
         results_multistart[iteration_multistart]['accuracy'] = accuracy
         results_multistart[iteration_multistart]['objective_value'] = objective_value_multistart
         results_multistart[iteration_multistart]['elapsed_time'] = elapsed_time_second_step
+        
+        kernel_matrix_test_initial_solution = pred.get_kernel_matrix(data_all_samples = data_all_samples,
+                                                             weights = initial_variables_multistart,
+                                                               correspondence_time_period_line_all_samples = correspondence_time_period_line_all_samples,
+                                                               sample_by_line = sample_by_line,
+                                                               first_sample = sample_names[0],
+                                                               second_sample = sample_names[1],
+                                                               line = line,
+                                                               number_of_renewable_energy = number_of_renewable_energy,
+                                                               label_first_sample = true_label['training_1'],
+                                                               label_second_sample = true_label['training_2'])
+        
+        kernel_matrix_test_optimal_solution = pred.get_kernel_matrix(data_all_samples = data_all_samples,
+                                                             weights = weights_variables,
+                                                               correspondence_time_period_line_all_samples = correspondence_time_period_line_all_samples,
+                                                               sample_by_line = sample_by_line,
+                                                               first_sample = sample_names[0],
+                                                               second_sample = sample_names[1],
+                                                               line = line,
+                                                               number_of_renewable_energy = number_of_renewable_energy,
+                                                               label_first_sample = true_label['training_1'],
+                                                               label_second_sample = true_label['training_2'])
+        
+        pdb.set_trace()
     return results_multistart
 
 
