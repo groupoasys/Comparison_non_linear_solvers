@@ -10,6 +10,7 @@ import math
 import pdb
 import pandas as pd
 import second_step_alternating_approach as ssap
+import error_handling as error
 
 def alternating_approach(maximum_number_iterations_alternating_approach,
                          threshold_difference_objective_values_second_step,
@@ -74,7 +75,6 @@ def alternating_approach(maximum_number_iterations_alternating_approach,
 #                                                                     line = line,
 #                                                                     label_values = label_values)
 #        alpha_variables = output_first_step['alpha_variables']
-        pdb.set_trace()
         ###################################################################################################################################################################################################
         alpha_variables = pd.DataFrame(data = {1: [1e-6, 1e-7, 0.999],
                                               2: [1e-6, 1e-7, 0.999],
@@ -89,7 +89,9 @@ def alternating_approach(maximum_number_iterations_alternating_approach,
                                               11: [1e-6, 0.999, 1e-7],
                                               12: [1e-6, 0.999, 1e-7]},
                                         index = new_label_values)
-    
+        if(len(data_all_samples['training_1']) != alpha_variables.shape[1] or SVM_regularization_parameter != 1e-3):
+            raise error.my_custom_error("The data set or the regularization parameter has changed. Please, ask Asun to check the status of the alpha variables")
+        
         pdb.set_trace()
         output_second_step = ssap.run_second_step_alternating_approach(alpha_variables = alpha_variables,
                                                                        initial_variables = initial_variables,
