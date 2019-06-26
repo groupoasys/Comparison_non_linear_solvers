@@ -39,11 +39,11 @@ def alternating_approach(maximum_number_iterations_alternating_approach,
                          label_values):
     
     iteration_alternating_approach = 0
-    difference_objective_values = default_difference_objective_values_second_step
+    difference_objective_values_second_step = default_difference_objective_values_second_step
     variables_previous_iteration = np.array([math.nan]*number_of_nodes)
     new_objective_value_second_step = default_new_objective_value_second_step
     output_alternating_approach_by_iteration = {}
-    while iteration_alternating_approach <= maximum_number_iterations_alternating_approach or default_difference_objective_values_second_step <= threshold_difference_objective_values_second_step:
+    while iteration_alternating_approach <= maximum_number_iterations_alternating_approach or difference_objective_values_second_step <= threshold_difference_objective_values_second_step:
         
         initial_variables = get_initial_variables(iteration_alternating_approach = iteration_alternating_approach,
                                                   seed_initialize_parameters = seed_initialize_parameters,

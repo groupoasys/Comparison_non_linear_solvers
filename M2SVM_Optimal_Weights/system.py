@@ -870,7 +870,7 @@ class sys:
         seed_initialize_parameters = 1133
         number_of_nodes = self.n_bus
         bounds_weights = {'lower_bound': 0,
-                         'upper_bound_initial_solution': 1}
+                         'upper_bound_initial_solution': 10}
         label_values = [-1, 0, 1]
         new_label_values = [1, 2, 3]
         if net_demand:
