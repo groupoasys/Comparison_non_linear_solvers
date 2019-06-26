@@ -43,7 +43,7 @@ def alternating_approach(maximum_number_iterations_alternating_approach,
     variables_previous_iteration = np.array([math.nan]*number_of_nodes)
     new_objective_value_second_step = default_new_objective_value_second_step
     output_alternating_approach_by_iteration = {}
-    while iteration_alternating_approach <= maximum_number_iterations_alternating_approach or difference_objective_values_second_step <= threshold_difference_objective_values_second_step:
+    while iteration_alternating_approach <= maximum_number_iterations_alternating_approach and difference_objective_values_second_step >= threshold_difference_objective_values_second_step:
         
         initial_variables = get_initial_variables(iteration_alternating_approach = iteration_alternating_approach,
                                                   seed_initialize_parameters = seed_initialize_parameters,
@@ -95,7 +95,7 @@ def alternating_approach(maximum_number_iterations_alternating_approach,
         if(len(data_all_samples['training_1']) != alpha_variables.shape[1] or SVM_regularization_parameter != 1e-3):
             raise error.my_custom_error("The data set or the regularization parameter has changed. Please, ask Asun to check the status of the alpha variables")
         
-        pdb.set_trace()
+        
         output_second_step = ssap.run_second_step_alternating_approach(alpha_variables = alpha_variables,
                                                                        initial_variables = initial_variables,
                                                                        maximum_number_iterations_multistart = maximum_number_iterations_multistart,
@@ -125,15 +125,17 @@ def alternating_approach(maximum_number_iterations_alternating_approach,
         
         old_objective_value_second_step = new_objective_value_second_step
         new_objective_value_second_step = output_second_step['optimal_objective_value']
-        difference_objective_values = new_objective_value_second_step - old_objective_value_second_step
+        difference_objective_values_second_step = abs(new_objective_value_second_step - old_objective_value_second_step)
         last_iteration_alternating_approach = iteration_alternating_approach
-        iteration_alternating_approach = iteration_alternating_approach + 1
         
         output_alternating_approach_by_iteration[iteration_alternating_approach] = {'first_step': output_first_step,
                                                                                     'second_step': output_second_step}
+        iteration_alternating_approach = iteration_alternating_approach + 1
+    
     
     output_alternating_approach = output_alternating_approach_by_iteration[last_iteration_alternating_approach]
     output_alternating_approach['last_iteration_alternating_approach'] = last_iteration_alternating_approach
+
     return output_alternating_approach
 
 def get_initial_variables(iteration_alternating_approach,

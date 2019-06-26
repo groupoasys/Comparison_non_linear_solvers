@@ -877,7 +877,7 @@ class sys:
             number_of_renewable_energy = 0
         else:
             number_of_renewable_energy = 1
-        maximum_number_iterations_multistart = 5
+        maximum_number_iterations_multistart = 2
         perturbation_multistart_variables = {'weights': 1}
         seed_multistart = 1219
         default_new_objective_value_second_step = 1e3
