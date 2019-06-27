@@ -885,13 +885,17 @@ class sys:
         folder_results_msvm = 'results_msvm/'
         if not (os.path.isdir('./' + folder_results_msvm)):
             os.mkdir(folder_results_msvm)
-        csv_file_name = 'results_all_lines'
+        csv_file_name = 'results_multistart'
       
         if weight_ptdf:
             approach = 'ptdf'
         else:
             approach = 'random'
-        csv_file = folder_results_msvm + csv_file_name +'_' + approach + '.csv'
+        csv_file = folder_results_msvm + csv_file_name + '.csv'
+        file_to_write = open(csv_file, 'a')
+        file_to_write.write('multistart' + ',' + 'objective value' + ','+ 'elapsed time\n')
+        file_to_write.close()
+        
         ######################################################################################
         # This code is not necessary in the solvers comparison
 #        file_to_write = open(csv_file, 'a')
@@ -911,11 +915,6 @@ class sys:
             data.index = range(1, len(data) + 1)
             label = pd.concat([self.y_train, self.y_test])
             label.index = range(1, len(label) + 1)
-          
-            percentage_individuals_of_label_zero = 100*len(label.iloc[:,line][label.iloc[:,line] == 0])/len(label.iloc[:,line])
-            percentage_individuals_of_label_one = 100*len(label.iloc[:,line][label.iloc[:,line] == 1])/len(label.iloc[:,line])
-            percentage_individuals_of_label_minus_one = 100*len(label.iloc[:,line][label.iloc[:,line] == -1])/len(label.iloc[:,line])
-            
             
             if weight_ptdf:
                initial_weights = np.absolute(np.array(self.ptdf[line]))
@@ -947,24 +946,22 @@ class sys:
                                                                            seed_multistart = seed_multistart,
                                                                            default_new_objective_value_second_step = default_new_objective_value_second_step,
                                                                            initial_weights = initial_weights)
-            pdb.set_trace()
+            
             file_name_to_save_results = folder_results_msvm + beggining_file_name_to_save_results + str(line + 1) +'_' + approach+'.pydata'          
             file_to_save = open(file_name_to_save_results, 'wb')
             pickle.dump(best_results_tune_parameters_grid[line], file_to_save)
             file_to_save.close()
-            score.append(best_results_tune_parameters_grid[line]['accuracy_all_samples']['test'])
-            mat_pred.append((best_results_tune_parameters_grid[line]['prediction_all_samples']['test']).tolist())
-            mat_prob.append((-0.5*np.ones(shape = len(y_test_line),dtype = float)).tolist())
-          
-            file_to_read = open(file_name_to_save_results, 'rb')
-            results_to_save = pickle.load(file_to_read)
-          
-                    
+            
             file_to_write = open(csv_file, 'a')
-            file_to_write.write(self.data_file + ',' + str((line + 1)) + ','+ str(percentage_individuals_of_label_zero +approach) + ',' +str(percentage_individuals_of_label_one) + ','+str(percentage_individuals_of_label_minus_one)+',' + str(results_to_save['accuracy_all_samples']['test']) + ',' +str(best_results_tune_parameters_grid[line]['best_SVM_regularization_parameter']) +',' +','.join(map(str, list(results_to_save['weights'][0].values)))+'\n')
+            objective_values = []
+            elapsed_times = []
+            for iteration_multistart in range(1, maximum_number_iterations_multistart + 1):    
+                objective_values.append(best_results_tune_parameters_grid[line]['results_multistart'][iteration_multistart - 1]['objective_value'])
+                elapsed_times.append(best_results_tune_parameters_grid[line]['results_multistart'][iteration_multistart - 1]['elapsed_time'])
+                file_to_write.write(str(iteration_multistart) + ',' + str(objective_values[iteration_multistart - 1]) + ','+ str(elapsed_times[iteration_multistart - 1]) +'\n')
             file_to_write.close()
         
-      
+        pdb.set_trace()
         file_name_all_results = folder_results_msvm + 'all_results'+ '_' + approach + '.pydata'
         file_to_save = open(file_name_all_results, 'wb')
         pickle.dump((best_results_tune_parameters_grid, score, mat_pred, mat_prob), file_to_save)
