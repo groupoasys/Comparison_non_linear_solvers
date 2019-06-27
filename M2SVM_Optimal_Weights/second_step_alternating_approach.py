@@ -61,6 +61,7 @@ def run_second_step_alternating_approach(alpha_variables,
                                  'best_prediction': best_prediction,
                                  'label': associated_label,
                                  'optimal_weights': optimal_weights,
-                                 'optimal_objective_value': optimal_objective_value}
+                                 'optimal_objective_value': optimal_objective_value,
+                                 'results_multistart': results_multistart}
     return output_results_multistart
     

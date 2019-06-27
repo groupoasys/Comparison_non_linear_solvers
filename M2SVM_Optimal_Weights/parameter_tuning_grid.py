@@ -152,7 +152,8 @@ def get_prediction_all_samples(sample_names,
                                                            label_values = label_values)
     prediction_all_samples = output_alternating_approach['second_step']['best_prediction']
     output_prediction_all_samples = {'prediction': prediction_all_samples,
-                                     'weights': output_alternating_approach['second_step']['optimal_weights']}
+                                     'weights': output_alternating_approach['second_step']['optimal_weights'],
+                                     'results_multistart':output_alternating_approach['second_step']['results_multistart']}
     
     return output_prediction_all_samples
     
@@ -236,6 +237,7 @@ def get_performance_results_all_SVM_regularization_parameters(SVM_regularization
                                                         sample_names = sample_names)
         performance_results_by_SVM_regularization_parameter['weights'] = output_prediction_all_samples['weights']
         performance_results_by_SVM_regularization_parameter["accuracy"] = accuracy_all_samples
+        performance_results_by_SVM_regularization_parameter['results_multistart'] = output_prediction_all_samples['results_multistart']
         
         performance_results_all_SVM_regularization_parameters.append(performance_results_by_SVM_regularization_parameter)
     return performance_results_all_SVM_regularization_parameters
@@ -255,7 +257,8 @@ def get_best_results_tune_parameters_grid(performance_results_all_SVM_regulariza
                     'best_accuracy': best_accuracy,
                     'accuracy_all_samples': accuracy_all_samples,
                     'prediction_all_samples': prediction_all_samples,
-                    'weights': weights}
+                    'weights': weights,
+                    'results_multistart': performance_results_all_SVM_regularization_parameters[best_SVM_regularization_parameter_index]['results_multistart']}
     return best_results
 
 def get_transformed_label_all_samples(label_all_samples,
