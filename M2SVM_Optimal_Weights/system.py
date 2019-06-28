@@ -22,6 +22,7 @@ import parameter_tuning_grid as ptg
 import error_handling as error
 import prediction as prediction
 import plot_utils as pltu
+from statistics import mean 
 
 class sys:
 
@@ -960,6 +961,19 @@ class sys:
                 elapsed_times.append(best_results_tune_parameters_grid[line]['results_multistart'][iteration_multistart - 1]['elapsed_time'])
                 file_to_write.write(str(iteration_multistart) + ',' + str(objective_values[iteration_multistart - 1]) + ','+ str(elapsed_times[iteration_multistart - 1]) +'\n')
             file_to_write.close()
+            
+        mean_objective_values = mean(objective_values)
+        mean_elapsed_times = mean(elapsed_times)
+        maximum_objective_value = max(objective_values)
+        minimum_objective_value = min(objective_values)
+        maximum_elapsed_time = max(elapsed_times)
+        minimum_maximum_elapsed_time = min(elapsed_times)
+        
+        csv_file_summary_results = folder_results_msvm + 'summary_results.csv'
+        file_to_write_summary = open(csv_file_summary_results, 'a')
+        file_to_write_summary.write('problem' + 'neos'+ 'solver'+ '# variables'+ '# constraints' + 'sense'+ 'mean obj. val.' + 'max obj. val.' + 'min obj. val.''mean comp. time' +'\n')
+        
+        file_to_write_summary.close()
         
         pdb.set_trace()
         file_name_all_results = folder_results_msvm + 'all_results'+ '_' + approach + '.pydata'
