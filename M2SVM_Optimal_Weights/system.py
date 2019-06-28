@@ -771,17 +771,6 @@ class sys:
                  weights_values = np.abs([[1, 1, 1],[1, 1, 1],[1, 1, 1]]),
                  SVM_regularization_parameter_grid = [10**range_element for range_element in range(0, 1)]):
     self.method = method  
-    self.level = level
-    mat_pred = []
-    mat_prob = []
-    score = []
-    mat_score = [[0,0,0],[0,0,0],[0,0,0]]
-    mat_score_trust = [[0,0,0],[0,0,0],[0,0,0]]
-    num_total = 0
-    num_trust = 0
-    num_right = 0
-    
-    #Method 11: illustrative m2svm optimization
     if method == 'illustrative_m2svm_optimization':
         if net_demand:
             x_train = pd.DataFrame(self.data.iloc[self.ini_train:self.end_train,:self.n_bus].values-self.data.iloc[self.ini_train:self.end_train,self.n_bus:2*self.n_bus].values)  
@@ -790,11 +779,9 @@ class sys:
             y_train = self.data.iloc[self.ini_train:self.end_train,2*self.n_bus:]    
             y_test = self.data.iloc[self.ini_test:self.end_test,2*self.n_bus:]
             if weight_ptdf:
-                weights = np.abs(self.ptdf) #ToDo: discuss this point with Salva.
-                #weights = np.abs([[1, 0, 0],[0.5, 0, 0],[1, 0, 0]])
+                weights = np.abs(self.ptdf) 
             else:
                 weights = [[1 for i in range(self.n_bus)] for line in range(self.n_lin)]
-                #weights = weights_values
         else:  
             x_train = self.data.iloc[self.ini_train:self.end_train,:2*self.n_bus]
             x_test = self.data.iloc[self.ini_test:self.end_test,:2*self.n_bus].reset_index().iloc[:,1:]
@@ -986,119 +973,6 @@ class sys:
         file_to_write_summary.close()
         
         pdb.set_trace()
-        file_name_all_results = folder_results_msvm + 'all_results'+ '_' + approach + '.pydata'
-        file_to_save = open(file_name_all_results, 'wb')
-        pickle.dump((best_results_tune_parameters_grid, score, mat_pred, mat_prob), file_to_save)
-        file_to_save.close()
-    
-    # End if for methods
-    mat_true = self.y_test.T.values.tolist()    
-    for line in range(len(mat_pred)):
-      for time in range(len(mat_pred[0])):
-        mat_score[int(mat_true[line][time])+1][int(mat_pred[line][time])+1] += 1  
-        if mat_prob[line][time] < level:
-          mat_pred[line][time] = 2  
-        else:  
-          mat_score_trust[int(mat_true[line][time])+1][int(mat_pred[line][time])+1] += 1  
-    self.line_forecast = pd.DataFrame(mat_pred).T
-    #self.score = 100*sum(score)/len(score)
-    self.mat_score = mat_score      
-    self.mat_score_trust = mat_score_trust
- 
-  # Write mat_score to a text file
-  def write_mat_score(self,text_file):
-    f = open(text_file, 'a')
-    f.write(self.data_file+','+self.method+','+str(self.level)+','+str(self.mat_score_trust[0][0])+','+str(self.mat_score_trust[0][1])+','+str(self.mat_score_trust[0][2])+','+str(self.mat_score_trust[1][0])+','+str(self.mat_score_trust[1][1])+','+str(self.mat_score_trust[1][2])+','+str(self.mat_score_trust[2][0])+','+str(self.mat_score_trust[2][1])+','+str(self.mat_score_trust[2][2])+'\n')
-    f.close()
-
-  # Compute the load shedding
-  def compute_shd(self,data_file,ini,end):
-      data = pd.read_csv(data_file, index_col=False)
-      shd = 0
-      dem = 0
-      for i,t in enumerate(range(ini,end)):
-        dem_day = data.iloc[24*t:24*(t+1),:self.n_bus]
-        win_day = data.iloc[24*t:24*(t+1),self.n_bus:2*self.n_bus]
-        m0,res0 = self.solve(dem_day,win_day,self.sta0(24),self.gen0(24),0)
-        shd += m0.tot_shd
-        dem += m0.tot_dem
-      return 100*shd/dem
-
-  # Once I have learnt the status of the lines, I solve the reduce unit commitment problems for each day
-  def solve_uc(self,results_file):
-    n_infes = 0
-    cost_prod = 0
-    cost = 0
-    tot_shed = 0
-    tot_dem = 0
-    day_shed = []
-    max_hour_shed = []
-    time = 0
-    for i,t in enumerate(range(self.ini_test,self.end_test)):
-        print('Solving day ',i)
-        dem_day = self.data.iloc[24*t:24*(t+1),:self.n_bus]
-        win_day = self.data.iloc[24*t:24*(t+1),self.n_bus:2*self.n_bus]
-        m1,res1 = self.solve(dem_day,win_day,self.line_forecast.iloc[24*i:24*(i+1),:],self.gen0(24),0)
-        if str(res1.solver.termination_condition) != 'optimal':
-            n_infes += 1
-        else:
-            m2,res2 = self.solve(dem_day,win_day,self.sta0(24),self.gen1(m1),1)        
-            cost += m2.z.value
-            cost_prod += m2.cost
-            tot_shed += m2.day_shd
-            tot_dem += m2.day_dem
-            day_shed.append(100*m2.day_shd/m2.day_dem)
-            max_hour_shed.append(m2.max_hour_shd)
-            time += res1['Solver'][0]['Time']
-    print('Printing the results in file')
-    f = open(results_file, 'a')
-    f.write(self.data_file+','+str(self.slack_bus)+','+self.method+','+str(self.mat_score_trust[0][1]+self.mat_score_trust[2][1])+','+str(self.mat_score_trust[1][1])+','+str(cost)+','+str(cost_prod)+','+str(round(100*tot_shed/tot_dem,6))+','+str(round(max(day_shed),6))+','+str(round(max(max_hour_shed),6))+','+str(round(time,2))+','+str(n_infes)+'\n')
-    f.close()
-    results = pd.read_csv(results_file)
-    print(results)
-    
-  def solve_uc_illustrative_example(self,results_file):
-    n_infes = 0
-    cost_prod = 0
-    cost = 0
-    tot_shed = 0
-    tot_dem = 0
-    day_shed = []
-    max_hour_shed = []
-    time = 0
-    for i,t in enumerate(range(self.ini_test,self.end_test)):
-        print('Solving time period ',i)
-        dem_day = self.data.iloc[t:(t+1),:self.n_bus]
-        win_day = self.data.iloc[t:(t+1),self.n_bus:2*self.n_bus]
-        m1,res1 = self.solve(dem_day,
-                             win_day,
-                             self.line_forecast.iloc[i:(i+1),:],
-                             self.gen0(self.end_test - self.ini_test),
-                             fix = 0)
-        if str(res1.solver.termination_condition) != 'optimal':
-            n_infes += 1
-        else:
-            m2,res2 = self.solve(dem_day,
-                                 win_day,
-                                 self.sta0(self.end_test - self.ini_test),
-                                 self.gen1(m1),
-                                 fix = 1)        
-            cost += m2.z.value
-            cost_prod += m2.cost
-            tot_shed += m2.day_shd
-            tot_dem += m2.day_dem
-            day_shed.append(100*m2.day_shd/m2.day_dem)
-            max_hour_shed.append(m2.max_hour_shd)
-            time += res1['Solver'][0]['Time']
-    print('Printing the results in file')
-    f = open(results_file, 'a')
-    f.write("data set, method, weights,score_trust_ones, score_trust_zeros, cost, cost_prod, shedding, max_day_shed, max_hour_shed, time, infeasibilities\n")
-    f.write(self.data_file+','+self.method+','+self.approach+','+str(self.mat_score_trust[0][1]+self.mat_score_trust[2][1])+','+str(self.mat_score_trust[1][1])+','+str(cost)+','+str(cost_prod)+','+str(round(100*tot_shed/tot_dem,6))+','+str(round(max(day_shed),6))+','+str(round(max(max_hour_shed),6))+','+str(round(time,2))+','+str(n_infes)+'\n')
-    f.close()
-    results = pd.read_csv(results_file)
-    print(results)
-
-    
     
     
     
