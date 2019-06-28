@@ -893,7 +893,7 @@ class sys:
         else:
             approach = 'random'
         csv_file = folder_results_msvm + csv_file_name + '.csv'
-        file_to_write = open(csv_file, 'a')
+        file_to_write = open(csv_file, 'w+')
         file_to_write.write('multistart' + ',' + 'objective value' + ','+ 'elapsed time\n')
         file_to_write.close()
         
@@ -967,12 +967,22 @@ class sys:
         maximum_objective_value = max(objective_values)
         minimum_objective_value = min(objective_values)
         maximum_elapsed_time = max(elapsed_times)
-        minimum_maximum_elapsed_time = min(elapsed_times)
+        minimum_elapsed_time = min(elapsed_times)
+        solver = 'conopt'
+        neos_flag = True
+        if neos_flag:
+            neos_string = 'Yes'
+        else:
+            neos_string = 'No'
+        problem = 'm2svm_optimal_weights'
+        number_of_variables = -1
+        number_of_constraints = -1
+        sense_opt_problem = 'min'
         
         csv_file_summary_results = folder_results_msvm + 'summary_results.csv'
-        file_to_write_summary = open(csv_file_summary_results, 'a')
-        file_to_write_summary.write('problem' + 'neos'+ 'solver'+ '# variables'+ '# constraints' + 'sense'+ 'mean obj. val.' + 'max obj. val.' + 'min obj. val.''mean comp. time' +'\n')
-        
+        file_to_write_summary = open(csv_file_summary_results, 'w+')
+        file_to_write_summary.write('problem, ' + 'neos, '      + 'solver, '+ '# variables, '            + '# constraints, '            + 'sense, '           + 'mean obj. val., '            + 'max obj. val., '              + 'min obj. val., '              + 'mean comp. time, '       + 'max comp. time, '          + 'min comp. time, '          + '\n')
+        file_to_write_summary.write(problem + ','  + neos_string + ','+ solver + ',' + str(number_of_variables) + ','+ str(number_of_constraints) + ','+ sense_opt_problem + ','+  str(mean_objective_values) + ','+ str(maximum_objective_value)+ ',' + str(minimum_objective_value) + ','+ str(mean_elapsed_times) + ','+ str(maximum_elapsed_time) + ','+ str(minimum_elapsed_time) + '\n')
         file_to_write_summary.close()
         
         pdb.set_trace()
