@@ -1,10 +1,7 @@
 import pyomo.environ as pe
 import sys
-import random
 import numpy as np
 import pdb
-import time
-import logging
 from pyomo.opt import TerminationCondition
 import pandas as pd
 from sklearn import neighbors, svm, tree
@@ -20,7 +17,6 @@ import os
 import first_step_alternating_approach as fsap
 import parameter_tuning_grid as ptg
 import error_handling as error
-import prediction as prediction
 import plot_utils as pltu
 from statistics import mean 
 
@@ -62,14 +58,12 @@ class sys:
                          end_train,
                          ini_test,
                          end_test,
-                         periods = 1,
                          net_demand=False,
                          weight_ptdf=False):
     self.ini_train = ini_train
     self.end_train = end_train
     self.ini_test = ini_test
     self.end_test = end_test
-    self.period = periods
     self.net_demand = net_demand
     self.weight_ptdf = weight_ptdf
 
@@ -90,26 +84,7 @@ class sys:
           weights = [1 for i in range(2*self.n_bus)] 
     y_train = self.data.iloc[24*ini_train:24*end_train,2*self.n_bus:]    
     y_test = self.data.iloc[24*ini_test:24*end_test,2*self.n_bus:]
-    if periods==3:
-      weights = [weights[i] + weights[i] + weights[i] for i in range(len(weights))]
-      mat = []
-      for index, row in x_train.iterrows():
-        if (index+24)%24==0:
-          mat.append(x_train.iloc[index,:].to_list()+x_train.iloc[index,:].to_list()+x_train.iloc[index+1,:].to_list())
-        elif (index+1)%24==0:
-          mat.append(x_train.iloc[index-1,:].to_list()+x_train.iloc[index,:].to_list()+x_train.iloc[index,:].to_list())
-        else:
-          mat.append(x_train.iloc[index-1,:].to_list()+x_train.iloc[index,:].to_list()+x_train.iloc[index+1,:].to_list())
-      x_train = pd.DataFrame(mat)
-      mat = []
-      for index, row in x_test.iterrows():
-        if (index+24)%24==0:
-          mat.append(x_test.iloc[index,:].to_list()+x_test.iloc[index,:].to_list()+x_test.iloc[index+1,:].to_list())
-        elif (index+1)%24==0:
-          mat.append(x_test.iloc[index-1,:].to_list()+x_test.iloc[index,:].to_list()+x_test.iloc[index,:].to_list())
-        else:
-          mat.append(x_test.iloc[index-1,:].to_list()+x_test.iloc[index,:].to_list()+x_test.iloc[index+1,:].to_list())
-      x_test = pd.DataFrame(mat)
+    
     self.x_train = x_train
     self.y_train = y_train
     self.x_test = x_test
