@@ -16,7 +16,6 @@ from system import sys
 import pandas as pd
 import numpy as np
 import pdb
-import pickle
 
 
 directory_path = os.path.dirname(os.path.abspath(__file__))
@@ -66,8 +65,7 @@ weights_choices = np.array([[1, 1, 1],
                          dtype = float)
 SVM_regularization_parameter_grid = [10**range_element for range_element in range(-3, -2)]
 
-#for choice in range(len(weights_choices)):
-#    weights_values[1,:] = weights_choices[choice,:]
+
 all_data_information = sys2.learning_test_data(ini_train=ini_train,
                                                 ini_test=ini_test,
                                                 end_train=end_train,
@@ -80,15 +78,6 @@ sys2.learn_line(method = method,
                     weight_ptdf = weight_ptdf,
                     weights_values = weights_values,
                     SVM_regularization_parameter_grid = SVM_regularization_parameter_grid)
-#if weight_ptdf:
-#    sys2.solve_uc_illustrative_example('results_msvm/illustrative_UC_results_weights_ptdf.csv')
-#else:
-#    sys2.solve_uc_illustrative_example('results_msvm/illustrative_UC_results_weights_1.csv')
-#    
-#
-#file_to_load = 'results_msvm/illustrative_all_results_random.pydata'
-#file_to_read = open(file_to_load, 'rb')
-#results_to_save = pickle.load(file_to_read)
 
 
 
