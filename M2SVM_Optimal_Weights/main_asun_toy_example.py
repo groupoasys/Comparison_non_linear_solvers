@@ -72,12 +72,25 @@ all_data_information = sys2.learning_test_data(ini_train=ini_train,
                                                 end_test=end_test,
                                                 weight_ptdf=weight_ptdf,
                                                 net_demand=net_demand)
+solver = 'conopt'
+problem = 'm2svm_optimal_weights'
+neos_flag = True
+number_of_variables = -1
+number_of_constraints = -1
+sense_opt_problem = 'min'
+
 sys2.learn_line(method = method,
                     level = level,
                     net_demand = net_demand,
                     weight_ptdf = weight_ptdf,
                     weights_values = weights_values,
-                    SVM_regularization_parameter_grid = SVM_regularization_parameter_grid)
+                    SVM_regularization_parameter_grid = SVM_regularization_parameter_grid,
+                    solver = solver,
+                    problem = problem,
+                    neos_flag = neos_flag,
+                    number_of_variables = number_of_variables,
+                    number_of_constraints = number_of_constraints,
+                    sense_opt_problem = sense_opt_problem)
 
 
 

@@ -87,7 +87,13 @@ class sys:
                  net_demand = True,
                  weight_ptdf = True,
                  weights_values = np.abs([[1, 1, 1],[1, 1, 1],[1, 1, 1]]),
-                 SVM_regularization_parameter_grid = [10**range_element for range_element in range(0, 1)]):
+                 SVM_regularization_parameter_grid = [10**range_element for range_element in range(0, 1)],
+                 solver = 'ipopt',
+                 problem = '',
+                 neos_flag = False,
+                 number_of_variables = -1,
+                 number_of_constraints = -1,
+                 sense_opt_problem = 'min'):
     self.method = method  
     if method == 'illustrative_m2svm_optimization':
         if net_demand:
@@ -272,16 +278,11 @@ class sys:
         minimum_objective_value = min(objective_values)
         maximum_elapsed_time = max(elapsed_times)
         minimum_elapsed_time = min(elapsed_times)
-        solver = 'conopt'
-        neos_flag = True
+        
         if neos_flag:
             neos_string = 'Yes'
         else:
             neos_string = 'No'
-        problem = 'm2svm_optimal_weights'
-        number_of_variables = -1
-        number_of_constraints = -1
-        sense_opt_problem = 'min'
         
         csv_file_summary_results = folder_results_msvm + 'summary_results.csv'
         file_to_write_summary = open(csv_file_summary_results, 'w+')
