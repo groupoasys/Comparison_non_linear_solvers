@@ -287,7 +287,7 @@ class sys:
         csv_file_summary_results = folder_results_msvm + 'summary_results.csv'
         file_to_write_summary = open(csv_file_summary_results, 'w+')
         file_to_write_summary.write('problem, ' + 'neos, '      + 'solver, '+ '# variables, '            + '# constraints, '            + 'sense, '           + 'mean obj. val., '            + 'max obj. val., '              + 'min obj. val., '              + 'mean comp. time, '       + 'max comp. time, '          + 'min comp. time, '          + '\n')
-        file_to_write_summary.write(problem + ','  + neos_string + ','+ solver + ',' + str(number_of_variables) + ','+ str(number_of_constraints) + ','+ sense_opt_problem + ','+  str(mean_objective_values) + ','+ str(maximum_objective_value)+ ',' + str(minimum_objective_value) + ','+ str(mean_elapsed_times) + ','+ str(maximum_elapsed_time) + ','+ str(minimum_elapsed_time) + '\n')
+        file_to_write_summary.write(problem + ','  + neos_string + ','+ solver + ',' + str(number_of_variables) + ','+ str(number_of_constraints) + ','+ sense_opt_problem + ','+  str(round(mean_objective_values, 2)) + ','+ str(maximum_objective_value)+ ',' + str(minimum_objective_value) + ','+ str(mean_elapsed_times) + ','+ str(maximum_elapsed_time) + ','+ str(minimum_elapsed_time) + '\n')
         file_to_write_summary.close()
         
         
