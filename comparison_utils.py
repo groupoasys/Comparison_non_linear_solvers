@@ -87,8 +87,7 @@ def run_m2svm_optimal_weights(solver,
                     neos_flag = neos_flag,
                     number_of_variables = number_of_variables,
                     number_of_constraints = number_of_constraints,
-                    sense_opt_problem = sense_opt_problem,
-                    main_directory_data = main_directory_data)
+                    sense_opt_problem = sense_opt_problem)
     
     return 0
     

@@ -11,10 +11,16 @@ for name in dir():
     if not name.startswith('_'):
         del globals()[name]
 
-import comparison_utils as cu
+
 import os
+import pdb
 
 directory_path = os.path.dirname(os.path.abspath(__file__))
+os.chdir(directory_path)
+os.chdir('..\\')
+
+import comparison_utils as cu
+
 os.chdir(directory_path)
 
 solver = 'conopt'
@@ -30,10 +36,3 @@ cu.run_optimization_problem_given_solver(solver = solver,
                                          number_of_variables = number_of_variables,
                                          number_of_constraints = number_of_constraints,
                                          sense_opt_problem = sense_opt_problem)
-
-
-
-
-
-
-

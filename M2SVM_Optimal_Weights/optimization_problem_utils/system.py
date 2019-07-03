@@ -93,8 +93,7 @@ class sys:
                  neos_flag = False,
                  number_of_variables = -1,
                  number_of_constraints = -1,
-                 sense_opt_problem = 'min',
-                 main_directory_data = '.'):
+                 sense_opt_problem = 'min'):
     self.method = method  
     if method == 'illustrative_m2svm_optimization':
         if net_demand:
@@ -195,7 +194,7 @@ class sys:
         seed_multistart = 1219
         default_new_objective_value_second_step = 1e3
         beggining_file_name_to_save_results = 'results_by_line_'
-        folder_results_msvm = main_directory_data +'results_msvm/'
+        folder_results_msvm = 'results_m2svm_optimal_weights/'
         if not (os.path.isdir('./' + folder_results_msvm)):
             os.mkdir(folder_results_msvm)
         csv_file_name = 'results_multistart'
