@@ -176,7 +176,7 @@ class sys:
         lowest_label_value = -1
         highest_label_value = 1
         sample_to_get_best_parameters = sample_names[2]
-        maximum_number_iterations_alternating_approach = 1
+        maximum_number_iterations_alternating_approach = 0
         threshold_difference_objective_values_second_step = 1e-5
         default_difference_objective_values_second_step = 1e5
         seed_initialize_parameters = 1133
@@ -194,7 +194,7 @@ class sys:
         seed_multistart = 1219
         default_new_objective_value_second_step = 1e3
         beggining_file_name_to_save_results = 'results_by_line_'
-        folder_results_msvm = 'results_m2svm_optimal_weights/'
+        folder_results_msvm = 'results_' + problem + '/'
         if not (os.path.isdir('./' + folder_results_msvm)):
             os.mkdir(folder_results_msvm)
         csv_file_name = 'results_multistart'
