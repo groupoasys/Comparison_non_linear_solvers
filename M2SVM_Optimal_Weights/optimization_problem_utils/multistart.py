@@ -111,6 +111,7 @@ def run_multistart_approach(alpha_variables,
         results_multistart[iteration_multistart]['accuracy'] = accuracy
         results_multistart[iteration_multistart]['objective_value'] = objective_value_multistart
         results_multistart[iteration_multistart]['elapsed_time'] = elapsed_time_second_step
+        pdb.set_trace()
     return results_multistart
 
 

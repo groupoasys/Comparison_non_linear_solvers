@@ -138,7 +138,7 @@ def write_results_m2svm_optimal_weights(output,
     for iteration_multistart in range(1, maximum_number_iterations_multistart + 1):    
         objective_values.append(output[line]['results_multistart'][iteration_multistart - 1]['objective_value'])
         elapsed_times.append(output[line]['results_multistart'][iteration_multistart - 1]['elapsed_time'])
-        file_to_write.write(str(iteration_multistart) + ',' + str(objective_values[iteration_multistart - 1]) + ','+ str(elapsed_times[iteration_multistart - 1]) +'\n')
+        file_to_write.write(str(iteration_multistart) + ',' + "{:.3e}".format(objective_values[iteration_multistart - 1]) + ','+ "{:.3e}".format(elapsed_times[iteration_multistart - 1]) +'\n')
     file_to_write.close()
             
     mean_objective_values = mean(objective_values)
@@ -153,7 +153,7 @@ def write_results_m2svm_optimal_weights(output,
     csv_file_summary_results = folder_results_msvm + 'summary_results.csv'
     file_to_write_summary = open(csv_file_summary_results, 'w+')
     file_to_write_summary.write('problem, ' + 'neos, '      + 'solver, '+ '# variables, '            + '# constraints, '            + 'sense, '           + 'mean obj. val., '            + 'max obj. val., '              + 'min obj. val., '              + 'mean comp. time, '       + 'max comp. time, '          + 'min comp. time, '          + '\n')
-    file_to_write_summary.write(problem + ','  + neos_string + ','+ solver + ',' + str(number_of_variables) + ','+ str(number_of_constraints) + ','+ sense_opt_problem + ','+  str(round(mean_objective_values, 2)) + ','+ str(maximum_objective_value)+ ',' + str(minimum_objective_value) + ','+ str(mean_elapsed_times) + ','+ str(maximum_elapsed_time) + ','+ str(minimum_elapsed_time) + '\n')
+    file_to_write_summary.write(problem + ','  + neos_string + ','+ solver + ',' + str(number_of_variables) + ','+ str(number_of_constraints) + ','+ sense_opt_problem + ','+  "{:.3e}".format(mean_objective_values) + ','+ "{:.3e}".format(maximum_objective_value)+ ',' + "{:.3e}".format(minimum_objective_value) + ','+ "{:.3e}".format(mean_elapsed_times) + ','+ "{:.3e}".format(maximum_elapsed_time) + ','+ "{:.3e}".format(minimum_elapsed_time) + '\n')
     file_to_write_summary.close()
         
     return 0
