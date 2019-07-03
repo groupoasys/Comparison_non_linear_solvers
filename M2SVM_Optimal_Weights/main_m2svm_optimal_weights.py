@@ -29,13 +29,17 @@ neos_flag = True
 number_of_variables = -1
 number_of_constraints = -1
 sense_opt_problem = 'min'    
-maximum_number_iterations_multistart = 2
+maximum_number_iterations_multistart = 1
 folder_results = 'results_' + problem + '/'
 csv_file_name_multistart = 'results_multistart'
 csv_file_summary_results = 'summary_results'
 
 solvers_list = ['conopt',
                 'ipopt']
+cu.create_folder_results_if_it_doesnt_exits(folder_results = folder_results)
+cu.initialize_summary_results_file(folder_results = folder_results,
+                                    csv_file_summary_results = csv_file_summary_results)
+
 for solver in solvers_list:
     cu.run_optimization_problem_given_solver(solver = solver,
                                              problem = problem,

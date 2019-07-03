@@ -196,8 +196,6 @@ class sys:
         default_new_objective_value_second_step = 1e3
         beggining_file_name_to_save_results = 'results_by_line_'
         folder_results_msvm = folder_results
-        if not (os.path.isdir('./' + folder_results_msvm)):
-            os.mkdir(folder_results_msvm)
       
         if weight_ptdf:
             approach = 'ptdf'
@@ -255,7 +253,7 @@ class sys:
                                                                            initial_weights = initial_weights,
                                                                            solver = solver)
             
-            file_name_to_save_results = folder_results_msvm + beggining_file_name_to_save_results + str(line + 1) +'_' + approach+'.pydata'          
+            file_name_to_save_results = folder_results_msvm + beggining_file_name_to_save_results + str(line + 1) +'_' + approach+'_neos_flag_'+ str(neos_flag) + '_solver_'+ solver + '.pydata'          
             file_to_save = open(file_name_to_save_results, 'wb')
             pickle.dump(best_results_tune_parameters_grid[line], file_to_save)
             file_to_save.close()
