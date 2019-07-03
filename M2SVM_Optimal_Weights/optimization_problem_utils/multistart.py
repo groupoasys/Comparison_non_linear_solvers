@@ -32,9 +32,12 @@ def run_multistart_approach(alpha_variables,
                             correspondence_time_period_line_all_samples,
                             sample_by_line,
                             number_of_renewable_energy,
-                            line):
+                            line,
+                            solver,
+                            neos_flag):
     
     results_multistart = {}
+    solver_name = solver
     for iteration_multistart in range(maximum_number_iterations_multistart):
         results_multistart[iteration_multistart] = {}
         
@@ -46,7 +49,11 @@ def run_multistart_approach(alpha_variables,
                                                                         seed_multistart = seed_multistart,
                                                                         index_SVM_regularization_parameter = index_SVM_regularization_parameter,
                                                                         iteration_alternating_approach = iteration_alternating_approach)
-        solver = pe.SolverManagerFactory("neos")
+        
+        if neos_flag:
+            solver = pe.SolverManagerFactory("neos")
+        else:
+            solver = pe.SolverFactory(solver_name)
         label_to_train = (transformed_label_all_samples[sample_to_train]).to_frame()
         data_to_train = data_all_samples[sample_to_train]
         label_alpha_variables = (transformed_label_all_samples[sample_alpha_variables].to_frame())
@@ -69,9 +76,13 @@ def run_multistart_approach(alpha_variables,
         
         initial_time_second_step = timeit.default_timer()
         
-        results_solver = solver.solve(multistart_model,
-                                      tee = True,
-                                      opt = 'conopt')
+        if neos_flag:
+            results_solver = solver.solve(multistart_model,
+                                          tee = True,
+                                          opt = solver_name)
+        else:
+            results_solver = solver.solve(multistart_model,
+                                          tee = True)
         
         final_time_second_step = timeit.default_timer()
         elapsed_time_second_step = final_time_second_step - initial_time_second_step
@@ -111,7 +122,7 @@ def run_multistart_approach(alpha_variables,
         results_multistart[iteration_multistart]['accuracy'] = accuracy
         results_multistart[iteration_multistart]['objective_value'] = objective_value_multistart
         results_multistart[iteration_multistart]['elapsed_time'] = elapsed_time_second_step
-        pdb.set_trace()
+        
     return results_multistart
 
 
