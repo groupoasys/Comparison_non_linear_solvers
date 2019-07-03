@@ -123,7 +123,11 @@ def write_results_m2svm_optimal_weights(output,
                                         csv_file_name_multistart):
     
     folder_results_msvm = folder_results
-    csv_file = folder_results_msvm + csv_file_name_multistart + '_' + solver + '.csv'
+    if neos_flag:
+        neos_string = 'yes'
+    else:
+        neos_string = 'no'
+    csv_file = folder_results_msvm + csv_file_name_multistart + '_' + solver + '_neos_' + neos_string +'.csv'
     file_to_write = open(csv_file, 'w+')
     file_to_write.write('multistart' + ',' + 'objective value' + ','+ 'elapsed time\n')
     
@@ -144,10 +148,7 @@ def write_results_m2svm_optimal_weights(output,
     maximum_elapsed_time = max(elapsed_times)
     minimum_elapsed_time = min(elapsed_times)
     
-    if neos_flag:
-        neos_string = 'Yes'
-    else:
-        neos_string = 'No'
+    
     
     csv_file_summary_results = folder_results_msvm + 'summary_results.csv'
     file_to_write_summary = open(csv_file_summary_results, 'w+')
