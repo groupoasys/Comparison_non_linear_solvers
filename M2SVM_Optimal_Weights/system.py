@@ -221,9 +221,7 @@ class sys:
 #                                      label_values = label_values,
 #                                      folder_results_msvm = folder_results_msvm)
         ######################################################################################
-        for line in range(1, 2):
-            print("The congestion of line %d is learnt with the multiclass SVM method" % (line + 1))
-            data = pd.concat([data_train_normalized, data_test_normalized])
+        for line in range(1, 2):data = pd.concat([data_train_normalized, data_test_normalized])
             data.index = range(1, len(data) + 1)
             label = pd.concat([self.y_train, self.y_test])
             label.index = range(1, len(label) + 1)
