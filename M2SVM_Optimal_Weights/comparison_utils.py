@@ -9,6 +9,7 @@ import os
 from system import sys
 import numpy as np
 import pdb
+import error_handling as error
 
 def run_optimization_problem_given_solver(solver,
                                           problem,
@@ -16,6 +17,25 @@ def run_optimization_problem_given_solver(solver,
                                           number_of_variables,
                                           number_of_constraints,
                                           sense_opt_problem):
+    
+    if problem == "m2svm_optimal_weights":
+        run_m2svm_optimal_weights(solver = solver,
+                                  problem = problem,
+                                  neos_flag = neos_flag,
+                                  number_of_variables = number_of_variables,
+                                  number_of_constraints = number_of_constraints,
+                                  sense_opt_problem = sense_opt_problem)
+    else:
+        raise error.my_custom_error("The given optimization problem does not exist❌🚫 Please, check 👁‍🗨 that the name is well-written ✍")
+    
+    return "The optimization problem has been solved"
+
+def run_m2svm_optimal_weights(solver,
+                              problem,
+                              neos_flag,
+                              number_of_variables,
+                              number_of_constraints,
+                              sense_opt_problem):
     directory_data = 'msvm_toy_example'
     source_data_file = 'demand_values.csv'
     generators_data_file = 'generators.csv'
@@ -65,4 +85,6 @@ def run_optimization_problem_given_solver(solver,
                         number_of_constraints = number_of_constraints,
                         sense_opt_problem = sense_opt_problem)
     
-    return "The optimization problem has been solved"
+    return 0
+    
+    
