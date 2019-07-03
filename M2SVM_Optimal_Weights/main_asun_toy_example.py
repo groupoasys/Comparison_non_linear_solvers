@@ -13,11 +13,9 @@ for name in dir():
 
 
 import os
-import pdb
 
 directory_path = os.path.dirname(os.path.abspath(__file__))
-os.chdir(directory_path)
-os.chdir('..\\')
+os.chdir(os.path.join(directory_path, os.path.pardir))
 
 import comparison_utils as cu
 
