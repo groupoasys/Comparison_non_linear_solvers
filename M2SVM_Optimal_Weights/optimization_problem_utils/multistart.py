@@ -32,9 +32,11 @@ def run_multistart_approach(alpha_variables,
                             correspondence_time_period_line_all_samples,
                             sample_by_line,
                             number_of_renewable_energy,
-                            line):
+                            line,
+                            solver):
     
     results_multistart = {}
+    solver_name = solver
     for iteration_multistart in range(maximum_number_iterations_multistart):
         results_multistart[iteration_multistart] = {}
         
@@ -46,6 +48,7 @@ def run_multistart_approach(alpha_variables,
                                                                         seed_multistart = seed_multistart,
                                                                         index_SVM_regularization_parameter = index_SVM_regularization_parameter,
                                                                         iteration_alternating_approach = iteration_alternating_approach)
+        
         solver = pe.SolverManagerFactory("neos")
         label_to_train = (transformed_label_all_samples[sample_to_train]).to_frame()
         data_to_train = data_all_samples[sample_to_train]
@@ -71,7 +74,7 @@ def run_multistart_approach(alpha_variables,
         
         results_solver = solver.solve(multistart_model,
                                       tee = True,
-                                      opt = 'conopt')
+                                      opt = solver_name)
         
         final_time_second_step = timeit.default_timer()
         elapsed_time_second_step = final_time_second_step - initial_time_second_step
@@ -111,7 +114,6 @@ def run_multistart_approach(alpha_variables,
         results_multistart[iteration_multistart]['accuracy'] = accuracy
         results_multistart[iteration_multistart]['objective_value'] = objective_value_multistart
         results_multistart[iteration_multistart]['elapsed_time'] = elapsed_time_second_step
-        pdb.set_trace()
     return results_multistart
 
 

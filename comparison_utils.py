@@ -151,7 +151,7 @@ def write_results_m2svm_optimal_weights(output,
     
     
     csv_file_summary_results = folder_results_msvm + 'summary_results.csv'
-    file_to_write_summary = open(csv_file_summary_results, 'w+')
+    file_to_write_summary = open(csv_file_summary_results, 'a+')
     file_to_write_summary.write('problem, ' + 'neos, '      + 'solver, '+ '# variables, '            + '# constraints, '            + 'sense, '           + 'mean obj. val., '            + 'max obj. val., '              + 'min obj. val., '              + 'mean comp. time, '       + 'max comp. time, '          + 'min comp. time, '          + '\n')
     file_to_write_summary.write(problem + ','  + neos_string + ','+ solver + ',' + str(number_of_variables) + ','+ str(number_of_constraints) + ','+ sense_opt_problem + ','+  "{:.3e}".format(mean_objective_values) + ','+ "{:.3e}".format(maximum_objective_value)+ ',' + "{:.3e}".format(minimum_objective_value) + ','+ "{:.3e}".format(mean_elapsed_times) + ','+ "{:.3e}".format(maximum_elapsed_time) + ','+ "{:.3e}".format(minimum_elapsed_time) + '\n')
     file_to_write_summary.close()

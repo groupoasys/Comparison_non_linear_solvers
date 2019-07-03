@@ -35,7 +35,8 @@ def alternating_approach(maximum_number_iterations_alternating_approach,
                          default_new_objective_value_second_step,
                          line,
                          initial_weights,
-                         label_values):
+                         label_values,
+                         solver):
     
     iteration_alternating_approach = 0
     difference_objective_values_second_step = default_difference_objective_values_second_step
@@ -114,7 +115,8 @@ def alternating_approach(maximum_number_iterations_alternating_approach,
                                                                        correspondence_time_period_line_all_samples = correspondence_time_period_line_all_samples,
                                                                        sample_by_line = sample_by_line,
                                                                        number_of_renewable_energy = number_of_renewable_energy,
-                                                                       line = line)
+                                                                       line = line,
+                                                                       solver = solver)
         
         if (output_first_step['accuracy'][sample_names[1]] > output_second_step['best_accuracy'][sample_names[1]]):
            variables_previous_iteration = initial_variables

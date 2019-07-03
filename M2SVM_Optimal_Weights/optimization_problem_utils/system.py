@@ -252,7 +252,8 @@ class sys:
                                                                            perturbation_multistart_variables = perturbation_multistart_variables,
                                                                            seed_multistart = seed_multistart,
                                                                            default_new_objective_value_second_step = default_new_objective_value_second_step,
-                                                                           initial_weights = initial_weights)
+                                                                           initial_weights = initial_weights,
+                                                                           solver = solver)
             
             file_name_to_save_results = folder_results_msvm + beggining_file_name_to_save_results + str(line + 1) +'_' + approach+'.pydata'          
             file_to_save = open(file_name_to_save_results, 'wb')
