@@ -6,11 +6,11 @@ Created on Tue May 14 13:29:33 2019
 """
 import numpy as np
 import pdb
-import optimization_problem_utils.parameter_tuning_grid as ptg
+import M2SVM_Optimal_Weights.optimization_problem_utils.parameter_tuning_grid as ptg
 import pandas as pd
-import optimization_problem_utils.optimization_problem_second_step as opss
+import M2SVM_Optimal_Weights.optimization_problem_utils.optimization_problem_second_step as opss
 import pyomo.environ as pe
-import optimization_problem_utils.prediction as pred
+import M2SVM_Optimal_Weights.optimization_problem_utils.prediction as pred
 import timeit
 
 def run_multistart_approach(alpha_variables,

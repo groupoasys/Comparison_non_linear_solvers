@@ -7,7 +7,7 @@ Created on Tue May  7 10:05:16 2019
 
 import pdb
 import numpy as np
-import optimization_problem_utils.alternating_approach as alt
+import M2SVM_Optimal_Weights.optimization_problem_utils.alternating_approach as alt
 
 def tune_parameters_grid(SVM_regularization_parameter_grid,
                          sample_by_line,

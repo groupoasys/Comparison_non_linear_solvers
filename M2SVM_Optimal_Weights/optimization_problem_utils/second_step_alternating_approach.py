@@ -4,7 +4,7 @@ Created on Tue May 14 13:25:07 2019
 
 @author: Asun
 """
-import optimization_problem_utils.multistart as ms
+import M2SVM_Optimal_Weights.optimization_problem_utils.multistart as ms
 import pdb
 
 def run_second_step_alternating_approach(alpha_variables,

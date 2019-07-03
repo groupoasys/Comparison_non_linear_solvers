@@ -17,6 +17,7 @@ import os
 directory_path = os.path.dirname(os.path.abspath(__file__))
 os.chdir(os.path.join(directory_path, os.path.pardir))
 
+
 import comparison_utils as cu
 
 os.chdir(directory_path)

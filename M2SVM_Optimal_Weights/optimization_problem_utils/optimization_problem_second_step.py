@@ -6,11 +6,11 @@ Created on Thu May 16 09:10:54 2019
 """
 
 import pyomo.environ as pe
-import optimization_problem_utils.multiclass_svm as msvm
+import M2SVM_Optimal_Weights.optimization_problem_utils.multiclass_svm as msvm
 import pdb
 import pandas as pd
 import numpy as np
-import optimization_problem_utils.error_handling as error
+import M2SVM_Optimal_Weights.optimization_problem_utils.error_handling as error
 
 def optimization_problem_second_step(alpha_variables,
                                      number_of_nodes,

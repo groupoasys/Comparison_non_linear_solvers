@@ -1,10 +1,10 @@
 import sys
 import numpy as np
 import pandas as pd
-import optimization_problem_utils.sampling as smp
-import optimization_problem_utils.parameter_tuning_grid as ptg
+import M2SVM_Optimal_Weights.optimization_problem_utils.sampling as smp
+import M2SVM_Optimal_Weights.optimization_problem_utils.parameter_tuning_grid as ptg
 import pickle
-import optimization_problem_utils.normalization as nm
+import M2SVM_Optimal_Weights.optimization_problem_utils.normalization as nm
 import os
 from statistics import mean 
 

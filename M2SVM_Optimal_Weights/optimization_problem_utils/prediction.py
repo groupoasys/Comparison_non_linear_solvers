@@ -5,7 +5,7 @@ Created on Mon May 20 12:46:48 2019
 @author: Asun
 """
 import pdb
-import optimization_problem_utils.multiclass_svm as msvm
+import M2SVM_Optimal_Weights.optimization_problem_utils.multiclass_svm as msvm
 import numpy as np
 import pandas as pd
 

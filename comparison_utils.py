@@ -7,11 +7,9 @@ Created on Wed Jul  3 08:43:49 2019
 
 import os
 import pdb
-pdb.set_trace()
-import optimization_problem_utils
-from optimization_problem_utils.system import sys
+from M2SVM_Optimal_Weights.optimization_problem_utils.system import sys
 import numpy as np
-import optimization_problem_utils.error_handling as error
+import M2SVM_Optimal_Weights.optimization_problem_utils.error_handling as error
 from statistics import mean 
 
 def run_optimization_problem_given_solver(solver,
