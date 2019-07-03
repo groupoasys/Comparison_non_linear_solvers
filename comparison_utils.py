@@ -5,19 +5,24 @@ Created on Wed Jul  3 08:43:49 2019
 @author: Asun
 """
 
-from optimization_problem_utils import *
 import os
+import pdb
+pdb.set_trace()
+import optimization_problem_utils
 from optimization_problem_utils.system import sys
 import numpy as np
-import pdb
 import optimization_problem_utils.error_handling as error
+from statistics import mean 
 
 def run_optimization_problem_given_solver(solver,
                                           problem,
                                           neos_flag,
                                           number_of_variables,
                                           number_of_constraints,
-                                          sense_opt_problem):
+                                          sense_opt_problem,
+                                          maximum_number_iterations_multistart,
+                                          folder_results,
+                                          csv_file_name_multistart):
     
     if problem == "m2svm_optimal_weights":
         run_m2svm_optimal_weights(solver = solver,
@@ -25,7 +30,10 @@ def run_optimization_problem_given_solver(solver,
                                   neos_flag = neos_flag,
                                   number_of_variables = number_of_variables,
                                   number_of_constraints = number_of_constraints,
-                                  sense_opt_problem = sense_opt_problem)
+                                  sense_opt_problem = sense_opt_problem,
+                                  maximum_number_iterations_multistart = maximum_number_iterations_multistart,
+                                  folder_results = folder_results,
+                                  csv_file_name_multistart = csv_file_name_multistart)
     else:
         raise error.my_custom_error("The given optimization problem does not exist❌🚫 Please, check 👁‍🗨 that the name is well-written ✍")
     
@@ -36,7 +44,10 @@ def run_m2svm_optimal_weights(solver,
                               neos_flag,
                               number_of_variables,
                               number_of_constraints,
-                              sense_opt_problem):
+                              sense_opt_problem,
+                              maximum_number_iterations_multistart,
+                              folder_results,
+                              csv_file_name_multistart):
     
     # Please, do not change this function here
     main_directory_data = 'optimization_problem_utils/'
@@ -77,17 +88,75 @@ def run_m2svm_optimal_weights(solver,
                             net_demand=net_demand)
     
     output = sys2.learn_line(method = method,
-                    level = level,
-                    net_demand = net_demand,
-                    weight_ptdf = weight_ptdf,
-                    weights_values = weights_values,
-                    SVM_regularization_parameter_grid = SVM_regularization_parameter_grid,
-                    solver = solver,
-                    problem = problem,
-                    neos_flag = neos_flag,
-                    number_of_variables = number_of_variables,
-                    number_of_constraints = number_of_constraints,
-                    sense_opt_problem = sense_opt_problem)
+                             level = level,
+                             net_demand = net_demand,
+                             weight_ptdf = weight_ptdf,
+                             weights_values = weights_values,
+                             SVM_regularization_parameter_grid = SVM_regularization_parameter_grid,
+                             solver = solver,
+                             problem = problem,
+                             neos_flag = neos_flag,
+                             number_of_variables = number_of_variables,
+                             number_of_constraints = number_of_constraints,
+                             sense_opt_problem = sense_opt_problem,
+                             maximum_number_iterations_multistart = maximum_number_iterations_multistart,
+                             folder_results = folder_results)
+    write_results_m2svm_optimal_weights(output = output,
+                                        solver = solver,
+                                        problem = problem,
+                                        neos_flag = neos_flag,
+                                        number_of_variables = number_of_variables,
+                                        number_of_constraints = number_of_constraints,
+                                        sense_opt_problem = sense_opt_problem,
+                                        maximum_number_iterations_multistart = maximum_number_iterations_multistart,
+                                        folder_results = folder_results,
+                                        csv_file_name_multistart = csv_file_name_multistart)
     return output
+
+def write_results_m2svm_optimal_weights(output,
+                                        solver,
+                                        problem,
+                                        neos_flag,
+                                        number_of_variables,
+                                        number_of_constraints,
+                                        sense_opt_problem,
+                                        maximum_number_iterations_multistart,
+                                        folder_results,
+                                        csv_file_name_multistart):
+    
+    folder_results_msvm = folder_results
+    csv_file = folder_results_msvm + csv_file_name_multistart + '_' + solver + '.csv'
+    file_to_write = open(csv_file, 'w+')
+    file_to_write.write('multistart' + ',' + 'objective value' + ','+ 'elapsed time\n')
+    
+    file_to_write = open(csv_file, 'a')
+    objective_values = []
+    elapsed_times = []
+    line = 1 #Do not change this parameter, since it depends on the data structure of the optimization algorithm.
+    for iteration_multistart in range(1, maximum_number_iterations_multistart + 1):    
+        objective_values.append(output[line]['results_multistart'][iteration_multistart - 1]['objective_value'])
+        elapsed_times.append(output[line]['results_multistart'][iteration_multistart - 1]['elapsed_time'])
+        file_to_write.write(str(iteration_multistart) + ',' + str(objective_values[iteration_multistart - 1]) + ','+ str(elapsed_times[iteration_multistart - 1]) +'\n')
+    file_to_write.close()
+            
+    mean_objective_values = mean(objective_values)
+    mean_elapsed_times = mean(elapsed_times)
+    maximum_objective_value = max(objective_values)
+    minimum_objective_value = min(objective_values)
+    maximum_elapsed_time = max(elapsed_times)
+    minimum_elapsed_time = min(elapsed_times)
+    
+    if neos_flag:
+        neos_string = 'Yes'
+    else:
+        neos_string = 'No'
+    
+    csv_file_summary_results = folder_results_msvm + 'summary_results.csv'
+    file_to_write_summary = open(csv_file_summary_results, 'w+')
+    file_to_write_summary.write('problem, ' + 'neos, '      + 'solver, '+ '# variables, '            + '# constraints, '            + 'sense, '           + 'mean obj. val., '            + 'max obj. val., '              + 'min obj. val., '              + 'mean comp. time, '       + 'max comp. time, '          + 'min comp. time, '          + '\n')
+    file_to_write_summary.write(problem + ','  + neos_string + ','+ solver + ',' + str(number_of_variables) + ','+ str(number_of_constraints) + ','+ sense_opt_problem + ','+  str(round(mean_objective_values, 2)) + ','+ str(maximum_objective_value)+ ',' + str(minimum_objective_value) + ','+ str(mean_elapsed_times) + ','+ str(maximum_elapsed_time) + ','+ str(minimum_elapsed_time) + '\n')
+    file_to_write_summary.close()
+        
+    return 0
     
     
