@@ -289,6 +289,8 @@ class sys:
         file_to_write_summary.write(problem + ','  + neos_string + ','+ solver + ',' + str(number_of_variables) + ','+ str(number_of_constraints) + ','+ sense_opt_problem + ','+  str(round(mean_objective_values, 2)) + ','+ str(maximum_objective_value)+ ',' + str(minimum_objective_value) + ','+ str(mean_elapsed_times) + ','+ str(maximum_elapsed_time) + ','+ str(minimum_elapsed_time) + '\n')
         file_to_write_summary.close()
         
+    return best_results_tune_parameters_grid
+        
         
     
     

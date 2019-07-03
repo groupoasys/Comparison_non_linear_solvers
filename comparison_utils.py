@@ -76,7 +76,7 @@ def run_m2svm_optimal_weights(solver,
                             weight_ptdf=weight_ptdf,
                             net_demand=net_demand)
     
-    sys2.learn_line(method = method,
+    output = sys2.learn_line(method = method,
                     level = level,
                     net_demand = net_demand,
                     weight_ptdf = weight_ptdf,
@@ -88,7 +88,6 @@ def run_m2svm_optimal_weights(solver,
                     number_of_variables = number_of_variables,
                     number_of_constraints = number_of_constraints,
                     sense_opt_problem = sense_opt_problem)
-    
-    return 0
+    return output
     
     
