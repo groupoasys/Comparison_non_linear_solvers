@@ -68,7 +68,6 @@ cu.create_folder_results_if_it_doesnt_exits(folder_results = folder_results)
 cu.initialize_summary_results_file(folder_results = folder_results,
                                     csv_file_summary_results = csv_file_summary_results)
 for solver in solvers_list_neos_flag_false:
-    print(solver)
     neos_flag = False
     cu.run_optimization_problem_given_solver(solver = solver,
                                              problem = problem,
@@ -81,7 +80,6 @@ for solver in solvers_list_neos_flag_false:
                                              csv_file_name_multistart = csv_file_name_multistart)
 
 for solver in solvers_list_neos_flag_true:
-    print(solver)
     neos_flag = True
     cu.run_optimization_problem_given_solver(solver = solver,
                                              problem = problem,
