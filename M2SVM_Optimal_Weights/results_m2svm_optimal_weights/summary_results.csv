@@ -1,1 +1,12 @@
 problem, neos, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
+m2svm_optimal_weights,yes,conopt,-1,-1,min,-2.040e-14,-2.040e-14,-2.040e-14,3.824e+00,3.824e+00,3.824e+00
+m2svm_optimal_weights,yes,ipopt,-1,-1,min,-7.499e-08,-7.499e-08,-7.499e-08,1.857e+01,1.857e+01,1.857e+01
+m2svm_optimal_weights,yes,filter,-1,-1,min,0.000e+00,0.000e+00,0.000e+00,1.967e+01,1.967e+01,1.967e+01
+m2svm_optimal_weights,yes,knitro,-1,-1,min,2.347e-09,2.347e-09,2.347e-09,1.878e+01,1.878e+01,1.878e+01
+m2svm_optimal_weights,yes,loqo,-1,-1,min,-2.005e+12,-2.005e+12,-2.005e+12,1.860e+01,1.860e+01,1.860e+01
+m2svm_optimal_weights,yes,minos,-1,-1,min,-2.875e-14,-2.875e-14,-2.875e-14,1.778e+01,1.778e+01,1.778e+01
+m2svm_optimal_weights,yes,mosek,-1,-1,min,3.333e-09,3.333e-09,3.333e-09,1.884e+01,1.884e+01,1.884e+01
+m2svm_optimal_weights,yes,snopt,-1,-1,min,0.000e+00,0.000e+00,0.000e+00,1.873e+01,1.873e+01,1.873e+01
+m2svm_optimal_weights,yes,bonmin,-1,-1,min,-9.990e-08,-9.990e-08,-9.990e-08,1.887e+01,1.887e+01,1.887e+01
+m2svm_optimal_weights,yes,couenne,-1,-1,min,-2.876e-13,-2.876e-13,-2.876e-13,1.844e+01,1.844e+01,1.844e+01
+m2svm_optimal_weights,yes,filmint,-1,-1,min,-2.768e-13,-2.768e-13,-2.768e-13,1.850e+01,1.850e+01,1.850e+01
