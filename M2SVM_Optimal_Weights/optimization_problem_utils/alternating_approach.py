@@ -5,12 +5,11 @@ Created on Wed May  8 10:39:15 2019
 @author: Asun
 """
 import numpy as np
-import first_step_alternating_approach as fsap
+import optimization_problem_utils.first_step_alternating_approach as fsap
 import math
-import pdb
 import pandas as pd
-import second_step_alternating_approach as ssap
-import error_handling as error
+import optimization_problem_utils.second_step_alternating_approach as ssap
+import optimization_problem_utils.error_handling as error
 
 def alternating_approach(maximum_number_iterations_alternating_approach,
                          threshold_difference_objective_values_second_step,

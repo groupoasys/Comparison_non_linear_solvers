@@ -5,11 +5,12 @@ Created on Wed Jul  3 08:43:49 2019
 @author: Asun
 """
 
+from optimization_problem_utils import *
 import os
-from system import sys
+from optimization_problem_utils.system import sys
 import numpy as np
 import pdb
-import error_handling as error
+import optimization_problem_utils.error_handling as error
 
 def run_optimization_problem_given_solver(solver,
                                           problem,
@@ -36,14 +37,17 @@ def run_m2svm_optimal_weights(solver,
                               number_of_variables,
                               number_of_constraints,
                               sense_opt_problem):
+    
+    # Please, do not change this function here
+    main_directory_data = 'optimization_problem_utils/'
     directory_data = 'msvm_toy_example'
     source_data_file = 'demand_values.csv'
     generators_data_file = 'generators.csv'
     lines_data_file = 'lines.csv'
     
-    data_file_path = os.path.join(directory_data, source_data_file)
-    generators_file_path = os.path.join(directory_data, generators_data_file)
-    lines_file_path = os.path.join(directory_data, lines_data_file)
+    data_file_path = os.path.join(main_directory_data, directory_data, source_data_file)
+    generators_file_path = os.path.join(main_directory_data, directory_data, generators_data_file)
+    lines_file_path = os.path.join(main_directory_data, directory_data, lines_data_file)
     load_shedding = 1000
     net_demand = True
     ini_train = 0
@@ -73,17 +77,18 @@ def run_m2svm_optimal_weights(solver,
                             net_demand=net_demand)
     
     sys2.learn_line(method = method,
-                        level = level,
-                        net_demand = net_demand,
-                        weight_ptdf = weight_ptdf,
-                        weights_values = weights_values,
-                        SVM_regularization_parameter_grid = SVM_regularization_parameter_grid,
-                        solver = solver,
-                        problem = problem,
-                        neos_flag = neos_flag,
-                        number_of_variables = number_of_variables,
-                        number_of_constraints = number_of_constraints,
-                        sense_opt_problem = sense_opt_problem)
+                    level = level,
+                    net_demand = net_demand,
+                    weight_ptdf = weight_ptdf,
+                    weights_values = weights_values,
+                    SVM_regularization_parameter_grid = SVM_regularization_parameter_grid,
+                    solver = solver,
+                    problem = problem,
+                    neos_flag = neos_flag,
+                    number_of_variables = number_of_variables,
+                    number_of_constraints = number_of_constraints,
+                    sense_opt_problem = sense_opt_problem,
+                    main_directory_data = main_directory_data)
     
     return 0
     

@@ -1,10 +1,10 @@
 import sys
 import numpy as np
 import pandas as pd
-import sampling as smp
-import parameter_tuning_grid as ptg
+import optimization_problem_utils.sampling as smp
+import optimization_problem_utils.parameter_tuning_grid as ptg
 import pickle
-import normalization as nm
+import optimization_problem_utils.normalization as nm
 import os
 from statistics import mean 
 
@@ -93,7 +93,8 @@ class sys:
                  neos_flag = False,
                  number_of_variables = -1,
                  number_of_constraints = -1,
-                 sense_opt_problem = 'min'):
+                 sense_opt_problem = 'min',
+                 main_directory_data = '.'):
     self.method = method  
     if method == 'illustrative_m2svm_optimization':
         if net_demand:
@@ -194,7 +195,7 @@ class sys:
         seed_multistart = 1219
         default_new_objective_value_second_step = 1e3
         beggining_file_name_to_save_results = 'results_by_line_'
-        folder_results_msvm = 'results_msvm/'
+        folder_results_msvm = main_directory_data +'results_msvm/'
         if not (os.path.isdir('./' + folder_results_msvm)):
             os.mkdir(folder_results_msvm)
         csv_file_name = 'results_multistart'
@@ -221,7 +222,8 @@ class sys:
 #                                      label_values = label_values,
 #                                      folder_results_msvm = folder_results_msvm)
         ######################################################################################
-        for line in range(1, 2):data = pd.concat([data_train_normalized, data_test_normalized])
+        for line in range(1, 2):
+            data = pd.concat([data_train_normalized, data_test_normalized])
             data.index = range(1, len(data) + 1)
             label = pd.concat([self.y_train, self.y_test])
             label.index = range(1, len(label) + 1)
