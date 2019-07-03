@@ -5,12 +5,11 @@ Created on Wed May  8 11:27:57 2019
 @author: Asun
 """
 import numpy as np
-import pdb
-import multiclass_svm as msvm
+import M2SVM_Optimal_Weights.optimization_problem_utils.multiclass_svm as msvm
 from pyomo.opt import SolverFactory
 import pandas as pd
-import parameter_tuning_grid as ptg
-import prediction as pred
+import M2SVM_Optimal_Weights.optimization_problem_utils.parameter_tuning_grid as ptg
+import M2SVM_Optimal_Weights.optimization_problem_utils.prediction as pred
 import timeit
 import pyomo.environ as pe
 

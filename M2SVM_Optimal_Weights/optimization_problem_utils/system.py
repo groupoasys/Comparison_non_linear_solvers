@@ -1,10 +1,10 @@
 import sys
 import numpy as np
 import pandas as pd
-import sampling as smp
-import parameter_tuning_grid as ptg
+import M2SVM_Optimal_Weights.optimization_problem_utils.sampling as smp
+import M2SVM_Optimal_Weights.optimization_problem_utils.parameter_tuning_grid as ptg
 import pickle
-import normalization as nm
+import M2SVM_Optimal_Weights.optimization_problem_utils.normalization as nm
 import os
 from statistics import mean 
 
@@ -87,7 +87,15 @@ class sys:
                  net_demand = True,
                  weight_ptdf = True,
                  weights_values = np.abs([[1, 1, 1],[1, 1, 1],[1, 1, 1]]),
-                 SVM_regularization_parameter_grid = [10**range_element for range_element in range(0, 1)]):
+                 SVM_regularization_parameter_grid = [10**range_element for range_element in range(0, 1)],
+                 solver = 'ipopt',
+                 problem = '',
+                 neos_flag = False,
+                 number_of_variables = -1,
+                 number_of_constraints = -1,
+                 sense_opt_problem = 'min',
+                 maximum_number_iterations_multistart = 1,
+                 folder_results = 'folder_results_by_default'):
     self.method = method  
     if method == 'illustrative_m2svm_optimization':
         if net_demand:
@@ -170,7 +178,7 @@ class sys:
         lowest_label_value = -1
         highest_label_value = 1
         sample_to_get_best_parameters = sample_names[2]
-        maximum_number_iterations_alternating_approach = 1
+        maximum_number_iterations_alternating_approach = 0
         threshold_difference_objective_values_second_step = 1e-5
         default_difference_objective_values_second_step = 1e5
         seed_initialize_parameters = 1133
@@ -183,24 +191,19 @@ class sys:
             number_of_renewable_energy = 0
         else:
             number_of_renewable_energy = 1
-        maximum_number_iterations_multistart = 2
         perturbation_multistart_variables = {'weights': 1}
         seed_multistart = 1219
         default_new_objective_value_second_step = 1e3
         beggining_file_name_to_save_results = 'results_by_line_'
-        folder_results_msvm = 'results_msvm/'
+        folder_results_msvm = folder_results
         if not (os.path.isdir('./' + folder_results_msvm)):
             os.mkdir(folder_results_msvm)
-        csv_file_name = 'results_multistart'
       
         if weight_ptdf:
             approach = 'ptdf'
         else:
             approach = 'random'
-        csv_file = folder_results_msvm + csv_file_name + '.csv'
-        file_to_write = open(csv_file, 'w+')
-        file_to_write.write('multistart' + ',' + 'objective value' + ','+ 'elapsed time\n')
-        file_to_write.close()
+        
         
         ######################################################################################
         # This code is not necessary in the solvers comparison
@@ -216,7 +219,6 @@ class sys:
 #                                      folder_results_msvm = folder_results_msvm)
         ######################################################################################
         for line in range(1, 2):
-            print("The congestion of line %d is learnt with the multiclass SVM method" % (line + 1))
             data = pd.concat([data_train_normalized, data_test_normalized])
             data.index = range(1, len(data) + 1)
             label = pd.concat([self.y_train, self.y_test])
@@ -256,38 +258,8 @@ class sys:
             file_to_save = open(file_name_to_save_results, 'wb')
             pickle.dump(best_results_tune_parameters_grid[line], file_to_save)
             file_to_save.close()
-            
-            file_to_write = open(csv_file, 'a')
-            objective_values = []
-            elapsed_times = []
-            for iteration_multistart in range(1, maximum_number_iterations_multistart + 1):    
-                objective_values.append(best_results_tune_parameters_grid[line]['results_multistart'][iteration_multistart - 1]['objective_value'])
-                elapsed_times.append(best_results_tune_parameters_grid[line]['results_multistart'][iteration_multistart - 1]['elapsed_time'])
-                file_to_write.write(str(iteration_multistart) + ',' + str(objective_values[iteration_multistart - 1]) + ','+ str(elapsed_times[iteration_multistart - 1]) +'\n')
-            file_to_write.close()
-            
-        mean_objective_values = mean(objective_values)
-        mean_elapsed_times = mean(elapsed_times)
-        maximum_objective_value = max(objective_values)
-        minimum_objective_value = min(objective_values)
-        maximum_elapsed_time = max(elapsed_times)
-        minimum_elapsed_time = min(elapsed_times)
-        solver = 'conopt'
-        neos_flag = True
-        if neos_flag:
-            neos_string = 'Yes'
-        else:
-            neos_string = 'No'
-        problem = 'm2svm_optimal_weights'
-        number_of_variables = -1
-        number_of_constraints = -1
-        sense_opt_problem = 'min'
         
-        csv_file_summary_results = folder_results_msvm + 'summary_results.csv'
-        file_to_write_summary = open(csv_file_summary_results, 'w+')
-        file_to_write_summary.write('problem, ' + 'neos, '      + 'solver, '+ '# variables, '            + '# constraints, '            + 'sense, '           + 'mean obj. val., '            + 'max obj. val., '              + 'min obj. val., '              + 'mean comp. time, '       + 'max comp. time, '          + 'min comp. time, '          + '\n')
-        file_to_write_summary.write(problem + ','  + neos_string + ','+ solver + ',' + str(number_of_variables) + ','+ str(number_of_constraints) + ','+ sense_opt_problem + ','+  str(mean_objective_values) + ','+ str(maximum_objective_value)+ ',' + str(minimum_objective_value) + ','+ str(mean_elapsed_times) + ','+ str(maximum_elapsed_time) + ','+ str(minimum_elapsed_time) + '\n')
-        file_to_write_summary.close()
+    return best_results_tune_parameters_grid
         
         
     

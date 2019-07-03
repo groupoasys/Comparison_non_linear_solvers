@@ -6,12 +6,11 @@ Created on Tue May 14 13:29:33 2019
 """
 import numpy as np
 import pdb
-import parameter_tuning_grid as ptg
+import M2SVM_Optimal_Weights.optimization_problem_utils.parameter_tuning_grid as ptg
 import pandas as pd
-from pyomo.opt import SolverFactory, SolverStatus, TerminationCondition
-import optimization_problem_second_step as opss
+import M2SVM_Optimal_Weights.optimization_problem_utils.optimization_problem_second_step as opss
 import pyomo.environ as pe
-import prediction as pred
+import M2SVM_Optimal_Weights.optimization_problem_utils.prediction as pred
 import timeit
 
 def run_multistart_approach(alpha_variables,
@@ -112,6 +111,7 @@ def run_multistart_approach(alpha_variables,
         results_multistart[iteration_multistart]['accuracy'] = accuracy
         results_multistart[iteration_multistart]['objective_value'] = objective_value_multistart
         results_multistart[iteration_multistart]['elapsed_time'] = elapsed_time_second_step
+        pdb.set_trace()
     return results_multistart
 
 

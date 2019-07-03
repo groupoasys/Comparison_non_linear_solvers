@@ -8,7 +8,7 @@ Created on Mon May  6 12:43:24 2019
 import pdb
 import numpy as np
 import random
-import error_handling as error
+import M2SVM_Optimal_Weights.optimization_problem_utils.error_handling as error
 import pandas as pd
 
 def sampling_method(indexes_individuals_sample_training,
