@@ -27,7 +27,8 @@ def run_second_step_alternating_approach(alpha_variables,
                                          sample_by_line,
                                          number_of_renewable_energy,
                                          line,
-                                         solver):
+                                         solver,
+                                         neos_flag):
     
     results_multistart = ms.run_multistart_approach(alpha_variables = alpha_variables,
                                                     initial_variables = initial_variables,
@@ -49,7 +50,8 @@ def run_second_step_alternating_approach(alpha_variables,
                                                     sample_by_line = sample_by_line,
                                                     number_of_renewable_energy = number_of_renewable_energy,
                                                     line = line,
-                                                    solver = solver)
+                                                    solver = solver,
+                                                    neos_flag = neos_flag)
     (best_iteration_multistart,
      best_accuracy) = max([(iteration_multistart, results_multistart[iteration_multistart]['accuracy'][sample_to_train]) for iteration_multistart in results_multistart], key = lambda x: x[1])
     

@@ -34,7 +34,8 @@ def tune_parameters_grid(SVM_regularization_parameter_grid,
                          seed_multistart,
                          default_new_objective_value_second_step,
                          initial_weights,
-                         solver):
+                         solver,
+                         neos_flag):
     performance_results_all_SVM_regularization_parameters = get_performance_results_all_SVM_regularization_parameters(SVM_regularization_parameter_grid = SVM_regularization_parameter_grid,
                                                                                                                       sample_by_line = sample_by_line,
                                                                                                                       label = label,
@@ -59,7 +60,8 @@ def tune_parameters_grid(SVM_regularization_parameter_grid,
                                                                                                                       seed_multistart = seed_multistart,
                                                                                                                       default_new_objective_value_second_step = default_new_objective_value_second_step,
                                                                                                                       initial_weights = initial_weights,
-                                                                                                                      solver = solver)
+                                                                                                                      solver = solver,
+                                                                                                                      neos_flag = neos_flag)
     best_results_tune_parameters_grid = get_best_results_tune_parameters_grid(performance_results_all_SVM_regularization_parameters = performance_results_all_SVM_regularization_parameters,
                                                                               sample_to_get_best_parameters = sample_to_get_best_parameters,
                                                                               SVM_regularization_parameter_grid = SVM_regularization_parameter_grid,)
@@ -126,7 +128,8 @@ def get_prediction_all_samples(sample_names,
                                default_new_objective_value_second_step,
                                initial_weights,
                                label_values,
-                               solver):
+                               solver,
+                               neos_flag):
     
     output_alternating_approach = alt.alternating_approach(maximum_number_iterations_alternating_approach = maximum_number_iterations_alternating_approach,
                                                            threshold_difference_objective_values_second_step = threshold_difference_objective_values_second_step,
@@ -153,7 +156,8 @@ def get_prediction_all_samples(sample_names,
                                                            line = line,
                                                            initial_weights = initial_weights,
                                                            label_values = label_values,
-                                                           solver = solver)
+                                                           solver = solver,
+                                                           neos_flag = neos_flag)
     prediction_all_samples = output_alternating_approach['second_step']['best_prediction']
     output_prediction_all_samples = {'prediction': prediction_all_samples,
                                      'weights': output_alternating_approach['second_step']['optimal_weights'],
@@ -186,7 +190,8 @@ def get_performance_results_all_SVM_regularization_parameters(SVM_regularization
                                                               seed_multistart,
                                                               default_new_objective_value_second_step,
                                                               initial_weights,
-                                                              solver):
+                                                              solver,
+                                                              neos_flag):
     performance_results_all_SVM_regularization_parameters = []
     for SVM_regularization_parameter in SVM_regularization_parameter_grid:
         index_SVM_regularization_parameter = SVM_regularization_parameter_grid.index(SVM_regularization_parameter)
@@ -231,7 +236,8 @@ def get_performance_results_all_SVM_regularization_parameters(SVM_regularization
                                                                     default_new_objective_value_second_step = default_new_objective_value_second_step,
                                                                     initial_weights = initial_weights,
                                                                     label_values = label_values,
-                                                                    solver = solver)
+                                                                    solver = solver,
+                                                                    neos_flag = neos_flag)
         prediction_all_samples = output_prediction_all_samples['prediction']
         performance_results_by_SVM_regularization_parameter["prediction"] = prediction_all_samples
         transformed_predictions_all_samples = get_transformed_prediction_all_samples(prediction_all_samples = prediction_all_samples,

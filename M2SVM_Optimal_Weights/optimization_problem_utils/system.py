@@ -251,7 +251,8 @@ class sys:
                                                                            seed_multistart = seed_multistart,
                                                                            default_new_objective_value_second_step = default_new_objective_value_second_step,
                                                                            initial_weights = initial_weights,
-                                                                           solver = solver)
+                                                                           solver = solver,
+                                                                           neos_flag = neos_flag)
             
             file_name_to_save_results = folder_results_msvm + beggining_file_name_to_save_results + str(line + 1) +'_' + approach+'_neos_flag_'+ str(neos_flag) + '_solver_'+ solver + '.pydata'          
             file_to_save = open(file_name_to_save_results, 'wb')

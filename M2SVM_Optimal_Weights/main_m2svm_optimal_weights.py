@@ -33,8 +33,6 @@ folder_results = 'results_' + problem + '/'
 csv_file_name_multistart = 'results_multistart'
 csv_file_summary_results = 'summary_results'
 
-
-neos_flag = True
 #solvers_list = ['conopt',
 #                'ipopt',
 #                'antigone',
@@ -52,23 +50,39 @@ neos_flag = True
 #                'filmint',
 #                'sbb',
 #                'scip']
-solvers_list = ['conopt',
-                'ipopt',
-                'filter',
-                'knitro',
-                'loqo',
-                'minos',
-                'mosek',
-                'snopt',
-                'bonmin',
-                'couenne',
-                'filmint']
+solvers_list_neos_flag_false = ['ipopt',
+                                'bonmin',
+                                'couenne']
+solvers_list_neos_flag_true = ['conopt',
+                               'ipopt',
+                               'filter',
+                               'knitro',
+                               'loqo',
+                               'minos',
+                               'mosek',
+                               'snopt',
+                               'bonmin',
+                               'couenne',
+                               'filmint']
 cu.create_folder_results_if_it_doesnt_exits(folder_results = folder_results)
 cu.initialize_summary_results_file(folder_results = folder_results,
                                     csv_file_summary_results = csv_file_summary_results)
-
-for solver in solvers_list:
+for solver in solvers_list_neos_flag_false:
     print(solver)
+    neos_flag = False
+    cu.run_optimization_problem_given_solver(solver = solver,
+                                             problem = problem,
+                                             neos_flag = neos_flag,
+                                             number_of_variables = number_of_variables,
+                                             number_of_constraints = number_of_constraints,
+                                             sense_opt_problem = sense_opt_problem,
+                                             maximum_number_iterations_multistart = maximum_number_iterations_multistart,
+                                             folder_results = folder_results,
+                                             csv_file_name_multistart = csv_file_name_multistart)
+
+for solver in solvers_list_neos_flag_true:
+    print(solver)
+    neos_flag = True
     cu.run_optimization_problem_given_solver(solver = solver,
                                              problem = problem,
                                              neos_flag = neos_flag,
