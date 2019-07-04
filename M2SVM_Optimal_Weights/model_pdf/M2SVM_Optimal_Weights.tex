@@ -40,7 +40,7 @@ The goal of this document is to formally state the optimization problem which is
 
 \section{Problem Formulation}
 
-Let us assume given a set of time periods $t = 1, \ldots, T$. For each $t$, we consider the pair $(x_t, y_t)$, where $x_t = (x_{t1}, \ldots, x_{tB}) \in\mathbb{R}^B$ denotes the vector of features, whereas $y_t\in\{1, \ldots, Q\}$ is the class label associated to each time period. The aim is to associate a weight $\omega_b$, $b = 1, \ldots, B$ to each one of the features of $x_t$, $\forall t$ in order to obtain a classification of the data as accurate as possible. To do this, the following optimization problem is solved in our example:
+Let us assume given a set of time periods $t = 1, \ldots, T$. For each $t$, we consider the pair $(x_t, y_t)$, where $x_t = (x_{t1}, \ldots, x_{tB}) \in\mathbb{R}^B$ denotes the vector of features, and $y_t\in\{1, \ldots, Q\}$ is the class label associated to each time period. The aim is to associate a weight $\omega_b$, $b = 1, \ldots, B$ to each one of the features of $x_t$, $\forall t$ in order to obtain a classification of the data as accurate as possible. To do this, the following optimization problem is solved:
 
 \begin{equation}\label{eq: optimal weights problem}
   \left\{
@@ -54,7 +54,7 @@ Let us assume given a set of time periods $t = 1, \ldots, T$. For each $t$, we c
   \end{array}
     \right.
   \end{equation}
-\noindent where $\delta_p,q$ denotes the Dirac delta function, which is equal to $1$ if $p = q$, and $0$ otherwise. In addition, $\alpha_{qt}$ are the optimal solution of the Multitask Multiclass Support Vector Machine (M2SVM) optimization problem in \eqref{eq: M2SVM}, $\beta$ is the regularization parameter, and $K_{\omega}(x_t, x_s)$ is the Gaussian kernel function that can be seen in \eqref{eq: kernel function}.
+\noindent where $\delta_{i,j}$ denotes the Dirac delta function, which is equal to $1$ if $i = j$, and $0$ otherwise. In addition, $\alpha_{qt}$ are the optimal solution of the Multitask Multiclass Support Vector Machine (M2SVM) optimization problem in \eqref{eq: M2SVM}, $\beta$ is the regularization parameter, and $K_{\omega}(x_t, x_s)$ is the Gaussian kernel function that can be seen in \eqref{eq: kernel function}.
 
 \begin{equation}\label{eq: M2SVM}
   \left\{
