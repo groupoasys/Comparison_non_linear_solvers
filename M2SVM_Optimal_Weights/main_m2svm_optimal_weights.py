@@ -27,32 +27,36 @@ problem = 'm2svm_optimal_weights'
 number_of_variables = 15
 number_of_constraints = 36
 sense_opt_problem = 'min'    
-maximum_number_iterations_multistart = 1
-folder_results = 'results_' + problem + '/'
+maximum_number_iterations_multistart = 100
+folder_results = 'temporary_results_' + problem + '/'
 csv_file_name_multistart = 'results_multistart'
 csv_file_summary_results = 'summary_results'
 
-solvers_list_ampl = ['conopt',
-                    'loqo',
-                    'minos',
-                    'snopt']
-solvers_list_neos_flag_false = ['ipopt',
-                                'bonmin',
-                                'couenne']
-solvers_list_neos_flag_true = ['conopt',
-                               'ipopt',
-                               'filter',
-                               'knitro',
-                               'loqo',
-                               'minos',
-                               'mosek',
-                               'snopt',
-                               'bonmin',
-                               'couenne',
-                               'filmint']
+#solvers_list_ampl = ['conopt',
+#                    'loqo',
+#                    'minos',
+#                    'snopt']
+#solvers_list_neos_flag_false = ['ipopt',
+#                                'bonmin',
+#                                'couenne']
+#solvers_list_neos_flag_true = ['conopt',
+#                               'ipopt',
+#                               'filter',
+#                               'knitro',
+#                               'loqo',
+#                               'minos',
+#                               'mosek',
+#                               'snopt',
+#                               'bonmin',
+#                               'couenne',
+#                               'filmint']
+solvers_list_ampl = ['conopt']
+solvers_list_neos_flag_false = []
+solvers_list_neos_flag_true = []
+
 cu.create_folder_results_if_it_doesnt_exits(folder_results = folder_results)
 cu.initialize_summary_results_file(folder_results = folder_results,
-                                    csv_file_summary_results = csv_file_summary_results)
+                                   csv_file_summary_results = csv_file_summary_results)
 for solver in solvers_list_ampl:
     neos_flag = False
     ampl_flag = True
