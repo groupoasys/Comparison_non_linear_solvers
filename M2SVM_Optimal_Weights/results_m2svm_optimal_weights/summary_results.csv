@@ -1,15 +1,40 @@
 problem, neos, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
-m2svm_optimal_weights,no,ipopt,-1,-1,min,-7.499e-08,-7.499e-08,-7.499e-08,1.225e-01,1.225e-01,1.225e-01
-m2svm_optimal_weights,no,bonmin,-1,-1,min,-9.990e-08,-9.990e-08,-9.990e-08,7.345e-01,7.345e-01,7.345e-01
-m2svm_optimal_weights,no,couenne,-1,-1,min,-2.876e-13,-2.876e-13,-2.876e-13,6.659e-01,6.659e-01,6.659e-01
-m2svm_optimal_weights,yes,conopt,-1,-1,min,-2.040e-14,-2.040e-14,-2.040e-14,1.847e+01,1.847e+01,1.847e+01
-m2svm_optimal_weights,yes,ipopt,-1,-1,min,-7.499e-08,-7.499e-08,-7.499e-08,5.731e+00,5.731e+00,5.731e+00
-m2svm_optimal_weights,yes,filter,-1,-1,min,0.000e+00,0.000e+00,0.000e+00,1.151e+01,1.151e+01,1.151e+01
-m2svm_optimal_weights,yes,knitro,-1,-1,min,2.347e-09,2.347e-09,2.347e-09,3.867e+01,3.867e+01,3.867e+01
-m2svm_optimal_weights,yes,loqo,-1,-1,min,-2.005e+12,-2.005e+12,-2.005e+12,3.887e+01,3.887e+01,3.887e+01
-m2svm_optimal_weights,yes,minos,-1,-1,min,-2.875e-14,-2.875e-14,-2.875e-14,1.936e+01,1.936e+01,1.936e+01
-m2svm_optimal_weights,yes,mosek,-1,-1,min,3.333e-09,3.333e-09,3.333e-09,1.963e+01,1.963e+01,1.963e+01
-m2svm_optimal_weights,yes,snopt,-1,-1,min,0.000e+00,0.000e+00,0.000e+00,1.846e+01,1.846e+01,1.846e+01
-m2svm_optimal_weights,yes,bonmin,-1,-1,min,-9.990e-08,-9.990e-08,-9.990e-08,1.850e+01,1.850e+01,1.850e+01
-m2svm_optimal_weights,yes,couenne,-1,-1,min,-2.876e-13,-2.876e-13,-2.876e-13,1.864e+01,1.864e+01,1.864e+01
-m2svm_optimal_weights,yes,filmint,-1,-1,min,-2.768e-13,-2.768e-13,-2.768e-13,1.853e+01,1.853e+01,1.853e+01
+m2svm_optimal_weights,no,conopt,-1,-1,min,-2.040e-14,-2.040e-14,-2.040e-14,7.403e-02,7.403e-02,7.403e-02
+m2svm_optimal_weights,no,ipopt,-1,-1,min,-7.499e-08,-7.499e-08,-7.499e-08,9.425e-02,9.425e-02,9.425e-02
+m2svm_optimal_weights,no,bonmin,-1,-1,min,-9.990e-08,-9.990e-08,-9.990e-08,1.520e-01,1.520e-01,1.520e-01
+m2svm_optimal_weights,no,couenne,-1,-1,min,-2.876e-13,-2.876e-13,-2.876e-13,2.490e-01,2.490e-01,2.490e-01
+problem, neos, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
+m2svm_optimal_weights,no,ipopt,-1,-1,min,-7.499e-08,-7.499e-08,-7.499e-08,9.959e-02,9.959e-02,9.959e-02
+m2svm_optimal_weights,no,bonmin,-1,-1,min,-9.990e-08,-9.990e-08,-9.990e-08,2.418e-01,2.418e-01,2.418e-01
+m2svm_optimal_weights,no,couenne,-1,-1,min,-2.876e-13,-2.876e-13,-2.876e-13,4.318e-01,4.318e-01,4.318e-01
+m2svm_optimal_weights,yes,conopt,-1,-1,min,-2.040e-14,-2.040e-14,-2.040e-14,2.411e+00,2.411e+00,2.411e+00
+problem, neos, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
+problem, neos, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
+m2svm_optimal_weights,no,conopt,-1,-1,min,-2.040e-14,-2.040e-14,-2.040e-14,1.246e-01,1.246e-01,1.246e-01
+problem, neos, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
+m2svm_optimal_weights,no,conopt,-1,-1,min,-2.040e-14,-2.040e-14,-2.040e-14,1.644e-01,1.644e-01,1.644e-01
+problem, neos, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
+m2svm_optimal_weights,no,conopt,-1,-1,min,-2.040e-14,-2.040e-14,-2.040e-14,1.589e-01,1.589e-01,1.589e-01
+problem, neos, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
+m2svm_optimal_weights,no,conopt,-1,-1,min,-2.040e-14,-2.040e-14,-2.040e-14,1.492e-01,1.492e-01,1.492e-01
+problem, neos, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
+m2svm_optimal_weights,no,conopt,-1,-1,min,-2.040e-14,-2.040e-14,-2.040e-14,1.875e-01,1.875e-01,1.875e-01
+problem, neos, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
+m2svm_optimal_weights,no,conopt,-1,-1,min,-2.040e-14,-2.040e-14,-2.040e-14,1.723e-01,1.723e-01,1.723e-01
+m2svm_optimal_weights,no,loqo,-1,-1,min,-2.244e+12,-2.244e+12,-2.244e+12,5.043e-01,5.043e-01,5.043e-01
+m2svm_optimal_weights,no,minos,-1,-1,min,-2.875e-14,-2.875e-14,-2.875e-14,2.407e-01,2.407e-01,2.407e-01
+m2svm_optimal_weights,no,snopt,-1,-1,min,0.000e+00,0.000e+00,0.000e+00,3.372e-01,3.372e-01,3.372e-01
+m2svm_optimal_weights,no,ipopt,-1,-1,min,-7.499e-08,-7.499e-08,-7.499e-08,9.440e-02,9.440e-02,9.440e-02
+m2svm_optimal_weights,no,bonmin,-1,-1,min,-9.990e-08,-9.990e-08,-9.990e-08,1.427e-01,1.427e-01,1.427e-01
+m2svm_optimal_weights,no,couenne,-1,-1,min,-2.876e-13,-2.876e-13,-2.876e-13,2.403e-01,2.403e-01,2.403e-01
+m2svm_optimal_weights,yes,conopt,-1,-1,min,-2.040e-14,-2.040e-14,-2.040e-14,2.002e+01,2.002e+01,2.002e+01
+m2svm_optimal_weights,yes,ipopt,-1,-1,min,-7.499e-08,-7.499e-08,-7.499e-08,1.831e+01,1.831e+01,1.831e+01
+m2svm_optimal_weights,yes,filter,-1,-1,min,0.000e+00,0.000e+00,0.000e+00,1.955e+01,1.955e+01,1.955e+01
+m2svm_optimal_weights,yes,knitro,-1,-1,min,2.347e-09,2.347e-09,2.347e-09,1.800e+01,1.800e+01,1.800e+01
+m2svm_optimal_weights,yes,loqo,-1,-1,min,-2.005e+12,-2.005e+12,-2.005e+12,1.905e+01,1.905e+01,1.905e+01
+m2svm_optimal_weights,yes,minos,-1,-1,min,-2.875e-14,-2.875e-14,-2.875e-14,1.874e+01,1.874e+01,1.874e+01
+m2svm_optimal_weights,yes,mosek,-1,-1,min,3.333e-09,3.333e-09,3.333e-09,1.849e+01,1.849e+01,1.849e+01
+m2svm_optimal_weights,yes,snopt,-1,-1,min,0.000e+00,0.000e+00,0.000e+00,3.829e+01,3.829e+01,3.829e+01
+m2svm_optimal_weights,yes,bonmin,-1,-1,min,-9.990e-08,-9.990e-08,-9.990e-08,1.884e+01,1.884e+01,1.884e+01
+m2svm_optimal_weights,yes,couenne,-1,-1,min,-2.876e-13,-2.876e-13,-2.876e-13,1.899e+01,1.899e+01,1.899e+01
+m2svm_optimal_weights,yes,filmint,-1,-1,min,-2.768e-13,-2.768e-13,-2.768e-13,1.875e+01,1.875e+01,1.875e+01
