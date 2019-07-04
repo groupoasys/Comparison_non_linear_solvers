@@ -1,1 +1,2 @@
 problem, neos, ampl, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
+m2svm_optimal_weights,no,yes,conopt,15,36,min,-7.262e-14,9.232e-16,-3.612e-13,1.030e-01,1.684e-01,6.174e-02
