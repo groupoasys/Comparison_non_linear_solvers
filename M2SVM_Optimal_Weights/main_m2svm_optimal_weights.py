@@ -13,7 +13,6 @@ for name in dir():
 
 
 import os
-import pdb
 
 directory_path = os.path.dirname(os.path.abspath(__file__))
 os.chdir(os.path.join(directory_path, os.path.pardir))
@@ -25,31 +24,14 @@ os.chdir(directory_path)
 
 
 problem = 'm2svm_optimal_weights'
-number_of_variables = -1
-number_of_constraints = -1
+number_of_variables = 15
+number_of_constraints = 36
 sense_opt_problem = 'min'    
 maximum_number_iterations_multistart = 1
 folder_results = 'results_' + problem + '/'
 csv_file_name_multistart = 'results_multistart'
 csv_file_summary_results = 'summary_results'
 
-#solvers_list = ['conopt',
-#                'ipopt',
-#                'antigone',
-#                'filter',
-#                'knitro',
-#                'loqo',
-#                'minos',
-#                'mosek',
-#                'pathnlp',
-#                'snopt',
-#                'baron',
-#                'bonmin',
-#                'couenne',
-#                'dicopt',
-#                'filmint',
-#                'sbb',
-#                'scip']
 solvers_list_ampl = ['conopt',
                     'loqo',
                     'minos',
@@ -72,8 +54,8 @@ cu.create_folder_results_if_it_doesnt_exits(folder_results = folder_results)
 cu.initialize_summary_results_file(folder_results = folder_results,
                                     csv_file_summary_results = csv_file_summary_results)
 for solver in solvers_list_ampl:
-    print(solver)
     neos_flag = False
+    ampl_flag = True
     cu.run_optimization_problem_given_solver(solver = solver,
                                              problem = problem,
                                              neos_flag = neos_flag,
@@ -82,11 +64,12 @@ for solver in solvers_list_ampl:
                                              sense_opt_problem = sense_opt_problem,
                                              maximum_number_iterations_multistart = maximum_number_iterations_multistart,
                                              folder_results = folder_results,
-                                             csv_file_name_multistart = csv_file_name_multistart)
+                                             csv_file_name_multistart = csv_file_name_multistart,
+                                             ampl_flag = ampl_flag)
 
 for solver in solvers_list_neos_flag_false:
-    print(solver)
     neos_flag = False
+    ampl_flag = False
     cu.run_optimization_problem_given_solver(solver = solver,
                                              problem = problem,
                                              neos_flag = neos_flag,
@@ -95,10 +78,12 @@ for solver in solvers_list_neos_flag_false:
                                              sense_opt_problem = sense_opt_problem,
                                              maximum_number_iterations_multistart = maximum_number_iterations_multistart,
                                              folder_results = folder_results,
-                                             csv_file_name_multistart = csv_file_name_multistart)
+                                             csv_file_name_multistart = csv_file_name_multistart,
+                                             ampl_flag = ampl_flag)
 
 for solver in solvers_list_neos_flag_true:
     neos_flag = True
+    ampl_flag = False
     cu.run_optimization_problem_given_solver(solver = solver,
                                              problem = problem,
                                              neos_flag = neos_flag,
@@ -107,4 +92,5 @@ for solver in solvers_list_neos_flag_true:
                                              sense_opt_problem = sense_opt_problem,
                                              maximum_number_iterations_multistart = maximum_number_iterations_multistart,
                                              folder_results = folder_results,
-                                             csv_file_name_multistart = csv_file_name_multistart)
+                                             csv_file_name_multistart = csv_file_name_multistart,
+                                             ampl_flag = ampl_flag)

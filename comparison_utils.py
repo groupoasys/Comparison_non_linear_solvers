@@ -20,7 +20,8 @@ def run_optimization_problem_given_solver(solver,
                                           sense_opt_problem,
                                           maximum_number_iterations_multistart,
                                           folder_results,
-                                          csv_file_name_multistart):
+                                          csv_file_name_multistart,
+                                          ampl_flag):
     
     if problem == "m2svm_optimal_weights":
         run_m2svm_optimal_weights(solver = solver,
@@ -31,7 +32,8 @@ def run_optimization_problem_given_solver(solver,
                                   sense_opt_problem = sense_opt_problem,
                                   maximum_number_iterations_multistart = maximum_number_iterations_multistart,
                                   folder_results = folder_results,
-                                  csv_file_name_multistart = csv_file_name_multistart)
+                                  csv_file_name_multistart = csv_file_name_multistart,
+                                  ampl_flag = ampl_flag)
     else:
         raise error.my_custom_error("The given optimization problem does not exist❌🚫 Please, check 👁‍🗨 that the name is well-written ✍")
     
@@ -45,7 +47,8 @@ def run_m2svm_optimal_weights(solver,
                               sense_opt_problem,
                               maximum_number_iterations_multistart,
                               folder_results,
-                              csv_file_name_multistart):
+                              csv_file_name_multistart,
+                              ampl_flag):
     
     # Please, do not change this function here
     main_directory_data = 'optimization_problem_utils/'
@@ -98,7 +101,8 @@ def run_m2svm_optimal_weights(solver,
                              number_of_constraints = number_of_constraints,
                              sense_opt_problem = sense_opt_problem,
                              maximum_number_iterations_multistart = maximum_number_iterations_multistart,
-                             folder_results = folder_results)
+                             folder_results = folder_results,
+                             ampl_flag = ampl_flag)
     write_results_m2svm_optimal_weights(output = output,
                                         solver = solver,
                                         problem = problem,
@@ -108,7 +112,8 @@ def run_m2svm_optimal_weights(solver,
                                         sense_opt_problem = sense_opt_problem,
                                         maximum_number_iterations_multistart = maximum_number_iterations_multistart,
                                         folder_results = folder_results,
-                                        csv_file_name_multistart = csv_file_name_multistart)
+                                        csv_file_name_multistart = csv_file_name_multistart,
+                                        ampl_flag = ampl_flag)
     return output
 
 def write_results_m2svm_optimal_weights(output,
@@ -120,14 +125,19 @@ def write_results_m2svm_optimal_weights(output,
                                         sense_opt_problem,
                                         maximum_number_iterations_multistart,
                                         folder_results,
-                                        csv_file_name_multistart):
+                                        csv_file_name_multistart,
+                                        ampl_flag):
     
     folder_results_msvm = folder_results
     if neos_flag:
         neos_string = 'yes'
     else:
         neos_string = 'no'
-    csv_file = folder_results_msvm + csv_file_name_multistart + '_' + solver + '_neos_' + neos_string +'.csv'
+    if ampl_flag:
+        ampl_string = 'yes'
+    else:
+        ampl_string = 'no'
+    csv_file = folder_results_msvm + csv_file_name_multistart + '_' + solver + '_neos_' + neos_string + '_ampl_' + ampl_string + '.csv'
     file_to_write = open(csv_file, 'w+')
     file_to_write.write('multistart' + ',' + 'objective value' + ','+ 'elapsed time\n')
     
@@ -152,7 +162,7 @@ def write_results_m2svm_optimal_weights(output,
     
     csv_file_summary_results = folder_results_msvm + 'summary_results.csv'
     file_to_write_summary = open(csv_file_summary_results, 'a+')
-    file_to_write_summary.write(problem + ','  + neos_string + ','+ solver + ',' + str(number_of_variables) + ','+ str(number_of_constraints) + ','+ sense_opt_problem + ','+  "{:.3e}".format(mean_objective_values) + ','+ "{:.3e}".format(maximum_objective_value)+ ',' + "{:.3e}".format(minimum_objective_value) + ','+ "{:.3e}".format(mean_elapsed_times) + ','+ "{:.3e}".format(maximum_elapsed_time) + ','+ "{:.3e}".format(minimum_elapsed_time) + '\n')
+    file_to_write_summary.write(problem + ','  + neos_string + ',' + ampl_string + ','+ solver + ',' + str(number_of_variables) + ','+ str(number_of_constraints) + ','+ sense_opt_problem + ','+  "{:.3e}".format(mean_objective_values) + ','+ "{:.3e}".format(maximum_objective_value)+ ',' + "{:.3e}".format(minimum_objective_value) + ','+ "{:.3e}".format(mean_elapsed_times) + ','+ "{:.3e}".format(maximum_elapsed_time) + ','+ "{:.3e}".format(minimum_elapsed_time) + '\n')
     file_to_write_summary.close()
         
     return 0
@@ -167,7 +177,7 @@ def initialize_summary_results_file(folder_results,
                                     csv_file_summary_results):
     csv_file_summary_results = folder_results + csv_file_summary_results + '.csv'
     file_to_write_summary = open(csv_file_summary_results, 'a+')
-    file_to_write_summary.write('problem, ' + 'neos, '      + 'solver, '+ '# variables, '            + '# constraints, '            + 'sense, '           + 'mean obj. val., '            + 'max obj. val., '              + 'min obj. val., '              + 'mean comp. time, '       + 'max comp. time, '          + 'min comp. time, '          + '\n')
+    file_to_write_summary.write('problem, ' + 'neos, ' + 'ampl, '     + 'solver, '+ '# variables, '            + '# constraints, '            + 'sense, '           + 'mean obj. val., '            + 'max obj. val., '              + 'min obj. val., '              + 'mean comp. time, '       + 'max comp. time, '          + 'min comp. time, '          + '\n')
     
     return 0
     

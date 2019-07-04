@@ -95,7 +95,8 @@ class sys:
                  number_of_constraints = -1,
                  sense_opt_problem = 'min',
                  maximum_number_iterations_multistart = 1,
-                 folder_results = 'folder_results_by_default'):
+                 folder_results = 'folder_results_by_default',
+                 ampl_flag = False):
     self.method = method  
     if method == 'illustrative_m2svm_optimization':
         if net_demand:
@@ -254,7 +255,7 @@ class sys:
                                                                            solver = solver,
                                                                            neos_flag = neos_flag)
             
-            file_name_to_save_results = folder_results_msvm + beggining_file_name_to_save_results + str(line + 1) +'_' + approach+'_neos_flag_'+ str(neos_flag) + '_solver_'+ solver + '.pydata'          
+            file_name_to_save_results = folder_results_msvm + beggining_file_name_to_save_results + str(line + 1) +'_' + approach+'_neos_flag_'+ str(neos_flag) + '_ampl_flag_' + str(ampl_flag) + '_solver_'+ solver + '.pydata'          
             file_to_save = open(file_name_to_save_results, 'wb')
             pickle.dump(best_results_tune_parameters_grid[line], file_to_save)
             file_to_save.close()
