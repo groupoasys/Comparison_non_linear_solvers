@@ -50,9 +50,9 @@ csv_file_summary_results = 'summary_results'
 #                               'bonmin',
 #                               'couenne',
 #                               'filmint']
-solvers_list_ampl = ['conopt']
-solvers_list_neos_flag_false = []
-solvers_list_neos_flag_true = []
+#solvers_list_ampl = ['loqo']
+#solvers_list_neos_flag_false = []
+#solvers_list_neos_flag_true = []
 
 cu.create_folder_results_if_it_doesnt_exits(folder_results = folder_results)
 cu.initialize_summary_results_file(folder_results = folder_results,
