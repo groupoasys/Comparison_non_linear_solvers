@@ -27,29 +27,29 @@ problem = 'm2svm_optimal_weights'
 number_of_variables = 15
 number_of_constraints = 36
 sense_opt_problem = 'min'    
-maximum_number_iterations_multistart = 100
+maximum_number_iterations_multistart = 1000
 folder_results = 'temporary_results_' + problem + '/'
 csv_file_name_multistart = 'results_multistart'
 csv_file_summary_results = 'summary_results'
 
-#solvers_list_ampl = ['conopt',
-#                    'loqo',
-#                    'minos',
-#                    'snopt']
-#solvers_list_neos_flag_false = ['ipopt',
-#                                'bonmin',
-#                                'couenne']
-#solvers_list_neos_flag_true = ['conopt',
-#                               'ipopt',
-#                               'filter',
-#                               'knitro',
-#                               'loqo',
-#                               'minos',
-#                               'mosek',
-#                               'snopt',
-#                               'bonmin',
-#                               'couenne',
-#                               'filmint']
+solvers_list_ampl = ['conopt',
+                    'loqo',
+                    'minos',
+                    'snopt']
+solvers_list_neos_flag_false = ['ipopt',
+                                'bonmin',
+                                'couenne']
+solvers_list_neos_flag_true = ['conopt',
+                               'ipopt',
+                               'filter',
+                               'knitro',
+                               'loqo',
+                               'minos',
+                               'mosek',
+                               'snopt',
+                               'bonmin',
+                               'couenne',
+                               'filmint']
 #solvers_list_ampl = ['loqo']
 #solvers_list_neos_flag_false = []
 #solvers_list_neos_flag_true = []
