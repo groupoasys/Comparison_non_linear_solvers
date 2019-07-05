@@ -251,7 +251,7 @@ def run_inverse_optimization_related_problem(solver,
             data = mp.parse_excel(config['input_files']['data'], config) 
                  
         logging.info("## Solving model 1 to generate x ##")
-        start_time = time.time()
+        
         
         #Initialize variables multistart
         
@@ -263,10 +263,12 @@ def run_inverse_optimization_related_problem(solver,
                                      conf = config,
                                      initial_variables_multistart = initial_variables_multistart)
         
+        start_time = time.time()
         solved_instance, solver_status, solver_solutions  = mp.run_solver(instance_mymodel,
                                                                           config['solver_cfg'],
                                                                           solver = solver,
                                                                           neos_flag = neos_flag)
+        end_time = time.time()
             
         print("--- %s seconds ---" % (time.time() - start_time))
           
@@ -275,10 +277,17 @@ def run_inverse_optimization_related_problem(solver,
             dict_out['x'].loc[:, 'x'] = mp.pyomo_to_pandas(solved_instance, 'x').iloc[:,0]
             dict_out['y'].loc[:, 'y'] = mp.pyomo_to_pandas(solved_instance, 'y').iloc[:,0]
             dict_out['u'].loc[:, 'u'] = data['u'].iloc[:, 0]
-            dict_out['info'].loc['Time', 'Value'] = (time.time() - start_time)
-    
-        mp.dict_pandas_to_excel(dict_out, dir=results_dir, filename=config['output_files']['filename'])
-
+            dict_out['info'].loc['Time', 'Value'] = (end_time - start_time)
+        
+        
+        output = {}
+        output['elapsed_time'] = dict_out['info'].loc['Time', 'Value']
+        output['objective_value'] = solved_instance.obj_model1()
+        
+        # Uncomment when the output should be saved in an output file
+        #mp.dict_pandas_to_excel(dict_out, dir=results_dir, filename=config['output_files']['filename'])
+        
+        return output
     def get_initial_variables_multistart(iteration_multistart,
                                          config):
         number_of_variables = config['model_cfg']['n_sample']
@@ -303,13 +312,18 @@ def run_inverse_optimization_related_problem(solver,
                             filename=config['log_file'],
                             level=logging.DEBUG)
         
+        output = {}
         for iteration_multistart in range(maximum_number_iterations_multistart):
     
-            run_mymodel(config,
-                        results_dir = folder_results,
-                        solver = solver,
-                        neos_flag = neos_flag,
-                        iteration_multistart = iteration_multistart)
+            output[iteration_multistart] = run_mymodel(config,
+                                                       results_dir = folder_results,
+                                                       solver = solver,
+                                                       neos_flag = neos_flag,
+                                                       iteration_multistart = iteration_multistart)
+        
+        
+        
+        pdb.set_trace()
     
     main()
         
