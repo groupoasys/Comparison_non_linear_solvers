@@ -2,6 +2,7 @@ import logging
 import os
 
 import pandas as pd
+import pdb
 
 def to_bool(boolean):
     return 1 if boolean == 'YES' else 0
@@ -90,6 +91,7 @@ def get_set_members(instance, sets):
     Returns:
         A list with the set members
     """
+    
     sm = []
     for s in sets:
         sm.append([v for v in getattr(instance, s).value])
@@ -109,6 +111,8 @@ def pyomo_to_pandas(instance, var):
         Instance in pandas Dataframe format
 
     """
+    
+    
     setnames = get_sets(instance, var)
     sets = get_set_members(instance, setnames)
     var = getattr(instance, var)  # Previous script used model.var instead of var

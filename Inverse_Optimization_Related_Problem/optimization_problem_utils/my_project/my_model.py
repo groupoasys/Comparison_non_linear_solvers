@@ -3,6 +3,8 @@ import logging
 import pyomo.environ as pe
 from pyomo.opt import TerminationCondition
 from pyomo.opt.base import SolverFactory
+import math
+import pdb
 
  ####################################################
 # Model 1
@@ -27,19 +29,30 @@ def model1(data, conf):
     # Sets
     m.i = pe.Set(initialize=m.u.index.get_level_values('i').unique(),
                  ordered=True, doc=' ')
+    m.j = pe.Set(initialize=m.u.index.get_level_values('i').unique(),
+                 ordered=True, doc=' ')
            
     # Variables
     m.x = pe.Var(m.i,
                  within=pe.Reals,
-                 doc='Decision variable')
+                 doc='Decision variable',
+                 initialize = 1)
+    m.y = pe.Var(m.j,
+                 within = pe.Binary,
+                 initialize = 1)
     
     # Constraints
-    m.eq1_model1          = pe.Constraint(m.i, rule=eq1_model1_rule,                doc=' ')
-    m.eq2_model1          = pe.Constraint(m.i, rule=eq2_model1_rule,                doc=' ')      
+    #m.eq1_model1          = pe.Constraint(m.i, rule=eq1_model1_rule,                doc=' ')
+    #m.eq2_model1          = pe.Constraint(m.i, rule=eq2_model1_rule,                doc=' ')
+    m.eq3_model1          = pe.Constraint(m.i, rule=eq,                doc=' ')   
+    m.eq4_model1          = pe.Constraint(rule=eq2,                doc=' ')
+    m.eq5_model1          = pe.Constraint(rule=eq3,                doc=' ')
+    m.eq6_model1          = pe.Constraint(rule=eq4,                doc=' ')
 
     # Objective function
     m.obj_model1 = pe.Objective(rule=obj_model1_rule, sense=pe.minimize, doc='Objective function of model 1')
-
+    
+    #m.obj_model1.pprint()
     logging.info("Model prepared")
     return m
     
@@ -49,16 +62,29 @@ def model1(data, conf):
 
 # Eq1
 def eq1_model1_rule(m, i):
-    return m.x[i] >= -1 
+    return m.x[i] >= -5*math.pi
 
 # Eq2
 def eq2_model1_rule(m, i):
-    return m.x[i] <= 1 
+    return m.x[i] <= 5*math.pi
+
+def eq(m, i):
+    return (m.x[i]**2)*m.x[1]<=1
+def eq2(m):
+    return sum(m.x[i]**2 for i in m.i)<=2
+def eq3(m):
+    return sum(m.x[i]**3 for i in m.i)<=sum(pe.sin(m.x[i])*pe.cos(m.x[i]) for i in m.i)
+def eq4(m):
+    return sum(sum(m.x[i]*m.y[j] for i in m.i) for j in m.j)<=1
+    #return sum(m.y[j] for j in m.j)<=1
+def eq5(m):
+    return sum(sum(m.x[i]*m.y[j] for i in m.i) for j in m.j)<=1
+
     
 # Objective Function
 def obj_model1_rule(m):
-    return sum( (m.theta + m.u.at[i, 'u']) * m.x[i]  
-                 for i in m.i)
+    return sum( (m.theta + m.u.at[i, 'u']) * (pe.sin(m.x[i])*pe.cos(m.x[i])*m.x[i]**2)
+                 for i in m.i) + sum(pe.cos(m.y[j]**2)*pe.sin(m.y[j]) for j in m.j)
     
 ########################################################
 # Processing
@@ -78,13 +104,14 @@ def run_solver(instance, conf):
 
     """
     # initialize the solver / solver manager.
+    #solver = SolverFactory(conf['solver'], solver_io ='nl')
     solver = SolverFactory(conf['solver'])
     if solver is None:
         raise Exception("Solver %s is not available on this machine." % solver)
     
-    solver.options['timelimit'] = conf['options_timelimit']
+    #solver.options['timelimit'] = conf['options_timelimit']
     results = solver.solve(instance,  #TODO: try with **conf
-                           options_string=conf['options_string'],
+                           #options_string=conf['options_string'],
                            tee=conf['tee'],
                            symbolic_solver_labels=conf['symbolic_solver_labels'], 
                            load_solutions=False)
@@ -96,5 +123,5 @@ def run_solver(instance, conf):
         logging.info("Model solved. Solver: %s, Time: %.2f, Gap: %s" %
                      (results.solver.termination_condition, results.solver.time, results.solution(0).gap))
         instance.solutions.load_from(results)
-        
+        instance.obj_model1.expr()
     return instance, results.solver, results.solution
