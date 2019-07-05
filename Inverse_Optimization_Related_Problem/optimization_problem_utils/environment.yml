@@ -1,0 +1,24 @@
+# run: conda env create
+name: my_project
+
+channels:
+ - anaconda
+ - conda-forge  # Includes pyomo and glpk
+
+dependencies:
+- python=2.7
+- jupyter
+- ipykernel
+- click
+- numpy
+- scipy
+- matplotlib
+- seaborn
+- xlrd  # Needed for pandas/excel IO. Not a pandas dependency
+- openpyxl  # idem
+- pandas>=0.18
+- glpk=4.59  # 4.60 not compatible with pyomo
+- pyomo
+- pyyaml
+- sphinx
+- sphinx_rtd_theme
