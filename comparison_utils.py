@@ -253,7 +253,9 @@ def run_inverse_optimization_related_problem(solver,
         # Create instance model
         instance_mymodel = mp.model1(data, config)
             
-        solved_instance, solver_status, solver_solutions  = mp.run_solver(instance_mymodel, config['solver_cfg'])
+        solved_instance, solver_status, solver_solutions  = mp.run_solver(instance_mymodel,
+                                                                          config['solver_cfg'],
+                                                                          solver = solver)
             
         print("--- %s seconds ---" % (time.time() - start_time))
           

@@ -85,7 +85,9 @@ def obj_model1_rule(m):
 # Processing
 ########################################################
 
-def run_solver(instance, conf):
+def run_solver(instance,
+               conf,
+               solver):
     """Method to solve a pyomo instance
 
     Parameters:
@@ -99,13 +101,11 @@ def run_solver(instance, conf):
 
     """
     # initialize the solver / solver manager.
-    solver = SolverFactory(conf['solver'])
+    solver = SolverFactory(solver)
     if solver is None:
         raise Exception("Solver %s is not available on this machine." % solver)
     
-    #solver.options['timelimit'] = conf['options_timelimit']
     results = solver.solve(instance,  #TODO: try with **conf
-                           #options_string=conf['options_string'],
                            tee=conf['tee'],
                            symbolic_solver_labels=conf['symbolic_solver_labels'], 
                            load_solutions=False)
