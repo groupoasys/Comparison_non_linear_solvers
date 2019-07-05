@@ -26,7 +26,7 @@ def run_mymodel(config, results_dir='./results/', solver='cplex'):
     if not os.path.exists(results_dir):
         os.makedirs(results_dir)
     
-    out_keys = ['info', 'theta', 'x', 'u', 'y']
+    out_keys = ['info', 'theta', 'u', 'x', 'y']
 
     dict_out = {}
     for i in range(len(out_keys)):

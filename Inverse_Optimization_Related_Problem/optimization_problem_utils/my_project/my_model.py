@@ -48,6 +48,7 @@ def model1(data, conf):
     m.eq4_model1          = pe.Constraint(rule=eq2,                doc=' ')
     m.eq5_model1          = pe.Constraint(rule=eq3,                doc=' ')
     m.eq6_model1          = pe.Constraint(rule=eq4,                doc=' ')
+    #m.eq7_model1          = pe.Constraint(rule=eq5,                doc=' ')
 
     # Objective function
     m.obj_model1 = pe.Objective(rule=obj_model1_rule, sense=pe.minimize, doc='Objective function of model 1')
@@ -71,14 +72,14 @@ def eq2_model1_rule(m, i):
 def eq(m, i):
     return (m.x[i]**2)*m.x[1]<=1
 def eq2(m):
-    return sum(m.x[i]**2 for i in m.i)<=2
+    return sum(m.x[i]**2 for i in m.i)<=10
 def eq3(m):
     return sum(m.x[i]**3 for i in m.i)<=sum(pe.sin(m.x[i])*pe.cos(m.x[i]) for i in m.i)
 def eq4(m):
     return sum(sum(m.x[i]*m.y[j] for i in m.i) for j in m.j)<=1
-    #return sum(m.y[j] for j in m.j)<=1
+    
 def eq5(m):
-    return sum(sum(m.x[i]*m.y[j] for i in m.i) for j in m.j)<=1
+    return sum(m.y[j] for j in m.j)>=1
 
     
 # Objective Function
