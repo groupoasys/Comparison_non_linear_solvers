@@ -223,12 +223,7 @@ def run_inverse_optimization_related_problem(solver,
                                                    results_dir = folder_results,
                                                    solver = solver,
                                                    neos_flag = neos_flag,
-                                                   iteration_multistart = iteration_multistart)
-    
-    
-    
-    pdb.set_trace()
-        
+                                                   iteration_multistart = iteration_multistart)        
     return 0
     
     
