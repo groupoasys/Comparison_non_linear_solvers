@@ -32,24 +32,24 @@ folder_results = 'temporary_results_' + problem + '/'
 csv_file_name_multistart = 'results_multistart'
 csv_file_summary_results = 'summary_results'
 
-solvers_list_ampl = ['conopt',
-                    'loqo',
-                    'minos',
-                    'snopt']
-solvers_list_neos_flag_false = ['ipopt',
-                                'bonmin',
-                                'couenne']
-solvers_list_neos_flag_true = ['conopt',
-                               'ipopt',
-                               'filter',
-                               'knitro',
-                               'loqo',
-                               'minos',
-                               'mosek',
-                               'snopt',
-                               'bonmin',
-                               'couenne',
-                               'filmint']
+#solvers_list_ampl = ['conopt',
+#                    'loqo',
+#                    'minos',
+#                    'snopt']
+#solvers_list_neos_flag_false = ['ipopt',
+#                                'bonmin',
+#                                'couenne']
+#solvers_list_neos_flag_true = ['conopt',
+#                               'ipopt',
+#                               'filter',
+#                               'knitro',
+#                               'loqo',
+#                               'minos',
+#                               'mosek',
+#                               'snopt',
+#                               'bonmin',
+#                               'couenne',
+#                               'filmint']
 solvers_list_ampl = []
 solvers_list_neos_flag_false = []
 solvers_list_neos_flag_true = ['knitro',
