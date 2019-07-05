@@ -3,11 +3,14 @@ import logging
 import pyomo.environ as pe
 from pyomo.opt import TerminationCondition
 from pyomo.opt.base import SolverFactory
+import pdb
 
  ####################################################
 # Model 1
 ####################################################
-def model1(data, conf):
+def model1(data,
+           conf,
+           initial_variables_multistart):
     """ Create model as a Pyomo object
 
     Parameters:
@@ -29,16 +32,16 @@ def model1(data, conf):
                  ordered=True, doc=' ')
     m.j = pe.Set(initialize=m.u.index.get_level_values('i').unique(),
                  ordered=True, doc=' ')
-           
+
     # Variables
     m.x = pe.Var(m.i,
                  within=pe.Reals,
                  doc='Decision variable',
-                 initialize = 1)
+                 initialize = initial_variables_multistart['x'].to_dict())
     m.y = pe.Var(m.j,
                  within = pe.Binary,
                  doc='Decision variable',
-                 initialize = 1)
+                 initialize = initial_variables_multistart['y'].to_dict())
     
     # Constraints
     m.eq1_model1          = pe.Constraint(m.i, rule=eq1_model1_rule,                doc=' ')

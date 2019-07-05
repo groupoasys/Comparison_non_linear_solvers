@@ -208,9 +208,10 @@ def run_inverse_optimization_related_problem(solver,
                                              csv_file_name_multistart,
                                              ampl_flag):
     
-    # Please, do not change this function here
+    # Please, do not change the content of this function
     def run_mymodel(config,
                     neos_flag,
+                    iteration_multistart,
                     results_dir='./results/',
                     solver='cplex'):
         """ Run my model
@@ -252,9 +253,16 @@ def run_inverse_optimization_related_problem(solver,
         logging.info("## Solving model 1 to generate x ##")
         start_time = time.time()
         
+        #Initialize variables multistart
+        
+        initial_variables_multistart = get_initial_variables_multistart(iteration_multistart = iteration_multistart,
+                                                                        config = config)
+        
         # Create instance model
-        instance_mymodel = mp.model1(data, config)
-            
+        instance_mymodel = mp.model1(data = data,
+                                     conf = config,
+                                     initial_variables_multistart = initial_variables_multistart)
+        
         solved_instance, solver_status, solver_solutions  = mp.run_solver(instance_mymodel,
                                                                           config['solver_cfg'],
                                                                           solver = solver,
@@ -271,17 +279,37 @@ def run_inverse_optimization_related_problem(solver,
     
         mp.dict_pandas_to_excel(dict_out, dir=results_dir, filename=config['output_files']['filename'])
 
+    def get_initial_variables_multistart(iteration_multistart,
+                                         config):
+        number_of_variables = config['model_cfg']['n_sample']
+        np.random.seed(seed = 1559 + iteration_multistart)
+        initial_variables_x = np.random.uniform(low = -10,
+                                                high = 10,
+                                                size = number_of_variables)
+        initial_variables_y = np.random.randint(low = 0,
+                                                high = 1 + 1,
+                                                size = number_of_variables)
+        initial_variables = pd.DataFrame({'x':initial_variables_x,
+                                          'y': initial_variables_y},
+                                         index = range(1, number_of_variables + 1))
+        
+        return initial_variables
+    
+    
     def main():
         config = mp.read_yaml('./optimization_problem_utils/configs/config_model1.yml')
         logging.basicConfig(format='%(asctime)s %(message)s',
                             datefmt='%d/%m/%y %H:%M:%S',
                             filename=config['log_file'],
                             level=logging.DEBUG)
+        
+        for iteration_multistart in range(maximum_number_iterations_multistart):
     
-        run_mymodel(config,
-                    results_dir = folder_results,
-                    solver = solver,
-                    neos_flag = neos_flag)
+            run_mymodel(config,
+                        results_dir = folder_results,
+                        solver = solver,
+                        neos_flag = neos_flag,
+                        iteration_multistart = iteration_multistart)
     
     main()
         
