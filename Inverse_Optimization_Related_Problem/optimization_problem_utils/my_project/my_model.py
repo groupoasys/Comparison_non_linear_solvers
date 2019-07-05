@@ -3,8 +3,6 @@ import logging
 import pyomo.environ as pe
 from pyomo.opt import TerminationCondition
 from pyomo.opt.base import SolverFactory
-import math
-import pdb
 
  ####################################################
 # Model 1
@@ -39,21 +37,19 @@ def model1(data, conf):
                  initialize = 1)
     m.y = pe.Var(m.j,
                  within = pe.Binary,
+                 doc='Decision variable',
                  initialize = 1)
     
     # Constraints
-    #m.eq1_model1          = pe.Constraint(m.i, rule=eq1_model1_rule,                doc=' ')
-    #m.eq2_model1          = pe.Constraint(m.i, rule=eq2_model1_rule,                doc=' ')
-    m.eq3_model1          = pe.Constraint(m.i, rule=eq,                doc=' ')   
-    m.eq4_model1          = pe.Constraint(rule=eq2,                doc=' ')
-    m.eq5_model1          = pe.Constraint(rule=eq3,                doc=' ')
-    m.eq6_model1          = pe.Constraint(rule=eq4,                doc=' ')
-    #m.eq7_model1          = pe.Constraint(rule=eq5,                doc=' ')
-
+    m.eq1_model1          = pe.Constraint(m.i, rule=eq1_model1_rule,                doc=' ')
+    m.eq2_model1          = pe.Constraint(     rule=eq2_model1_rule,                doc=' ')
+    m.eq3_model1          = pe.Constraint(     rule=eq3_model1_rule,                doc=' ')   
+    m.eq4_model1          = pe.Constraint(     rule=eq4_model1_rule,                doc=' ')
+    
     # Objective function
     m.obj_model1 = pe.Objective(rule=obj_model1_rule, sense=pe.minimize, doc='Objective function of model 1')
     
-    #m.obj_model1.pprint()
+    
     logging.info("Model prepared")
     return m
     
@@ -63,23 +59,21 @@ def model1(data, conf):
 
 # Eq1
 def eq1_model1_rule(m, i):
-    return m.x[i] >= -5*math.pi
+    return (m.x[i]**2)*m.x[1]<=1
 
 # Eq2
-def eq2_model1_rule(m, i):
-    return m.x[i] <= 5*math.pi
-
-def eq(m, i):
-    return (m.x[i]**2)*m.x[1]<=1
-def eq2(m):
+def eq2_model1_rule(m):
     return sum(m.x[i]**2 for i in m.i)<=10
-def eq3(m):
+
+#Eq3
+def eq3_model1_rule(m):
     return sum(m.x[i]**3 for i in m.i)<=sum(pe.sin(m.x[i])*pe.cos(m.x[i]) for i in m.i)
-def eq4(m):
+
+#Eq4
+def eq4_model1_rule(m):
     return sum(sum(m.x[i]*m.y[j] for i in m.i) for j in m.j)<=1
     
-def eq5(m):
-    return sum(m.y[j] for j in m.j)>=1
+
 
     
 # Objective Function

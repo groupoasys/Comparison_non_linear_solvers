@@ -4,7 +4,7 @@ model_cfg:
   how_to_read_data: 'endogenously' # endogenously or exogenously
 
 solver_cfg:
-  solver: 'conopt'
+  solver: 'ipopt'
   symbolic_solver_labels: True  # better output in lp file but a but slower
   tee: True  # output solver
   options_timelimit: 3000
