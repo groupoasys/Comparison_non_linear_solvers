@@ -12,8 +12,7 @@ import os
 import pdb
 import numpy as np
 from statistics import mean
-import optimization_problem_utils.my_project as mp
-from optimization_problem_utils import run_mymodel
+import Inverse_Optimization_Related_Problem.optimization_problem_utils.my_project as mp
 import logging
 import pandas as pd
 import time
@@ -210,7 +209,10 @@ def run_inverse_optimization_related_problem(solver,
                                              ampl_flag):
     
     # Please, do not change this function here
-    def run_mymodel(config, results_dir='./results/', solver='cplex'):
+    def run_mymodel(config,
+                    neos_flag,
+                    results_dir='./results/',
+                    solver='cplex'):
         """ Run my model
         
         Parameters:
@@ -255,7 +257,8 @@ def run_inverse_optimization_related_problem(solver,
             
         solved_instance, solver_status, solver_solutions  = mp.run_solver(instance_mymodel,
                                                                           config['solver_cfg'],
-                                                                          solver = solver)
+                                                                          solver = solver,
+                                                                          neos_flag = neos_flag)
             
         print("--- %s seconds ---" % (time.time() - start_time))
           
@@ -277,7 +280,8 @@ def run_inverse_optimization_related_problem(solver,
     
         run_mymodel(config,
                     results_dir = folder_results,
-                    solver = solver)
+                    solver = solver,
+                    neos_flag = neos_flag)
     
     main()
         

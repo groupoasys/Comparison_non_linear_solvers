@@ -87,7 +87,8 @@ def obj_model1_rule(m):
 
 def run_solver(instance,
                conf,
-               solver):
+               solver,
+               neos_flag):
     """Method to solve a pyomo instance
 
     Parameters:
@@ -101,14 +102,25 @@ def run_solver(instance,
 
     """
     # initialize the solver / solver manager.
-    solver = SolverFactory(solver)
+    solver_name = solver
+    if neos_flag:
+        solver = pe.SolverManagerFactory("neos")
+    else:
+        solver = pe.SolverFactory(solver_name)
     if solver is None:
         raise Exception("Solver %s is not available on this machine." % solver)
-    
-    results = solver.solve(instance,  #TODO: try with **conf
-                           tee=conf['tee'],
-                           symbolic_solver_labels=conf['symbolic_solver_labels'], 
-                           load_solutions=False)
+        
+    if neos_flag:
+        results = solver.solve(instance,
+                               tee = conf['tee'],
+                               symbolic_solver_labels=conf['symbolic_solver_labels'], 
+                               load_solutions=False,
+                               opt = solver_name)
+    else:
+        results = solver.solve(instance,
+                               tee = conf['tee'],
+                               symbolic_solver_labels=conf['symbolic_solver_labels'], 
+                               load_solutions=False)
     if results.solver.termination_condition not in (TerminationCondition.optimal, TerminationCondition.maxTimeLimit):
         # something went wrong
         logging.warn("Solver: %s" % results.solver.termination_condition)
