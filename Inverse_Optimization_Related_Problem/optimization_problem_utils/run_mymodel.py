@@ -1,14 +1,15 @@
 #!/usr/bin/env python
 """ Main script to run routines from my_project library
 """
-from __future__ import division
-import my_project as mp
+#from __future__ import division
+import optimization_problem_utils.my_project as mp
 import logging
 import pandas as pd
 import numpy as np
 import os
-import pdb
 import time
+import pdb
+
 
 def run_mymodel(config, results_dir='./results/', solver='cplex'):
     """ Run my model
@@ -23,7 +24,7 @@ def run_mymodel(config, results_dir='./results/', solver='cplex'):
     if not os.path.exists(results_dir):
         os.makedirs(results_dir)
     
-    out_keys = ['info', 'theta', 'x', 'u']
+    out_keys = ['info', 'theta', 'u', 'x', 'y']
 
     dict_out = {}
     for i in range(len(out_keys)):
@@ -38,6 +39,7 @@ def run_mymodel(config, results_dir='./results/', solver='cplex'):
         data['parameters'].index.name = 'p'
     
         logging.info("## Generating input data for the parameter u ##")
+        np.random.seed(seed = 1133)
         data['u'] = pd.DataFrame(np.random.uniform(-2,1,data['parameters'].loc['n', 'Value']), index=range(1, int(data['parameters'].loc['n', 'Value'])+1), columns=['u'])
         data['u'].index.name = 'i'
         
@@ -59,19 +61,22 @@ def run_mymodel(config, results_dir='./results/', solver='cplex'):
     if solver_status.termination_condition.index == 8:  # Termination condition of solver: Optimal
         dict_out['theta'].loc['theta', 'Value'] = data['parameters'].loc['theta', 'Value']
         dict_out['x'].loc[:, 'x'] = mp.pyomo_to_pandas(solved_instance, 'x').iloc[:,0]
+        dict_out['y'].loc[:, 'y'] = mp.pyomo_to_pandas(solved_instance, 'y').iloc[:,0]
         dict_out['u'].loc[:, 'u'] = data['u'].iloc[:, 0]
         dict_out['info'].loc['Time', 'Value'] = (time.time() - start_time)
 
     mp.dict_pandas_to_excel(dict_out, dir=results_dir, filename=config['output_files']['filename'])
 
 def main():
-    config = mp.read_yaml('./configs/config_model1.yml')
+    config = mp.read_yaml('./optimization_problem_utils/configs/config_model1.yml')
     logging.basicConfig(format='%(asctime)s %(message)s',
                         datefmt='%d/%m/%y %H:%M:%S',
                         filename=config['log_file'],
                         level=logging.DEBUG)
 
     run_mymodel(config)
+
+main()
 
 if __name__ == '__main__':
     main()

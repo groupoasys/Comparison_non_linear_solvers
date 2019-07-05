@@ -99,7 +99,6 @@ def run_solver(instance, conf):
 
     """
     # initialize the solver / solver manager.
-    #solver = SolverFactory(conf['solver'], solver_io ='nl')
     solver = SolverFactory(conf['solver'])
     if solver is None:
         raise Exception("Solver %s is not available on this machine." % solver)
