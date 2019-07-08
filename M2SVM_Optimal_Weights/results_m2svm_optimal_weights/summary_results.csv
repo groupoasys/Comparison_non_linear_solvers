@@ -9,3 +9,6 @@ m2svm_optimal_weights,no,no,couenne,15,36,min,-2.876e-13,-2.876e-13,-2.876e-13,6
 m2svm_optimal_weights,yes,no,conopt,15,36,min,-6.459e-14,1.451e-15,-3.612e-13,1.805e+01,7.397e+01,2.378e+00
 m2svm_optimal_weights,yes,no,ipopt,15,36,min,-7.499e-08,-7.494e-08,-7.503e-08,1.731e+01,3.874e+01,2.380e+00
 m2svm_optimal_weights,yes,no,filter,15,36,min,-1.736e-13,0.000e+00,-2.858e-13,1.851e+01,2.940e+01,2.586e+00
+m2svm_optimal_weights,yes,no,knitro,15,36,min,1.867e-07,4.852e-06,-9.890e-10,1.811e+01,6.691e+01,2.409e+00
+m2svm_optimal_weights,yes,no,loqo,15,36,min,-1.125e+12,1.891e+04,-2.984e+12,1.785e+01,6.601e+01,2.471e+00
+m2svm_optimal_weights,yes,no,minos,15,36,min,-2.787e-14,0.000e+00,-8.560e-14,1.815e+01,3.881e+01,2.776e+00
