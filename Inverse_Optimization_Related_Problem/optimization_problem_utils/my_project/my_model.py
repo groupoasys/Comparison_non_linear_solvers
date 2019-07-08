@@ -111,6 +111,8 @@ def run_solver(instance,
 
     """
     # initialize the solver / solver manager.
+    if solver == 'minos':
+        pdb.set_trace()
     solver_name = solver
     if neos_flag:
         solver = pe.SolverManagerFactory("neos")
