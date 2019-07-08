@@ -201,9 +201,7 @@ def run_mymodel(config,
                                                                       solver = solver,
                                                                       neos_flag = neos_flag)
     end_time = time.time()
-        
-    print("--- %s seconds ---" % (time.time() - start_time))
-      
+          
     if solver_status.termination_condition.index == 8:  # Termination condition of solver: Optimal
         dict_out['theta'].loc['theta', 'Value'] = data['parameters'].loc['theta', 'Value']
         dict_out['x'].loc[:, 'x'] = hp.pyomo_to_pandas(solved_instance, 'x').iloc[:,0]
@@ -215,6 +213,7 @@ def run_mymodel(config,
     output = {}
     output['elapsed_time'] = dict_out['info'].loc['Time', 'Value']
     output['objective_value'] = solved_instance.obj_model1()
+    output['dictionary_output'] = dict_out
     
     # Uncomment when the output should be saved in an output file
     #mp.dict_pandas_to_excel(dict_out, dir=results_dir, filename=config['output_files']['filename'])

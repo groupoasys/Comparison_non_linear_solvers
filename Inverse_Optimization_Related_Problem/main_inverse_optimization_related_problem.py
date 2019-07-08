@@ -24,32 +24,35 @@ os.chdir(directory_path)
 
 
 problem = 'inverse_optimization_related_problem'
-number_of_variables = 15
-number_of_constraints = 36
+number_of_variables = 300
+number_of_constraints = 153
 sense_opt_problem = 'min'    
 maximum_number_iterations_multistart = 2
-folder_results = 'temporary_results_' + problem + '/'
+folder_results = 'temporary_results/'
 csv_file_name_multistart = 'results_multistart'
 csv_file_summary_results = 'summary_results'
 
-solvers_list_ampl = ['conopt',
-                    'loqo',
-                    'minos',
-                    'snopt']
-solvers_list_neos_flag_false = ['ipopt',
-                                'bonmin',
-                                'couenne']
-solvers_list_neos_flag_true = ['conopt',
-                               'ipopt',
-                               'filter',
-                               'knitro',
-                               'loqo',
-                               'minos',
-                               'mosek',
-                               'snopt',
-                               'bonmin',
-                               'couenne',
-                               'filmint']
+#solvers_list_ampl = ['conopt',
+#                    'loqo',
+#                    'minos',
+#                    'snopt']
+#solvers_list_neos_flag_false = ['ipopt',
+#                                'bonmin',
+#                                'couenne']
+#solvers_list_neos_flag_true = ['conopt',
+#                               'ipopt',
+#                               'filter',
+#                               'knitro',
+#                               'loqo',
+#                               'minos',
+#                               'mosek',
+#                               'snopt',
+#                               'bonmin',
+#                               'couenne',
+#                               'filmint']
+solvers_list_ampl = ['conopt']
+solvers_list_neos_flag_false = []
+solvers_list_neos_flag_true = []
 
 cu.create_folder_results_if_it_doesnt_exits(folder_results = folder_results)
 cu.initialize_summary_results_file(folder_results = folder_results,
