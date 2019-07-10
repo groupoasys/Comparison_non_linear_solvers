@@ -1,19 +1,7 @@
 problem, neos, ampl, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
-inverse_optimization_related_problem,no,yes,conopt,15,36,min,2.781e+01,2.904e+01,2.657e+01,4.538e+00,5.386e+00,3.690e+00
-problem, neos, ampl, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
-inverse_optimization_related_problem,no,yes,conopt,300,153,min,2.781e+01,2.904e+01,2.657e+01,4.572e+00,5.195e+00,3.948e+00
-inverse_optimization_related_problem,no,yes,loqo,300,153,min,-8.238e+00,-7.434e+00,-9.042e+00,1.218e+00,1.272e+00,1.164e+00
-problem, neos, ampl, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
-inverse_optimization_related_problem,no,yes,conopt,300,153,min,2.781e+01,2.904e+01,2.657e+01,6.464e+00,7.655e+00,5.274e+00
-problem, neos, ampl, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
-problem, neos, ampl, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
-problem, neos, ampl, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
-problem, neos, ampl, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
-problem, neos, ampl, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
-problem, neos, ampl, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
-problem, neos, ampl, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
-inverse_optimization_related_problem,no,yes,minos,300,153,min,5.554e+01,8.700e+01,2.408e+01,2.194e+00,2.624e+00,1.763e+00
-problem, neos, ampl, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
-inverse_optimization_related_problem,no,yes,minos,300,153,min,5.554e+01,8.700e+01,2.408e+01,2.203e+00,2.367e+00,2.040e+00
-problem, neos, ampl, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
-inverse_optimization_related_problem,no,yes,minos,300,153,min,5.554e+01,8.700e+01,2.408e+01,1.669e+01,2.299e+01,1.038e+01
+inverse_optimization_related_problem,no,yes,conopt,300,153,min,2.781e+01,2.904e+01,2.657e+01,7.987e+00,9.043e+00,6.931e+00
+inverse_optimization_related_problem,no,yes,loqo,300,153,min,-8.238e+00,-7.434e+00,-9.042e+00,2.960e+00,3.286e+00,2.634e+00
+inverse_optimization_related_problem,no,yes,minos,300,153,min,5.554e+01,8.700e+01,2.408e+01,2.455e+00,3.208e+00,1.702e+00
+inverse_optimization_related_problem,no,yes,snopt,300,153,min,2.817e+01,6.220e+01,-5.867e+00,3.190e+00,3.726e+00,2.655e+00
+inverse_optimization_related_problem,no,no,ipopt,300,153,min,1.208e+01,2.963e+01,-5.473e+00,3.179e+01,4.288e+01,2.071e+01
+inverse_optimization_related_problem,no,no,bonmin,300,153,min,-5.704e+00,-4.831e+00,-6.577e+00,6.145e+01,9.455e+01,2.834e+01
