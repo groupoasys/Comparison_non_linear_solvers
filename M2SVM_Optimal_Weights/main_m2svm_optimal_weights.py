@@ -92,6 +92,7 @@ for solver in solvers_list_neos_flag_false:
 for solver in solvers_list_neos_flag_true:
     neos_flag = True
     ampl_flag = False
+    print(solver)
     cu.run_optimization_problem_given_solver(solver = solver,
                                              problem = problem,
                                              neos_flag = neos_flag,
