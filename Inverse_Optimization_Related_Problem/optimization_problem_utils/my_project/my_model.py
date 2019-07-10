@@ -111,8 +111,8 @@ def run_solver(instance,
 
     """
     # initialize the solver / solver manager.
-    if solver == 'minos':
-        pdb.set_trace()
+#    if solver == 'minos':
+#        pdb.set_trace()
     solver_name = solver
     if neos_flag:
         solver = pe.SolverManagerFactory("neos")
@@ -202,9 +202,14 @@ def run_mymodel(config,
                                                                       config['solver_cfg'],
                                                                       solver = solver,
                                                                       neos_flag = neos_flag)
-    end_time = time.time()
-          
+    end_time = time.time()   
     if solver_status.termination_condition.index == 8:  # Termination condition of solver: Optimal
+        dict_out['theta'].loc['theta', 'Value'] = data['parameters'].loc['theta', 'Value']
+        dict_out['x'].loc[:, 'x'] = hp.pyomo_to_pandas(solved_instance, 'x').iloc[:,0]
+        dict_out['y'].loc[:, 'y'] = hp.pyomo_to_pandas(solved_instance, 'y').iloc[:,0]
+        dict_out['u'].loc[:, 'u'] = data['u'].iloc[:, 0]
+        dict_out['info'].loc['Time', 'Value'] = (end_time - start_time)
+    else:
         dict_out['theta'].loc['theta', 'Value'] = data['parameters'].loc['theta', 'Value']
         dict_out['x'].loc[:, 'x'] = hp.pyomo_to_pandas(solved_instance, 'x').iloc[:,0]
         dict_out['y'].loc[:, 'y'] = hp.pyomo_to_pandas(solved_instance, 'y').iloc[:,0]

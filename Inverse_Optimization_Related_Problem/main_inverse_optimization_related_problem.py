@@ -50,7 +50,7 @@ solvers_list_neos_flag_true = ['conopt',
                                'bonmin',
                                'couenne',
                                'filmint']
-#solvers_list_ampl = ['conopt']
+#solvers_list_ampl = ['minos']
 #solvers_list_neos_flag_false = []
 #solvers_list_neos_flag_true = []
 
