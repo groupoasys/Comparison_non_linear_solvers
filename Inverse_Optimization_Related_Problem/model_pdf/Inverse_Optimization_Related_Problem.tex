@@ -1,0 +1,68 @@
+\documentclass[a4paper,12pt]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MY DEFINITIONS
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MY PACKAGES
+\usepackage[english,activeacute]{babel}
+\usepackage{color} 
+\usepackage[normalem]{ulem}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage[numbers]{natbib}
+\usepackage{textcomp}
+\usepackage{enumitem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\title{A MINLP with Trigonometric Functions}
+
+\author{Asunci\'on Jim\'enez Cordero}
+
+\date{\small{OASYS Group (\url{oasys.uma.es})}}
+
+\maketitle
+
+\section{Goal}
+
+The goal of this document is to formally state the optimization problem which is solved in the example named as \emph{Inverse\_Optimization\_Related\_Problem}.
+
+\section{Problem Formulation}
+
+For a given value $\theta>0$ and $u\in\mathbb{R}^n$, the following optimization problem is solved:
+
+\begin{equation}
+  \left\{
+  \begin{array}{cl}
+  \min\limits_{x, y} & \sum\limits_{i = 1}^n \left(\theta + u_i)(\sin(x_i)\cos(x_i)x_i^2\right) + \sum\limits_{i = 1}^n \cos(y_j^2)\sin(y_j)\\
+  &\\
+   \text{s.t. }& x_ix_1\leq 1, \quad \forall i \\
+   &\\
+   & \sum\limits_{i = 1}^nx_i^2 \leq 10\\
+   &\\
+   & \sum\limits_{i = 1}^nx_i^3 \leq \sum\limits_{i = 1}^n \sin(x_i)\cos(x_i)\\
+   &\\
+   & \sum\limits_{i,j = 1}^n x_iy_j \leq 1\\
+   &\\
+   & x_i \in \mathbb{R}, \quad \forall i\\
+   &\\
+   & y_i\in\{0,1\}, \quad \forall i
+  \end{array}
+    \right.
+  \end{equation}
+
+
+%\bibliographystyle{abbrvnat}
+%\bibliography{\myreferences}%Use this line when the references are in other folder different from the one where the .tex is. Please, do not remove
+%\bibliography{Bibliography_all}
+\end{document}
+
