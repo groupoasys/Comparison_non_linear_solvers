@@ -52,9 +52,7 @@ csv_file_summary_results = 'summary_results'
 #                               'filmint']
 solvers_list_ampl = []
 solvers_list_neos_flag_false = []
-solvers_list_neos_flag_true = ['mosek',
-                               'snopt',
-                               'bonmin',
+solvers_list_neos_flag_true = ['bonmin',
                                'couenne',
                                'filmint']
 
