@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jun 12 10:53:25 2019
+Created on Fri Jul  5 13:00:14 2019
 
 @author: Asun
 """
@@ -23,12 +23,12 @@ import comparison_utils as cu
 os.chdir(directory_path)
 
 
-problem = 'm2svm_optimal_weights'
-number_of_variables = 15
-number_of_constraints = 36
+problem = 'inverse_optimization_related_problem'
+number_of_variables = 300
+number_of_constraints = 153
 sense_opt_problem = 'min'    
-maximum_number_iterations_multistart = 1000
-folder_results = 'temporary_results_' + problem + '/'
+maximum_number_iterations_multistart = 2
+folder_results = 'temporary_results/'
 csv_file_name_multistart = 'results_multistart'
 csv_file_summary_results = 'summary_results'
 
@@ -50,16 +50,9 @@ solvers_list_neos_flag_true = ['conopt',
                                'bonmin',
                                'couenne',
                                'filmint']
-solvers_list_ampl = []
-solvers_list_neos_flag_false = []
-solvers_list_neos_flag_true = ['knitro',
-                               'loqo',
-                               'minos',
-                               'mosek',
-                               'snopt',
-                               'bonmin',
-                               'couenne',
-                               'filmint']
+#solvers_list_ampl = ['minos']
+#solvers_list_neos_flag_false = []
+#solvers_list_neos_flag_true = []
 
 cu.create_folder_results_if_it_doesnt_exits(folder_results = folder_results)
 cu.initialize_summary_results_file(folder_results = folder_results,

@@ -1,0 +1,23 @@
+model_cfg:
+  n_sample: 150 # sample size
+  theta: 0 # Value of theta to generate synthetic data
+  how_to_read_data: 'endogenously' # endogenously or exogenously
+
+solver_cfg:
+  solver: ''
+  symbolic_solver_labels: True  # better output in lp file but a but slower
+  tee: True  # output solver
+  options_timelimit: 3000
+  options_string: "mipgap=1e-16 mip_tolerances_absmipgap=1e-16"
+#tmlim
+  
+log_file: "" #keep empty for screen output
+ 
+input_files:
+  data: './case1/Input_data.xlsx'
+
+output_files:
+  folder: ''
+  filename: 'Output.xlsx'
+
+
