@@ -39,6 +39,7 @@ def run_multistart_approach(alpha_variables,
     results_multistart = {}
     solver_name = solver
     for iteration_multistart in range(maximum_number_iterations_multistart):
+        print(iteration_multistart)
         results_multistart[iteration_multistart] = {}
         
         initial_variables_multistart = get_initial_variables_multistart(iteration_multistart = iteration_multistart,

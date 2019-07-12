@@ -28,7 +28,7 @@ number_of_variables = 15
 number_of_constraints = 36
 sense_opt_problem = 'min'    
 maximum_number_iterations_multistart = 1000
-folder_results = 'temporary_results_' + problem + '/'
+folder_results = 'results_' + problem + '/'
 csv_file_name_multistart = 'results_multistart'
 csv_file_summary_results = 'summary_results'
 
@@ -43,16 +43,6 @@ solvers_list_neos_flag_true = ['conopt',
                                'ipopt',
                                'filter',
                                'knitro',
-                               'loqo',
-                               'minos',
-                               'mosek',
-                               'snopt',
-                               'bonmin',
-                               'couenne',
-                               'filmint']
-solvers_list_ampl = []
-solvers_list_neos_flag_false = []
-solvers_list_neos_flag_true = ['knitro',
                                'loqo',
                                'minos',
                                'mosek',
@@ -95,6 +85,7 @@ for solver in solvers_list_neos_flag_false:
 for solver in solvers_list_neos_flag_true:
     neos_flag = True
     ampl_flag = False
+    print(solver)
     cu.run_optimization_problem_given_solver(solver = solver,
                                              problem = problem,
                                              neos_flag = neos_flag,
