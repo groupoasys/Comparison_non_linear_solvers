@@ -126,12 +126,13 @@ def run_solver(instance,
                                tee = conf['tee'],
                                symbolic_solver_labels=conf['symbolic_solver_labels'], 
                                load_solutions=False,
-                               opt = solver_name)
+                               opt = solver)       
     else:
         results = solver.solve(instance,
                                tee = conf['tee'],
                                symbolic_solver_labels=conf['symbolic_solver_labels'], 
-                               load_solutions=False)
+                               load_solutions=False,
+                               opt = solver)
     if results.solver.termination_condition not in (TerminationCondition.optimal, TerminationCondition.maxTimeLimit):
         # something went wrong
         logging.warn("Solver: %s" % results.solver.termination_condition)
