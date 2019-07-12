@@ -28,7 +28,7 @@ number_of_variables = 15
 number_of_constraints = 36
 sense_opt_problem = 'min'    
 maximum_number_iterations_multistart = 1000
-folder_results = 'temporary_results_' + problem + '/'
+folder_results = 'results_' + problem + '/'
 csv_file_name_multistart = 'results_multistart'
 csv_file_summary_results = 'summary_results'
 
