@@ -111,8 +111,6 @@ def run_solver(instance,
 
     """
     # initialize the solver / solver manager.
-#    if solver == 'minos':
-#        pdb.set_trace()
     solver_name = solver
     if neos_flag:
         solver = pe.SolverManagerFactory("neos")
@@ -120,26 +118,25 @@ def run_solver(instance,
         solver = pe.SolverFactory(solver_name)
     if solver is None:
         raise Exception("Solver %s is not available on this machine." % solver)
-        
+      
     if neos_flag:
         results = solver.solve(instance,
                                tee = conf['tee'],
                                symbolic_solver_labels=conf['symbolic_solver_labels'], 
                                load_solutions=False,
-                               opt = solver)       
+                               opt = solver_name)       
     else:
         results = solver.solve(instance,
                                tee = conf['tee'],
                                symbolic_solver_labels=conf['symbolic_solver_labels'], 
-                               load_solutions=False,
-                               opt = solver)
+                               load_solutions=False)
     if results.solver.termination_condition not in (TerminationCondition.optimal, TerminationCondition.maxTimeLimit):
         # something went wrong
         logging.warn("Solver: %s" % results.solver.termination_condition)
         logging.debug(results.solver)
     else:
-        logging.info("Model solved. Solver: %s, Time: %.2f, Gap: %s" %
-                     (results.solver.termination_condition, results.solver.time, results.solution(0).gap))
+        #logging.info("Model solved. Solver: %s, Time: %.2f, Gap: %s" %
+        #             (results.solver.termination_condition, results.solver.time, results.solution(0).gap))
         instance.solutions.load_from(results)
         instance.obj_model1.expr()
     return instance, results.solver, results.solution
@@ -203,7 +200,7 @@ def run_mymodel(config,
                                                                       config['solver_cfg'],
                                                                       solver = solver,
                                                                       neos_flag = neos_flag)
-    end_time = time.time()   
+    end_time = time.time() 
     if solver_status.termination_condition.index == 8:  # Termination condition of solver: Optimal
         dict_out['theta'].loc['theta', 'Value'] = data['parameters'].loc['theta', 'Value']
         dict_out['x'].loc[:, 'x'] = hp.pyomo_to_pandas(solved_instance, 'x').iloc[:,0]
