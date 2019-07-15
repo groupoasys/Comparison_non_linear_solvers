@@ -9,13 +9,10 @@ from M2SVM_Optimal_Weights.optimization_problem_utils.system import sys
 import M2SVM_Optimal_Weights.optimization_problem_utils.error_handling as error
 
 import os
-import pdb
 import numpy as np
 from statistics import mean
-import Inverse_Optimization_Related_Problem.optimization_problem_utils.my_project as mp
-import logging
+import MINLP_Trigonometric_Functions.optimization_problem_utils.my_project as mp
 import pandas as pd
-import time
 import pickle
 
 def run_optimization_problem_given_solver(solver,
@@ -40,8 +37,8 @@ def run_optimization_problem_given_solver(solver,
                                   folder_results = folder_results,
                                   csv_file_name_multistart = csv_file_name_multistart,
                                   ampl_flag = ampl_flag)
-    elif problem == "inverse_optimization_related_problem":
-        run_inverse_optimization_related_problem(solver = solver,
+    elif problem == "MINLP_trigonometric_functions":
+        run_minlp_trigonometric_functions(solver = solver,
                                                  problem = problem,
                                                  neos_flag = neos_flag,
                                                  number_of_variables = number_of_variables,
@@ -198,16 +195,16 @@ def initialize_summary_results_file(folder_results,
     
     return 0
 
-def run_inverse_optimization_related_problem(solver,
-                                             problem,
-                                             neos_flag,
-                                             number_of_variables,
-                                             number_of_constraints,
-                                             sense_opt_problem,
-                                             maximum_number_iterations_multistart,
-                                             folder_results,
-                                             csv_file_name_multistart,
-                                             ampl_flag):
+def run_minlp_trigonometric_functions(solver,
+                                     problem,
+                                     neos_flag,
+                                     number_of_variables,
+                                     number_of_constraints,
+                                     sense_opt_problem,
+                                     maximum_number_iterations_multistart,
+                                     folder_results,
+                                     csv_file_name_multistart,
+                                     ampl_flag):
     
     # Please, do not change the content of this function
     config = mp.read_yaml('./optimization_problem_utils/configs/config_model1.yml')
@@ -225,7 +222,7 @@ def run_inverse_optimization_related_problem(solver,
     pickle.dump(output, file_to_save)
     file_to_save.close()
     
-    write_results_inverse_optimization_related_problem(output = output,
+    write_results_minlp_trigonometric_functions(output = output,
                                                        solver = solver,
                                                        problem = problem,
                                                        neos_flag = neos_flag,
@@ -238,17 +235,17 @@ def run_inverse_optimization_related_problem(solver,
                                                        ampl_flag = ampl_flag)
     return 0
 
-def write_results_inverse_optimization_related_problem(output,
-                                                       solver,
-                                                       problem,
-                                                       neos_flag,
-                                                       number_of_variables,
-                                                       number_of_constraints,
-                                                       sense_opt_problem,
-                                                       maximum_number_iterations_multistart,
-                                                       folder_results,
-                                                       csv_file_name_multistart,
-                                                       ampl_flag):
+def write_results_minlp_trigonometric_functions(output,
+                                               solver,
+                                               problem,
+                                               neos_flag,
+                                               number_of_variables,
+                                               number_of_constraints,
+                                               sense_opt_problem,
+                                               maximum_number_iterations_multistart,
+                                               folder_results,
+                                               csv_file_name_multistart,
+                                               ampl_flag):
     
     if neos_flag:
         neos_string = 'yes'
@@ -269,10 +266,9 @@ def write_results_inverse_optimization_related_problem(output,
         objective_values.append(output[iteration_multistart - 1]['objective_value'])
         elapsed_times.append(output[iteration_multistart - 1]['elapsed_time'])
         file_to_write.write(str(iteration_multistart) + ',' + "{:.3e}".format(objective_values[iteration_multistart - 1]) + ','+ "{:.3e}".format(elapsed_times[iteration_multistart - 1]) +'\n')
-        #pdb.set_trace()
+
     file_to_write.close()
     
-    #pdb.set_trace()
     mean_objective_values = mean(objective_values)
     mean_elapsed_times = mean(elapsed_times)
     maximum_objective_value = max(objective_values)
