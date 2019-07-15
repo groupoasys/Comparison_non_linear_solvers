@@ -40,3 +40,5 @@ inverse_optimization_related_problem,yes,no,minos,300,153,min,5.554e+01,8.700e+0
 inverse_optimization_related_problem,yes,no,mosek,300,153,min,0.000e+00,0.000e+00,0.000e+00,1.956e+01,1.970e+01,1.941e+01
 inverse_optimization_related_problem,yes,no,snopt,300,153,min,1.181e+01,2.947e+01,-5.852e+00,2.020e+01,2.192e+01,1.848e+01
 inverse_optimization_related_problem,yes,no,bonmin,300,153,min,2.623e+00,1.089e+01,-5.648e+00,3.244e+01,4.225e+01,2.264e+01
+problem, neos, ampl, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
+problem, neos, ampl, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 

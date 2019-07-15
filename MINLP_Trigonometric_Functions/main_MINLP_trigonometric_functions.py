@@ -23,7 +23,7 @@ import comparison_utils as cu
 os.chdir(directory_path)
 
 
-problem = 'inverse_optimization_related_problem'
+problem = 'MINLP_trigonometric_functions'
 number_of_variables = 300
 number_of_constraints = 153
 sense_opt_problem = 'min'    
@@ -32,26 +32,13 @@ folder_results = 'temporary_results/'
 csv_file_name_multistart = 'results_multistart'
 csv_file_summary_results = 'summary_results'
 
-#solvers_list_ampl = ['conopt',
-#                    'loqo',
-#                    'minos',
-#                    'snopt']
-#solvers_list_neos_flag_false = ['ipopt',
-#                                'bonmin',
-#                                'couenne']
-#solvers_list_neos_flag_true = ['conopt',
-#                               'ipopt',
-#                               'filter',
-#                               'knitro',
-#                               'loqo',
-#                               'minos',
-#                               'mosek',
-#                               'snopt',
-#                               'bonmin',
-#                               'couenne',
-#                               'filmint']
-solvers_list_ampl = []
-solvers_list_neos_flag_false = []
+solvers_list_ampl = ['conopt',
+                    'loqo',
+                    'minos',
+                    'snopt']
+solvers_list_neos_flag_false = ['ipopt',
+                                'bonmin',
+                                'couenne']
 solvers_list_neos_flag_true = ['conopt',
                                'ipopt',
                                'filter',
