@@ -9,13 +9,10 @@ from M2SVM_Optimal_Weights.optimization_problem_utils.system import sys
 import M2SVM_Optimal_Weights.optimization_problem_utils.error_handling as error
 
 import os
-import pdb
 import numpy as np
 from statistics import mean
-import Inverse_Optimization_Related_Problem.optimization_problem_utils.my_project as mp
-import logging
+import MINLP_Trigonometric_Functions.optimization_problem_utils.my_project as mp
 import pandas as pd
-import time
 import pickle
 
 def run_optimization_problem_given_solver(solver,
@@ -40,7 +37,7 @@ def run_optimization_problem_given_solver(solver,
                                   folder_results = folder_results,
                                   csv_file_name_multistart = csv_file_name_multistart,
                                   ampl_flag = ampl_flag)
-    elif problem == "minlp_trigonometric_functions":
+    elif problem == "MINLP_trigonometric_functions":
         run_minlp_trigonometric_functions(solver = solver,
                                                  problem = problem,
                                                  neos_flag = neos_flag,

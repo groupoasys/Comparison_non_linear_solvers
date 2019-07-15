@@ -1,10 +1,9 @@
 import logging
 
-import Inverse_Optimization_Related_Problem.optimization_problem_utils.my_project.helpers as hp 
+import MINLP_Trigonometric_Functions.optimization_problem_utils.my_project.helpers as hp 
 import pyomo.environ as pe
 from pyomo.opt import TerminationCondition
 from pyomo.opt.base import SolverFactory
-import pdb
 import pandas as pd
 import time
 import numpy as np
