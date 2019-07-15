@@ -211,7 +211,7 @@ def run_minlp_trigonometric_functions(solver,
         
     output = {}
     for iteration_multistart in range(maximum_number_iterations_multistart):
-
+        print(iteration_multistart)
         output[iteration_multistart] = mp.run_mymodel(config,
                                                    results_dir = folder_results,
                                                    solver = solver,
