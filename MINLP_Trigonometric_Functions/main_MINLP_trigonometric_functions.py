@@ -32,13 +32,28 @@ folder_results = 'temporary_results/'
 csv_file_name_multistart = 'results_multistart'
 csv_file_summary_results = 'summary_results'
 
-solvers_list_ampl = ['conopt',
-                    'loqo',
-                    'minos',
-                    'snopt']
+#solvers_list_ampl = ['conopt',
+#                    'loqo',
+#                    'minos',
+#                    'snopt']
+#solvers_list_neos_flag_false = ['ipopt',
+#                                'bonmin',
+#                                'couenne']
+#solvers_list_neos_flag_true = ['conopt',
+#                               'ipopt',
+#                               'filter',
+#                               'knitro',
+#                               'loqo',
+#                               'minos',
+#                               'mosek',
+#                               'snopt',
+#                               'bonmin',
+#                               'couenne',
+#                               'filmint']
+
+solvers_list_ampl = []
 solvers_list_neos_flag_false = ['ipopt',
-                                'bonmin',
-                                'couenne']
+                                'bonmin']
 solvers_list_neos_flag_true = ['conopt',
                                'ipopt',
                                'filter',
@@ -47,9 +62,7 @@ solvers_list_neos_flag_true = ['conopt',
                                'minos',
                                'mosek',
                                'snopt',
-                               'bonmin',
-                               'couenne',
-                               'filmint']
+                               'bonmin']
 
 cu.create_folder_results_if_it_doesnt_exits(folder_results = folder_results)
 cu.initialize_summary_results_file(folder_results = folder_results,
