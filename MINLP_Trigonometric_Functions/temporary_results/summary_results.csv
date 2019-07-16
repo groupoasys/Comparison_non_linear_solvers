@@ -1,7 +1,0 @@
-problem, neos, ampl, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
-problem, neos, ampl, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
-problem, neos, ampl, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
-problem, neos, ampl, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
-MINLP_trigonometric_functions,yes,no,mosek,300,153,min,0.000e+00,0.000e+00,0.000e+00,1.851e+01,2.319e+01,4.773e+00
-MINLP_trigonometric_functions,yes,no,snopt,300,153,min,3.140e+01,2.993e+02,-2.219e+01,1.949e+01,3.779e+01,5.629e+00
-MINLP_trigonometric_functions,yes,no,bonmin,300,153,min,7.127e+00,6.426e+01,-9.721e+00,2.233e+01,4.824e+01,6.617e+00
