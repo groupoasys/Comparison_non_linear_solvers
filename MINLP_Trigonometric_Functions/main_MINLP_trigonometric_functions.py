@@ -52,15 +52,8 @@ csv_file_summary_results = 'summary_results'
 #                               'filmint']
 
 solvers_list_ampl = []
-solvers_list_neos_flag_false = ['ipopt',
-                                'bonmin']
-solvers_list_neos_flag_true = ['conopt',
-                               'ipopt',
-                               'filter',
-                               'knitro',
-                               'loqo',
-                               'minos',
-                               'mosek',
+solvers_list_neos_flag_false = []
+solvers_list_neos_flag_true = ['mosek',
                                'snopt',
                                'bonmin']
 
