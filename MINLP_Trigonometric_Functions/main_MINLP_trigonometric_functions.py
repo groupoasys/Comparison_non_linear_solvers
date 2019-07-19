@@ -27,8 +27,8 @@ problem = 'MINLP_trigonometric_functions'
 number_of_variables = 300
 number_of_constraints = 153
 sense_opt_problem = 'min'    
-maximum_number_iterations_multistart = 2
-folder_results = 'temporary_results/'
+maximum_number_iterations_multistart = 100
+folder_results = 'results_' + problem + '/'
 csv_file_name_multistart = 'results_multistart'
 csv_file_summary_results = 'summary_results'
 
@@ -55,6 +55,7 @@ cu.create_folder_results_if_it_doesnt_exits(folder_results = folder_results)
 cu.initialize_summary_results_file(folder_results = folder_results,
                                    csv_file_summary_results = csv_file_summary_results)
 for solver in solvers_list_ampl:
+    print(solver)
     neos_flag = False
     ampl_flag = True
     cu.run_optimization_problem_given_solver(solver = solver,
@@ -69,6 +70,7 @@ for solver in solvers_list_ampl:
                                              ampl_flag = ampl_flag)
 
 for solver in solvers_list_neos_flag_false:
+    print(solver)
     neos_flag = False
     ampl_flag = False
     cu.run_optimization_problem_given_solver(solver = solver,

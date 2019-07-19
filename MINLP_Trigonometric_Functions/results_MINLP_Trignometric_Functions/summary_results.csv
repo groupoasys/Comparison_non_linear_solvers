@@ -1,0 +1,16 @@
+problem, neos, ampl, solver, # variables, # constraints, sense, mean obj. val., max obj. val., min obj. val., mean comp. time, max comp. time, min comp. time, 
+MINLP_trigonometric_functions,no,yes,conopt,300,153,min,2.463e+01,1.228e+02,-1.652e+02,8.284e+00,2.472e+01,9.923e-01
+MINLP_trigonometric_functions,no,yes,loqo,300,153,min,-7.625e+00,4.330e+00,-2.219e+01,3.448e+00,1.433e+01,1.770e+00
+MINLP_trigonometric_functions,no,yes,minos,300,153,min,3.947e+01,4.636e+02,-4.170e+02,1.736e+00,3.132e+00,7.273e-01
+MINLP_trigonometric_functions,no,yes,snopt,300,153,min,3.089e+01,4.636e+02,-2.285e+02,3.158e+00,9.511e+00,5.416e-01
+MINLP_trigonometric_functions,no,no,ipopt,300,153,min,3.265e+00,6.499e+01,-9.247e+01,5.732e+01,1.986e+02,1.501e+01
+MINLP_trigonometric_functions,no,no,bonmin,300,153,min,8.079e+00,1.966e+02,-9.597e+00,8.960e+01,3.276e+02,1.015e+01
+MINLP_trigonometric_functions,yes,no,conopt,300,153,min,2.443e+01,8.775e+01,-2.006e+02,1.914e+01,2.574e+01,9.510e+00
+MINLP_trigonometric_functions,yes,no,ipopt,300,153,min,6.236e+00,6.499e+01,-9.121e+00,2.211e+01,5.723e+01,9.908e+00
+MINLP_trigonometric_functions,yes,no,filter,300,153,min,2.743e+01,6.273e+01,-9.649e+00,1.968e+01,3.831e+01,1.517e+01
+MINLP_trigonometric_functions,yes,no,knitro,300,153,min,-4.543e+00,6.266e+01,-9.258e+00,1.954e+01,4.399e+01,7.203e+00
+MINLP_trigonometric_functions,yes,no,loqo,300,153,min,-7.158e+00,-2.276e-01,-9.495e+00,1.977e+01,3.989e+01,9.047e+00
+MINLP_trigonometric_functions,yes,no,minos,300,153,min,3.947e+01,4.636e+02,-4.170e+02,1.892e+01,2.898e+01,8.308e+00
+MINLP_trigonometric_functions,yes,no,mosek,300,153,min,0.000e+00,0.000e+00,0.000e+00,1.851e+01,2.319e+01,4.773e+00
+MINLP_trigonometric_functions,yes,no,snopt,300,153,min,3.140e+01,2.993e+02,-2.219e+01,1.949e+01,3.779e+01,5.629e+00
+MINLP_trigonometric_functions,yes,no,bonmin,300,153,min,7.127e+00,6.426e+01,-9.721e+00,2.233e+01,4.824e+01,6.617e+00
