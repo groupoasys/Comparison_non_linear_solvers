@@ -9,7 +9,7 @@ the correct place! =) Continue reading and have a look at this repo.
 This repository aims to perform a comparison of several of the available non linear solvers. Such a comparison is made in 
 terms of the objective value and the computational time.
 
-To this goal, some non linear optimization problems of different nature are modelled using Pyomo, and run with different
+To do this, some non linear optimization problems of different nature are modelled using Pyomo, and run with different
 solvers. The results are saved and analyse below to get conclusions.
 
 It is important to note that the conclusions draw here cannot be extended to all the existing optimization problems.
