@@ -16,5 +16,12 @@ It is important to note that the conclusions draw here cannot be extended to all
 This repo just serves as a guide for your decisions, but it is not an universal truth. Please take this into account when 
 deciding which solver is more suitable in your case.
 
+## Examples
 
+The following table summarizes the optimization problems which have been used for the non linear solvers comparison. This table 
+includes the name of the problem, the problem formulation and the folder with the obtained results.
+
+| # | Name  | Model Formulation | Folder results |
+| - | ----- | ------------------| -------------- |
+| 1 | M2SVM_Optimal_Weights | [M2SVM_Optimal_Weights Model Formulation](./M2SVM_Optimal_Weights/model_pdf/M2SVM_Optimal_Weights.pdf)  |[M2SVM_Optimal_Weights Results](./M2SVM_Optimal_Weights/results_m2svm_optimal_weights) |
 
