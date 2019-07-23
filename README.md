@@ -145,4 +145,6 @@ m2svm_optimal_weights|yes|no|couenne|15|36|min|-2.88E-13|-2.88E-13|-2.88E-13|17.
 m2svm_optimal_weights|yes|no|filmint|15|36|min|-2.77E-13|-2.77E-13|-2.77E-13|17.21|66.69|2.56
   
   
-  In spite of the small size of the problem, the results allow us to get conclusions about the different solvers.
+  In spite of the small size of the problem, the results allow us to get conclusions about the different solvers. Regarding
+  the objective values, we observe that in all the cases a mean value close to zero is obtained, except in the `loqo` solver, which
+  at first sight seems to be the best one. However, if we observe the optimal solution obtained in this case (which can be downloaded [here](./M2SVM_Optimal_Weights/results_m2svm_optimal_weights/results_by_line_2_random_neos_flag_False_ampl_flag_True_solver_loqo.pydata) and [here](./M2SVM_Optimal_Weights/results_m2svm_optimal_weights/results_by_line_2_random_neos_flag_True))
