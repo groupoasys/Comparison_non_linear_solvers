@@ -1,10 +1,12 @@
-# Comparison_non_linear_solvers
+ # Comparison_non_linear_solvers
 
 
-Do you want to solve a non-linear optimization problem? Have you doubts about which solver is the best? Then, you are in 
-the correct place! =) Continue reading and have a look at this repo.
+Do you want to solve a non-linear optimization problem? 📈📉 Have you doubts about which solver is the best? 🤔 Then, you are in 
+the correct place! 🎉😁 Continue reading and have a look at this repo 👁🧐🤓
 
-## Goals
+<img src="https://pyomo.readthedocs.io/en/latest/_images/PyomoNewBlue3.png" height="150" width="600"/>
+
+## Goals ⚽
 
 This repository aims to perform a comparison of several of the available non linear solvers. Such a comparison is made in 
 terms of the objective value and the computational time.
@@ -12,12 +14,12 @@ terms of the objective value and the computational time.
 To do this, some non linear optimization problems of different nature are modeled using [Pyomo](http://www.pyomo.org/) and run with different
 solvers. The results are saved and analyzed below to get conclusions.
 
-It is important to note that the conclusions drawn here cannot be extended to all the existing optimization problems.
-This repo just serves as a guide for your decisions, but it is not a universal truth. Please take this into account when 
+It is important to note that the conclusions drawn here cannot be extended to all the existing optimization problems 🌍🌎🌏
+This repo just serves as a guide for your decisions ➡↙↖⬅ but it is not a universal truth. Please take this into account when 
 deciding which solver is more suitable in your case.
 
 
-## How is comparison testing performed?
+## How is comparison testing performed? ✏📝📏
 
 In this section, we explain the strategy applied to compare the different solvers. Let us consider the following list of
  non linear solvers used in our examples to compare their performance:
@@ -74,8 +76,8 @@ we run them with the help of the Neos Server:
 * [snopt](https://web.stanford.edu/group/SOL/snopt.htm)
 
  
-The next step consists of running the optimization problem for the different solvers enumerated in the previous three lists.
-Since the optimization problems we are considering in this repo are (highly) non linear, they may be stuck at local optimal.
+The next step consists of running the optimization problem for the different solvers enumerated in the previous 3️⃣ lists.
+Since the optimization problems we are considering in this repo are (highly) non linear, they may be stuck at local optima ➡⬅
 Hence, a multistart approach is applied in which the same problem is run several times starting from different initial solutions,
 randomly chosen from the feasible region. The number of runs at the multistart is defined by the user.
 
@@ -94,12 +96,12 @@ example of the results is given below:
 
 The whole computational experience is executed on a laptop with 8Gb of RAM memory at 1.80 GHz, running Windows 10.
 
-## Examples
+## Examples 📌📋
 
 This section briefly explains the organization of the examples used here. This repo contains one folder per optimization problem.
 Each folder contains three new folders and a script called `main_name_of_the_problem.py`. Such a script is the only one that should be executed
 when running the experiments. Moreover, the first folder, entitled `model_pdf` contains the document with the model formulation. The second folder, `optimization_problem_utils` is formed
-by the scripts which solve the optimization problem, so *be careful when modifying it*. Do not hesitate to contact the person who has written this code if you want to make changes.
+by the scripts which solve the optimization problem, so *be careful when modifying it*. Do not hesitate to contact the person who has written this code if you want to make changes 📳
 Finally, the third folder entitled `results_name_of_the_problem` includes the results obtained in all the runs of the multistart, and a
 summary of them, called `summary_results.csv`.
 
@@ -107,13 +109,13 @@ The following table provides the optimization problems which have been used for 
 includes the name of the problem, the problem formulation and the folder with the obtained results.
 
 | # | Name  | Model Formulation | Folder results |
-| - | ----- | ------------------| -------------- |
+| - | ----- | ------------------| --------1️⃣1️⃣------ |
 | 1 | M2SVM_Optimal_Weights | [M2SVM_Optimal_Weights Model Formulation](./M2SVM_Optimal_Weights/model_pdf/M2SVM_Optimal_Weights.pdf)  |[M2SVM_Optimal_Weights Results](./M2SVM_Optimal_Weights/results_m2svm_optimal_weights) |
 | 2 | MINLP_Trigonometric_Functions | [MINLP_Trigonometric_Functions Model Formulation](./MINLP_Trigonometric_Functions/model_pdf/MINLP_Trigonometric_Functions.pdf)  |[MINLP_Trigonometric_Functions Results](./MINLP_Trigonometric_Functions/results_MINLP_Trignometric_Functions) |
 
 More details about the results obtained in each example are given in the next sections.
 
-### Example 1: M2SVM Optimal Weights
+### Example 1️⃣: M2SVM Optimal Weights
 
 The aim of the optimization problem formulated [here](./M2SVM_Optimal_Weights/model_pdf/M2SVM_Optimal_Weights.pdf) is to
  seek the optimal weights in the Gaussian kernel in order to obtain a good classification with the Support Vector Machine. Since the problem is based on
@@ -161,10 +163,10 @@ m2svm_optimal_weights|yes|no|filmint|15|36|min|-2.77E-13|-2.77E-13|-2.77E-13|17.
   Thus, taking into account the previous comments, for this particular optimization problem, we suggest using any of the following solvers without Neos: `conopt`,
   `minos`, `snopt`, `ipopt` and `bonmin`.
   
-  ### Example 2: MINLP Trigonometric Functions
+  ### Example 2️⃣: MINLP Trigonometric Functions
   
   In this example, we solve a Mixed Integer Non Linear Programming (MINLP) problem with trigonometric functions involved.
-  Contrary to what happened in Example 1, this problem is of medium size, since it is formed by **300 variables (150 integer and 150 continuous)**
+  Contrary to what happened in Example 1️⃣, this problem is of medium size, since it is formed by **300 variables (150 integer and 150 continuous)**
   and **153 constraints**.
   
   The results of the different solvers after solving the multistart with **100 runs** are shown in the following table. For more details
@@ -213,7 +215,7 @@ Hence, to solve the optimization problem of this example with integer variables 
 is omitted, then it is better to use `knitro`.
 
 
- ## Final Conclusions
+ ## Final Conclusions 🔚😋 
 
 As previously mentioned at the beginning of this repo, the conclusions obtained here are not a universal truth, and therefore, they
 have to be used just as a guide. However, we can state that:
@@ -226,7 +228,7 @@ three orders of magnitude when running locally or via Neos.
 * For the optimization problems tested, the best solvers are `conopt`, `minos`, `snopt`, `ipopt` and `bonmin` in the first
 case and `bonmin`, `knitro` and `ipopt` in the second case. 
 
-## How to perform a solver comparison of a new optimization problem?
+## How to perform a solver comparison of a new optimization problem? 🤔
 
 This section explains the steps to follow if a comparison of the solvers wants to be performed on a new optimization problem.
 First, a folder with the name of the optimization problem should be created. This folder should contain three subfolders and 
@@ -368,20 +370,20 @@ of the function which writes the results can be seen in the function `write_resu
  Finally, it just remains to run the experiments and get conclusions about which solver is the best for the new optimization problem.
  
  
- ## Do you want to contribute?
+ ## Do you want to contribute? 🙋‍♂️🙋‍♀️
  
  Please, do it. Any feedback is welcome, so feel free to ask or comment anything you want via a Pull Request in this repo.
  
- ## Contributors
+ ## Contributors 🌬☀
  
  * [OASYS group](http://oasys.uma.es) -  groupoasys@gmail.com
  
- ## Developed by
+ ## Developed by 👩‍💻👨‍💻
  * [Asunción Jiménez Cordero](https://www.researchgate.net/profile/Asuncion_Jimenez-Cordero/research) - asuncionjc@uma.es
  
  (Please add your name here if you have contributed to the repo)
  
- ## License
+ ## License 📝
  
     Copyright 2019 Optimization and Analytics for Sustainable energY Systems (OASYS)
 
