@@ -112,7 +112,7 @@ includes the name of the problem, the problem formulation and the folder with th
 
 More details about the results obtained in each example are given in next sections.
 
-### M2SVM Optimal Weights
+### Example 1: M2SVM Optimal Weights
 
 The aim of the optimization problem formulated [here](./M2SVM_Optimal_Weights/model_pdf/M2SVM_Optimal_Weights.pdf) is to
  seek the optimal weights in the Gaussian kernel in order to obtain a good classification with the Support Vector Machine. Since the problem is based on
@@ -145,6 +145,19 @@ m2svm_optimal_weights|yes|no|couenne|15|36|min|-2.88E-13|-2.88E-13|-2.88E-13|17.
 m2svm_optimal_weights|yes|no|filmint|15|36|min|-2.77E-13|-2.77E-13|-2.77E-13|17.21|66.69|2.56
   
   
-  In spite of the small size of the problem, the results allow us to get conclusions about the different solvers. Regarding
-  the objective values, we observe that in all the cases a mean value close to zero is obtained, except in the `loqo` solver, which
-  at first sight seems to be the best one. However, if we observe the optimal solution obtained in this case (which can be downloaded [here](./M2SVM_Optimal_Weights/results_m2svm_optimal_weights/results_by_line_2_random_neos_flag_False_ampl_flag_True_solver_loqo.pydata) and [here](./M2SVM_Optimal_Weights/results_m2svm_optimal_weights/results_by_line_2_random_neos_flag_True))
+  In spite of the small size of the problem, the results allow us to get conclusions about the different solvers. 
+  
+  Regarding the objective values, we observe that in all the cases a mean value close to zero is obtained, except in the `loqo` solver, which
+  at first sight seems to be the best one. However, the optimal solution obtained with `loqo` (which can be downloaded [here](./M2SVM_Optimal_Weights/results_m2svm_optimal_weights/results_by_line_2_random_neos_flag_False_ampl_flag_True_solver_loqo.pydata) and [here](./M2SVM_Optimal_Weights/results_m2svm_optimal_weights/results_by_line_2_random_neos_flag_True_ampl_flag_False_solver_loqo.pydata))
+  is numerically unstable, since values of order 1E25 are obtained. Therefore, `loqo` is not a good solver for our problem, but 
+  any of the remaining ones can be used.
+  
+  With respect to the computational time, we see that there is a difference mean of three order of magnitude between using the solvers through the Neos server
+  or directly using the executable files. The reason of this issue is that solving an optimization problem via Neos not 
+  only includes the computational cost associating to the problem resolution but also the calls to the server which significantly increase the total elapsed time.
+  Looking at that solvers that have been used without Neos, we check that `couenne` is the one that spent most time solving the problem, and then is not advisable to use.
+  
+  Thus, taking into account the previous comments, for this particular optimization problem, we suggest to use any of the following solvers without Neos: `conopt`,
+  `minos`, `snopt`, `ipopt` and `bonmin`.
+  
+  ### Example 2: MINLP 
