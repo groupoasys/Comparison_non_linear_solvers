@@ -172,18 +172,18 @@ m2svm_optimal_weights|yes|no|filmint|15|36|min|-2.77E-13|-2.77E-13|-2.77E-13|17.
    
   | problem  | neos | ampl | solver | #variables | #constraints | sense | mean obj. val. | max obj. val.| min obj. val. | mean comp. time | max comp. time | min comp. time |
 | -------- | ---- | ---- | ------ | ---------- | ------------ | ----- | -------------- | ------------ | ------------- | --------------- | -------------- | -------------- |
- MINLP_trigonometric_functions|no|yes|conopt|300|153|min|2.46E+01|1.23E+02|-1.65E+02|8.28|24.72|0.99
-MINLP_trigonometric_functions|no|yes|loqo|300|153|min|-7.63E+00|4.33E+00|-2.22E+01|3.45|14.33|1.77
-MINLP_trigonometric_functions|no|yes|minos|300|153|min|3.95E+01|4.64E+02|-4.17E+02|1.74|3.13|0.73
-MINLP_trigonometric_functions|no|yes|snopt|300|153|min|3.09E+01|4.64E+02|-2.29E+02|3.16|9.51|0.54
-MINLP_trigonometric_functions|no|no|ipopt|300|153|min|3.27E+00|6.50E+01|-9.25E+01|57.32|198.60|15.01
-MINLP_trigonometric_functions|no|no|bonmin|300|153|min|8.08E+00|1.97E+02|-9.60E+00|89.60|327.60|10.15
-MINLP_trigonometric_functions|yes|no|conopt|300|153|min|2.44E+01|8.78E+01|-2.01E+02|19.14|25.74|9.51
-MINLP_trigonometric_functions|yes|no|ipopt|300|153|min|6.24E+00|6.50E+01|-9.12E+00|22.11|57.23|9.91
-MINLP_trigonometric_functions|yes|no|filter|300|153|min|2.74E+01|6.27E+01|-9.65E+00|19.68|38.31|15.17
-MINLP_trigonometric_functions|yes|no|knitro|300|153|min|-4.54E+00|6.27E+01|-9.26E+00|19.54|43.99|7.20
-MINLP_trigonometric_functions|yes|no|loqo|300|153|min|-7.16E+00|-2.28E-01|-9.50E+00|19.77|39.89|9.05
-MINLP_trigonometric_functions|yes|no|minos|300|153|min|3.95E+01|4.64E+02|-4.17E+02|18.92|28.98|8.31
-MINLP_trigonometric_functions|yes|no|mosek|300|153|min|0.00E+00|0.00E+00|0.00E+00|18.51|23.19|4.77
-MINLP_trigonometric_functions|yes|no|snopt|300|153|min|3.14E+01|2.99E+02|-2.22E+01|19.49|37.79|5.63
-MINLP_trigonometric_functions|yes|no|bonmin|300|153|min|7.13E+00|6.43E+01|-9.72E+00|22.33|48.24|6.62
+ MINLP_trigonometric_functions|no|yes|conopt|300|153|min|24.63|122.80|-165.20|8.28|24.72|0.99
+MINLP_trigonometric_functions|no|yes|loqo|300|153|min|-7.63|4.33|-22.19|3.45|14.33|1.77
+MINLP_trigonometric_functions|no|yes|minos|300|153|min|39.47|463.60|-417.00|1.74|3.13|0.73
+MINLP_trigonometric_functions|no|yes|snopt|300|153|min|30.89|463.60|-228.50|3.16|9.51|0.54
+MINLP_trigonometric_functions|no|no|ipopt|300|153|min|3.27|64.99|-92.47|57.32|198.60|15.01
+MINLP_trigonometric_functions|no|no|bonmin|300|153|min|8.08|196.60|-9.60|89.60|327.60|10.15
+MINLP_trigonometric_functions|yes|no|conopt|300|153|min|24.43|87.75|-200.60|19.14|25.74|9.51
+MINLP_trigonometric_functions|yes|no|ipopt|300|153|min|6.24|64.99|-9.12|22.11|57.23|9.91
+MINLP_trigonometric_functions|yes|no|filter|300|153|min|27.43|62.73|-9.65|19.68|38.31|15.17
+MINLP_trigonometric_functions|yes|no|knitro|300|153|min|-4.54|62.66|-9.26|19.54|43.99|7.20
+MINLP_trigonometric_functions|yes|no|loqo|300|153|min|-7.16|-0.23|-9.50|19.77|39.89|9.05
+MINLP_trigonometric_functions|yes|no|minos|300|153|min|39.47|463.60|-417.00|18.92|28.98|8.31
+MINLP_trigonometric_functions|yes|no|mosek|300|153|min|0.00|0.00|0.00|18.51|23.19|4.77
+MINLP_trigonometric_functions|yes|no|snopt|300|153|min|31.40|299.30|-22.19|19.49|37.79|5.63
+MINLP_trigonometric_functions|yes|no|bonmin|300|153|min|7.13|64.26|-9.72|22.33|48.24|6.62
