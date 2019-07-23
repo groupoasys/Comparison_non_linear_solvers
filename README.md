@@ -228,3 +228,6 @@ case and `bonmin`, `knitro` and `ipopt` in the second case.
 
 ## How to compare a new optimization problem?
 
+This section explains the steps to follow if a comparison of the solvers want to be performed on a new optimization problem.
+First, a folder with the name of the optimization problem should be created. This folder should contain three subfolders and 
+a `main` file.
