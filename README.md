@@ -98,7 +98,7 @@ example of the results is given below:
 This section briefly explains the organization of the examples used here. This repo contains one folder per optimization problem.
 Each folder contains three new folders and a script called `main_name_of_the_problem.py`. Such a script is the only one that should be executed
 when running the experiments. Moreover, the first folder, entitled `model_pdf` contains the document with the model formulation. The second folder, `optimization_problem_utils` is formed
-by the scripts which solves the optimization problem, so be careful when modifying it. Do not hesitate to contact the person who has written this code.
+by the scripts which solves the optimization problem, so *be careful when modifying it*. Do not hesitate to contact the person who has written this code.
 Finally, the third folder entitled `results_name_of_the_problem` includes the results obtained in all the runs of the multistart, and a
 summary of them, called `summary_results.csv`.
 
@@ -115,11 +115,34 @@ More details about the results obtained in each example are given in next sectio
 ### M2SVM Optimal Weights
 
 The aim of the optimization problem formulated [here](./M2SVM_Optimal_Weights/model_pdf/M2SVM_Optimal_Weights.pdf) is to
- seek the optimal weights in the Gaussian kernel in order to obtain a good classification. Since the problem is based on
-  a toy example, the size of this optimization problem is small. Particularly, it is formed by 15 continuous variables 
-  and 36 constraints. 
+ seek the optimal weights in the Gaussian kernel in order to obtain a good classification with the Support Vector Machine. Since the problem is based on
+  a toy example, the size of this optimization problem is small. Particularly, it is formed by **15 continuous variables**
+  and **36 constraints**. 
   
+  A multistart approach with **1000 runs** is run for the different solvers as explained in previous section. A summary of the
+  results obtained can be see in the following table. If further information is necessary, we suggest the reader to download the summary
+  [here](./M2SVM_Optimal_Weights/results_m2svm_optimal_weights/summary_results.csv) or to have a look at the results of the different runs in [this folder](./M2SVM_Optimal_Weights/results_m2svm_optimal_weights).
   
+  | problem  | neos | ampl | solver | #variables | #constraints | sense | mean obj. val. | max obj. val.| min obj. val. | mean comp. time | max comp. time | min comp. time |
+| -------- | ---- | ---- | ------ | ---------- | ------------ | ----- | -------------- | ------------ | ------------- | --------------- | -------------- | -------------- |
+m2svm_optimal_weights|no|yes|conopt|15|36|min|-6.46E-14|1.45E-15|-3.61E-13|0.15|0.35|0.07
+m2svm_optimal_weights|no|yes|loqo|15|36|min|-1.37E+12|9.00E+03|-3.07E+12|0.30|1.45|0.11
+m2svm_optimal_weights|no|yes|minos|15|36|min|-2.79E-14|0.00E+00|-8.56E-14|0.11|0.49|0.06
+m2svm_optimal_weights|no|yes|snopt|15|36|min|-1.05E-14|4.44E-16|-5.81E-14|0.10|0.20|0.06
+m2svm_optimal_weights|no|no|ipopt|15|36|min|-7.50E-08|-7.49E-08|-7.50E-08|0.11|0.30|0.10
+m2svm_optimal_weights|no|no|bonmin|15|36|min|-9.97E-08|-9.38E-08|-9.99E-08|0.12|0.34|0.07
+m2svm_optimal_weights|no|no|couenne|15|36|min|-2.88E-13|-2.88E-13|-2.88E-13|0.67|14.98|0.18
+m2svm_optimal_weights|yes|no|conopt|15|36|min|-6.46E-14|1.45E-15|-3.61E-13|18.05|73.97|2.38
+m2svm_optimal_weights|yes|no|ipopt|15|36|min|-7.50E-08|-7.49E-08|-7.50E-08|17.31|38.74|2.38
+m2svm_optimal_weights|yes|no|filter|15|36|min|-1.74E-13|0.00E+00|-2.86E-13|18.51|29.40|2.59
+m2svm_optimal_weights|yes|no|knitro|15|36|min|1.87E-07|4.85E-06|-9.89E-10|18.11|66.91|2.41
+m2svm_optimal_weights|yes|no|loqo|15|36|min|-1.13E+12|1.89E+04|-2.98E+12|17.85|66.01|2.47
+m2svm_optimal_weights|yes|no|minos|15|36|min|-2.79E-14|0.00E+00|-8.56E-14|18.15|38.81|2.78
+m2svm_optimal_weights|yes|no|mosek|15|36|min|3.33E-09|3.37E-09|3.33E-09|17.41|82.82|2.39
+m2svm_optimal_weights|yes|no|snopt|15|36|min|-1.05E-14|4.44E-16|-5.81E-14|18.16|39.06|2.41
+m2svm_optimal_weights|yes|no|bonmin|15|36|min|-9.97E-08|-9.38E-08|-9.99E-08|18.04|41.91|2.60
+m2svm_optimal_weights|yes|no|couenne|15|36|min|-2.88E-13|-2.88E-13|-2.88E-13|17.72|76.28|2.55
+m2svm_optimal_weights|yes|no|filmint|15|36|min|-2.77E-13|-2.77E-13|-2.77E-13|17.21|66.69|2.56
   
   
   In spite of the small size of the problem, the results allow us to get conclusions about the different solvers.
