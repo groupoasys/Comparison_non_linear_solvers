@@ -372,7 +372,7 @@ of the function which writes the results can be seen in the function `write_resu
  
  ## Do you want to contribute? 🙋‍♂️🙋‍♀️
  
- Please, do it  Any feedback is welcome 🤗 so feel free to ask or comment anything you want via a Pull Request in this repo.
+ Please, do it 😋 Any feedback is welcome 🤗 so feel free to ask or comment anything you want via a Pull Request in this repo.
  
  ## Contributors 🌬☀
  
