@@ -120,7 +120,7 @@ The aim of the optimization problem formulated [here](./M2SVM_Optimal_Weights/mo
   and **36 constraints**. 
   
   A multistart approach with **1000 runs** is run for the different solvers as explained in previous section. A summary of the
-  results obtained can be see in the following table. If further information is necessary, we suggest the reader to download the summary
+  results obtained can be seen in the following table. If further information is necessary, we suggest the reader to download the summary
   [here](./M2SVM_Optimal_Weights/results_m2svm_optimal_weights/summary_results.csv) or to have a look at the results of the different runs in [this folder](./M2SVM_Optimal_Weights/results_m2svm_optimal_weights).
   
   | problem  | neos | ampl | solver | #variables | #constraints | sense | mean obj. val. | max obj. val.| min obj. val. | mean comp. time | max comp. time | min comp. time |
@@ -149,7 +149,7 @@ m2svm_optimal_weights|yes|no|filmint|15|36|min|-2.77E-13|-2.77E-13|-2.77E-13|17.
   
   Regarding the objective values, we observe that in all the cases a mean value close to zero is obtained, except in the `loqo` solver, which
   at first sight seems to be the best one. However, the optimal solution obtained with `loqo` (which can be downloaded [here](./M2SVM_Optimal_Weights/results_m2svm_optimal_weights/results_by_line_2_random_neos_flag_False_ampl_flag_True_solver_loqo.pydata) and [here](./M2SVM_Optimal_Weights/results_m2svm_optimal_weights/results_by_line_2_random_neos_flag_True_ampl_flag_False_solver_loqo.pydata))
-  is numerically unstable, since values of order 1E25 are obtained. Therefore, `loqo` is not a good solver for our problem, but 
+  is numerically unstable, since values of order 1E+25 are obtained. Therefore, `loqo` is not a good solver for our problem, but 
   any of the remaining ones can be used.
   
   With respect to the computational time, we see that there is a difference mean of three order of magnitude between using the solvers through the Neos server
@@ -160,4 +160,30 @@ m2svm_optimal_weights|yes|no|filmint|15|36|min|-2.77E-13|-2.77E-13|-2.77E-13|17.
   Thus, taking into account the previous comments, for this particular optimization problem, we suggest to use any of the following solvers without Neos: `conopt`,
   `minos`, `snopt`, `ipopt` and `bonmin`.
   
-  ### Example 2: MINLP 
+  ### Example 2: MINLP Trigonometric Functions
+  
+  In this example, we solve a Mixed Integer Non Linear Programming (MINLP) problem with trigonometric functions involved.
+  Contrary to the Example 1, this problem is of medium size, since it is formed by **300 variables (150 integer and 150 continuous)**
+  and **153 constraints**.
+  
+  The results of the different solvers after solving the multistart with **100 runs** are shown in the following table. For more details
+  the reader is referred to [this file](./MINLP_Trigonometric_Functions/results_MINLP_Trignometric_Functions/summary_results.csv)
+   and [this folder](./MINLP_Trigonometric_Functions/results_MINLP_Trignometric_Functions):
+   
+  | problem  | neos | ampl | solver | #variables | #constraints | sense | mean obj. val. | max obj. val.| min obj. val. | mean comp. time | max comp. time | min comp. time |
+| -------- | ---- | ---- | ------ | ---------- | ------------ | ----- | -------------- | ------------ | ------------- | --------------- | -------------- | -------------- |
+ MINLP_trigonometric_functions|no|yes|conopt|300|153|min|2.46E+01|1.23E+02|-1.65E+02|8.28|24.72|0.99
+MINLP_trigonometric_functions|no|yes|loqo|300|153|min|-7.63E+00|4.33E+00|-2.22E+01|3.45|14.33|1.77
+MINLP_trigonometric_functions|no|yes|minos|300|153|min|3.95E+01|4.64E+02|-4.17E+02|1.74|3.13|0.73
+MINLP_trigonometric_functions|no|yes|snopt|300|153|min|3.09E+01|4.64E+02|-2.29E+02|3.16|9.51|0.54
+MINLP_trigonometric_functions|no|no|ipopt|300|153|min|3.27E+00|6.50E+01|-9.25E+01|57.32|198.60|15.01
+MINLP_trigonometric_functions|no|no|bonmin|300|153|min|8.08E+00|1.97E+02|-9.60E+00|89.60|327.60|10.15
+MINLP_trigonometric_functions|yes|no|conopt|300|153|min|2.44E+01|8.78E+01|-2.01E+02|19.14|25.74|9.51
+MINLP_trigonometric_functions|yes|no|ipopt|300|153|min|6.24E+00|6.50E+01|-9.12E+00|22.11|57.23|9.91
+MINLP_trigonometric_functions|yes|no|filter|300|153|min|2.74E+01|6.27E+01|-9.65E+00|19.68|38.31|15.17
+MINLP_trigonometric_functions|yes|no|knitro|300|153|min|-4.54E+00|6.27E+01|-9.26E+00|19.54|43.99|7.20
+MINLP_trigonometric_functions|yes|no|loqo|300|153|min|-7.16E+00|-2.28E-01|-9.50E+00|19.77|39.89|9.05
+MINLP_trigonometric_functions|yes|no|minos|300|153|min|3.95E+01|4.64E+02|-4.17E+02|18.92|28.98|8.31
+MINLP_trigonometric_functions|yes|no|mosek|300|153|min|0.00E+00|0.00E+00|0.00E+00|18.51|23.19|4.77
+MINLP_trigonometric_functions|yes|no|snopt|300|153|min|3.14E+01|2.99E+02|-2.22E+01|19.49|37.79|5.63
+MINLP_trigonometric_functions|yes|no|bonmin|300|153|min|7.13E+00|6.43E+01|-9.72E+00|22.33|48.24|6.62
