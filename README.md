@@ -230,4 +230,162 @@ case and `bonmin`, `knitro` and `ipopt` in the second case.
 
 This section explains the steps to follow if a comparison of the solvers want to be performed on a new optimization problem.
 First, a folder with the name of the optimization problem should be created. This folder should contain three subfolders and 
-a `main` file.
+a `main` file. The role of each of the folders is explained in the *Examples* section. Then, a script named `main_name_of_the_problem.py`
+is built. This script should contain the preamble with the following information which delete the possible variables which are saved in the 
+environment and automatically change the directory:
+
+```
+from __future__ import division
+
+for name in dir():
+    if not name.startswith('_'):
+        del globals()[name]
+
+
+import os
+
+directory_path = os.path.dirname(os.path.abspath(__file__))
+os.chdir(os.path.join(directory_path, os.path.pardir))
+
+
+import comparison_utils as cu
+
+os.chdir(directory_path)
+
+```
+
+Then, the parameters of the new problem should be defined. An example of the values of these parameters is given below:
+```
+problem = 'new_problem'
+number_of_variables = 500
+number_of_constraints = 200
+sense_opt_problem = 'max'    
+maximum_number_iterations_multistart = 1000
+folder_results = 'results_' + problem + '/'
+csv_file_name_multistart = 'results_multistart'
+csv_file_summary_results = 'summary_results'
+```
+
+The next lines of the script are formed the lists of the solvers used for the comparison. They are divided according to their use
+through AMPL and Neos. The lists below are the ones used in the previous examples. This choice is flexible and can be modified
+according to the user requirements.
+```
+solvers_list_ampl = ['conopt',
+                    'loqo',
+                    'minos',
+                    'snopt']
+solvers_list_neos_flag_false = ['ipopt',
+                                'bonmin',
+                                'couenne']
+solvers_list_neos_flag_true = ['conopt',
+                               'ipopt',
+                               'filter',
+                               'knitro',
+                               'loqo',
+                               'minos',
+                               'mosek',
+                               'snopt',
+                               'bonmin',
+                               'couenne',
+                               'filmint']
+```
+
+Finally, the optimization problem is solved for each element in the list using the function `run_optimization_problem_given_solver`.
+Here you can see an example:
+```
+for solver in solvers_list_neos_flag_true:
+    neos_flag = True
+    ampl_flag = False
+    print(solver)
+    cu.run_optimization_problem_given_solver(solver = solver,
+                                             problem = problem,
+                                             neos_flag = neos_flag,
+                                             number_of_variables = number_of_variables,
+                                             number_of_constraints = number_of_constraints,
+                                             sense_opt_problem = sense_opt_problem,
+                                             maximum_number_iterations_multistart = maximum_number_iterations_multistart,
+                                             folder_results = folder_results,
+                                             csv_file_name_multistart = csv_file_name_multistart,
+                                             ampl_flag = ampl_flag)
+```
+Apart from the parameters previously mentioned, this function has two extra parameters called `neos_flag` and `ampl_flag`
+indicating if the Neos server or the AMPL are used or not. The value of each parameter is given in next lines depending on 
+the list used:
+
+**solvers_list_ampl**
+* `neos_flag = False`
+* `ampl_flag = True`
+
+**solvers_list_neos_flag_false**
+* `neos_flag = False`
+* `ampl_flag = False`
+
+**solvers_list_neos_flag_true**
+* `neos_flag = False`
+* `ampl_flag = False`
+
+The function `run_optimization_problem_given_solver` is defined in the script `comparison_utils.py`. When a new optimization
+problem is to be compared for different solvers, then an `if` structure should be added, which is `True` if the `problem` parameter is equal
+to the name of the new problem, and which runs the optimization problem which has been previously coded. An example of the
+new structure can be seen here:
+```
+if problem == "new_problem":
+        run_new_problem(solver = solver,
+                        problem = problem,
+                        neos_flag = neos_flag,
+                        number_of_variables = number_of_variables,
+                        number_of_constraints = number_of_constraints,
+                        sense_opt_problem = sense_opt_problem,
+                        maximum_number_iterations_multistart = maximum_number_iterations_multistart,
+                        folder_results = folder_results,
+                        csv_file_name_multistart = csv_file_name_multistart,
+                        ampl_flag = ampl_flag) 
+```
+
+Moreover, the function `run_new_problem` includes the model definition as well as the resolution. We suggest to include 
+in the call to the solver, an `if` structure which varies depending if the Neos server is used or not. The code structure should be similar to this one:
+
+```
+solver_name = 'conopt'
+if neos_flag:
+    solver = pe.SolverManagerFactory("neos")
+else:
+    solver = pe.SolverFactory(solver_name)
+
+if neos_flag:
+    results_solver = solver.solve(multistart_model,
+                                  tee = True,
+                                  opt = solver_name)
+else:
+    results_solver = solver.solve(multistart_model,
+                                  tee = True)
+```
+
+Finally, we suggest to save the output results of the multistart in a binary `.pydata` file or similar, as well as to save 
+the objective value and computational times (or any other performance measure) for each of the runs of the multistart. Morever, it will be nice to
+have a summary of the results. An example
+of the function which write the results can be seen in the function `write_results_minlp_trigonometric_functions` in the
+ [comparison_utils.py](comparison_utils.py) file.
+ 
+ 
+ ## Do you want to contribute?
+ 
+ Please, do it. Any feedback is welcome, so feel free to ask or comment anything you want via a Pull Request in this repo.
+ 
+ ## Contributors
+ 
+ * [OASYS group](http://oasys.uma.es) -  groupoasys@gmail.com
+ 
+ ## Developed by
+ * [Asunción Jiménez Cordero](https://www.researchgate.net/profile/Asuncion_Jimenez-Cordero/research) - asuncionjc@uma.es
+ 
+ (Please add your name here if you have contributed to the repo)
+ 
+ ##License
+ 
+ 
+
+
+
+
+
