@@ -92,6 +92,7 @@ example of the results is given below:
 | Problem 1| yes | no   | conopt |   100      |     200      | min   |  1.2           |     5.7      | 0.23          |    180          | 300            | 50             |         
 
 
+The whole computational experience is executed on a laptop with 8Gb of RAM memory at 1.80 GHz, running Windows 10.
 
 ## Examples
 
@@ -178,6 +179,7 @@ MINLP_trigonometric_functions|no|yes|minos|300|153|min|39.47|463.60|-417.00|1.74
 MINLP_trigonometric_functions|no|yes|snopt|300|153|min|30.89|463.60|-228.50|3.16|9.51|0.54
 MINLP_trigonometric_functions|no|no|ipopt|300|153|min|3.27|64.99|-92.47|57.32|198.60|15.01
 MINLP_trigonometric_functions|no|no|bonmin|300|153|min|8.08|196.60|-9.60|89.60|327.60|10.15
+MINLP_trigonometric_functions|no|no|couenne|300|153|min|-|-|-|max time reached|-|-
 MINLP_trigonometric_functions|yes|no|conopt|300|153|min|24.43|87.75|-200.60|19.14|25.74|9.51
 MINLP_trigonometric_functions|yes|no|ipopt|300|153|min|6.24|64.99|-9.12|22.11|57.23|9.91
 MINLP_trigonometric_functions|yes|no|filter|300|153|min|27.43|62.73|-9.65|19.68|38.31|15.17
@@ -187,3 +189,28 @@ MINLP_trigonometric_functions|yes|no|minos|300|153|min|39.47|463.60|-417.00|18.9
 MINLP_trigonometric_functions|yes|no|mosek|300|153|min|0.00|0.00|0.00|18.51|23.19|4.77
 MINLP_trigonometric_functions|yes|no|snopt|300|153|min|31.40|299.30|-22.19|19.49|37.79|5.63
 MINLP_trigonometric_functions|yes|no|bonmin|300|153|min|7.13|64.26|-9.72|22.33|48.24|6.62
+MINLP_trigonometric_functions|yes|no|couenne|300|153|min|-|-|-|max time reached|-|-
+MINLP_trigonometric_functions|yes|no|filmint|300|153|min|-|-|-|Neos error|-|-
+
+
+It is important to note that not all the solvers tested are designed for handling optimization problems with integer variables. 
+Particularly, only `bonmin`, `couenne`, `filmint` and `mosek` are able to treated such variables. However, looking at the 
+table of results, we see that `couenne` and `filmint` cannot be used because of different reasons. On the other hand,
+`mosek` only solves problems with a conic structure. Unfortunately, our problem does not have such a structure. Therefore, it just 
+remains `bonmin` for the resolution. Similar results in terms of the objective values are obtained when comparing the average
+obtained with and without Neos. Nevertheless, contrary to what happened in Example 1, the computational time decreases when solving the problem
+through Neos server. In other words, when a medium-size non linear optimization problem (with integer variables)is considered, it is better to run the problem
+in a server than in a standard laptop.
+
+When the numerical numerical experiments of the rest of the solvers are performed, the integrity of the variables is simply ommited. 
+In other words, those solvers which do not handle problems with integer variables just omit this constraint. With respect to
+the average of the objective values, we state that `knitro` is the best choice. Moreover, the results in terms of the computational time
+ are acceptable (around 20 seconds). Note that we have ignored the results of `loqo` for the 
+very same reason as in Example 1. Regarding the computational times, the best choice is to use `minos` through AMPL. However, the
+mean of objective values has a very bad performance.
+
+Hence, to solve the optimization problem of this example with integer variables we suggest to use `bonmin`, and if the integrality constraint
+is omitted, then it is better to use `knitro`.
+
+
+ ## Final Conclusions
