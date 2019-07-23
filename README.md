@@ -9,11 +9,11 @@ the correct place! =) Continue reading and have a look at this repo.
 This repository aims to perform a comparison of several of the available non linear solvers. Such a comparison is made in 
 terms of the objective value and the computational time.
 
-To do this, some non linear optimization problems of different nature are modelled using [Pyomo](http://www.pyomo.org/), and run with different
-solvers. The results are saved and analysed below to get conclusions.
+To do this, some non linear optimization problems of different nature are modeled using [Pyomo](http://www.pyomo.org/) and run with different
+solvers. The results are saved and analyzed below to get conclusions.
 
-It is important to note that the conclusions draw here cannot be extended to all the existing optimization problems.
-This repo just serves as a guide for your decisions, but it is not an universal truth. Please take this into account when 
+It is important to note that the conclusions drawn here cannot be extended to all the existing optimization problems.
+This repo just serves as a guide for your decisions, but it is not a universal truth. Please take this into account when 
 deciding which solver is more suitable in your case.
 
 
@@ -56,7 +56,7 @@ Thus, it is not necessary to use them via the Neos Server:
 * [couenne](https://projects.coin-or.org/Couenne)
 * [ipopt](https://projects.coin-or.org/Ipopt/wiki)
 
-Finally, the third list is composed by those solvers that require license for their use. In order to avoid such an issue, 
+Finally, the third list is composed of those solvers that require a license for their use. In order to avoid such an issue, 
 we run them with the help of the Neos Server:
 
  **List solver with Neos**
@@ -75,11 +75,11 @@ we run them with the help of the Neos Server:
 
  
 The next step consists of running the optimization problem for the different solvers enumerated in the previous three lists.
-Since the optimization problems we are considering in this repo are (highly) non linear, they may stuck at local optimal.
+Since the optimization problems we are considering in this repo are (highly) non linear, they may be stuck at local optimal.
 Hence, a multistart approach is applied in which the same problem is run several times starting from different initial solutions,
 randomly chosen from the feasible region. The number of runs at the multistart is defined by the user.
 
-The objective value and the computational time will be used as measure of performance. Particularly, we provide the average,
+The objective value and the computational time will be used as measures of performance. Particularly, we provide the average,
 the maximum and minimum of all the objective values obtained after running the multistart, as well as the average, the 
 maximum and minimum value of the computational time. The results of each optimization problem are summarized in a table which,
 apart of the performance values previously mentioned, includes extra information such as the name of the problem, if the Neos Server 
@@ -99,11 +99,11 @@ The whole computational experience is executed on a laptop with 8Gb of RAM memor
 This section briefly explains the organization of the examples used here. This repo contains one folder per optimization problem.
 Each folder contains three new folders and a script called `main_name_of_the_problem.py`. Such a script is the only one that should be executed
 when running the experiments. Moreover, the first folder, entitled `model_pdf` contains the document with the model formulation. The second folder, `optimization_problem_utils` is formed
-by the scripts which solves the optimization problem, so *be careful when modifying it*. Do not hesitate to contact the person who has written this code if you want to make changes.
+by the scripts which solve the optimization problem, so *be careful when modifying it*. Do not hesitate to contact the person who has written this code if you want to make changes.
 Finally, the third folder entitled `results_name_of_the_problem` includes the results obtained in all the runs of the multistart, and a
 summary of them, called `summary_results.csv`.
 
-The following table provides the optimization problems which have been used for the non linear solvers comparison. This table 
+The following table provides the optimization problems which have been used for the non linear solvers' comparison. This table 
 includes the name of the problem, the problem formulation and the folder with the obtained results.
 
 | # | Name  | Model Formulation | Folder results |
@@ -111,7 +111,7 @@ includes the name of the problem, the problem formulation and the folder with th
 | 1 | M2SVM_Optimal_Weights | [M2SVM_Optimal_Weights Model Formulation](./M2SVM_Optimal_Weights/model_pdf/M2SVM_Optimal_Weights.pdf)  |[M2SVM_Optimal_Weights Results](./M2SVM_Optimal_Weights/results_m2svm_optimal_weights) |
 | 2 | MINLP_Trigonometric_Functions | [MINLP_Trigonometric_Functions Model Formulation](./MINLP_Trigonometric_Functions/model_pdf/MINLP_Trigonometric_Functions.pdf)  |[MINLP_Trigonometric_Functions Results](./MINLP_Trigonometric_Functions/results_MINLP_Trignometric_Functions) |
 
-More details about the results obtained in each example are given in next sections.
+More details about the results obtained in each example are given in the next sections.
 
 ### Example 1: M2SVM Optimal Weights
 
@@ -120,7 +120,7 @@ The aim of the optimization problem formulated [here](./M2SVM_Optimal_Weights/mo
   a toy example, the size of this optimization problem is small. Particularly, it is formed by **15 continuous variables**
   and **36 constraints**. 
   
-  A multistart approach with **1000 runs** is run for the different solvers as explained in previous section. A summary of the
+  A multistart approach with **1000 runs** is run for the different solvers as explained in the previous section. A summary of the
   results obtained can be seen in the following table. If further information is necessary, we suggest the reader to download the summary
   [here](./M2SVM_Optimal_Weights/results_m2svm_optimal_weights/summary_results.csv) or to have a look at the results of the different runs in [this folder](./M2SVM_Optimal_Weights/results_m2svm_optimal_weights).
   
@@ -153,18 +153,18 @@ m2svm_optimal_weights|yes|no|filmint|15|36|min|-2.77E-13|-2.77E-13|-2.77E-13|17.
   is numerically unstable, since values of order 1E+25 are obtained. Therefore, `loqo` is not a good solver for our problem, but 
   any of the remaining ones can be used.
   
-  With respect to the computational time, we see that there is a difference of three order of magnitude between using the solvers through the Neos server
-  or directly using the executable files in a standard laptop. The reason of this issue is that solving an optimization problem via Neos not 
+  Concerning the computational time, we see that there is a difference of three orders of magnitude between using the solvers through the Neos server
+  or directly using the executable files in a standard laptop. The reason for this issue is that solving an optimization problem via Neos not 
   only includes the computational cost associating to the problem resolution but also the calls to the server which significantly increase the total elapsed time.
-  Looking at that solvers that have been used without Neos, we check that `couenne` is the one that spent most time solving the problem, and then is not advisable to use.
+  Looking at those solvers that have been used without Neos, we check that `couenne` is the one that spent most time solving the problem, and then is not advisable to use.
   
-  Thus, taking into account the previous comments, for this particular optimization problem, we suggest to use any of the following solvers without Neos: `conopt`,
+  Thus, taking into account the previous comments, for this particular optimization problem, we suggest using any of the following solvers without Neos: `conopt`,
   `minos`, `snopt`, `ipopt` and `bonmin`.
   
   ### Example 2: MINLP Trigonometric Functions
   
   In this example, we solve a Mixed Integer Non Linear Programming (MINLP) problem with trigonometric functions involved.
-  Contrary to the Example 1, this problem is of medium size, since it is formed by **300 variables (150 integer and 150 continuous)**
+  Contrary to what happened in Example 1, this problem is of medium size, since it is formed by **300 variables (150 integer and 150 continuous)**
   and **153 constraints**.
   
   The results of the different solvers after solving the multistart with **100 runs** are shown in the following table. For more details
@@ -194,7 +194,7 @@ MINLP_trigonometric_functions|yes|no|filmint|300|153|min|-|-|-|Neos error|-|-
 
 
 It is important to note that not all the solvers tested are designed for handling optimization problems with integer variables. 
-Particularly, only `bonmin`, `couenne`, `filmint` and `mosek` are able to treated such variables. However, looking at the 
+Particularly, only `bonmin`, `couenne`, `filmint` and `mosek` are able to treat such variables. However, looking at the 
 table of results, we see that `couenne` and `filmint` cannot be used because of different reasons. On the other hand,
 `mosek` only solves problems with a conic structure. Unfortunately, our problem does not have such a structure. Therefore, it just 
 remains `bonmin` for the resolution. Similar results in terms of the objective values are obtained when comparing the average
@@ -202,7 +202,7 @@ obtained with and without Neos. Nevertheless, contrary to what happened in Examp
 through Neos server. In other words, when a medium-size non linear optimization problem (with integer variables)is considered, it is better to run the problem
 in a server than in a standard laptop, since the computational time spent in the calls to the server is insignificant when comparing it with the problem resolution itself.
 
-When the numerical numerical experiments with the rest of the solvers are performed, the integrity of the variables is simply ommited. 
+When the numerical experiments with the rest of the solvers are performed, the integrity of the variables is simply omitted. 
 In other words, those solvers which do not handle problems with integer variables just omit this constraint. With respect to
 the average of the objective values using these solvers, we observe that `knitro` is the best choice. Moreover, the results in terms of the computational time
  are acceptable (around 20 seconds). Note that we have ignored the results of `loqo` for the 
@@ -215,12 +215,12 @@ is omitted, then it is better to use `knitro`.
 
  ## Final Conclusions
 
-As previously mentioned at the beginning of this repo, the conclusions obtained here are not an universal truth, and therefore, they
-have to be use just as a guide. However, we can state that:
+As previously mentioned at the beginning of this repo, the conclusions obtained here are not a universal truth, and therefore, they
+have to be used just as a guide. However, we can state that:
 
 * `loqo` is not a good solver due to the unstable results that it provides.
 * `couenne` has more difficulties to find a local optimum solution than other solvers, e.g. `bonmin`.
-* For small-size problems, all the solvers are equivalent in terms of the objective values. However, there exists differences of
+* For small-size problems, all the solvers are equivalent in terms of the objective values. However, there exist a difference of
 three orders of magnitude when running locally or via Neos.
 * Running a medium-size optimization problem in a local computer is equivalent to run it on the Neos server, in terms of the computational time.
 * For the optimization problems tested, the best solvers are `conopt`, `minos`, `snopt`, `ipopt` and `bonmin` in the first
@@ -228,7 +228,7 @@ case and `bonmin`, `knitro` and `ipopt` in the second case.
 
 ## How to perform a solver comparison of a new optimization problem?
 
-This section explains the steps to follow if a comparison of the solvers want to be performed on a new optimization problem.
+This section explains the steps to follow if a comparison of the solvers wants to be performed on a new optimization problem.
 First, a folder with the name of the optimization problem should be created. This folder should contain three subfolders and 
 a `main` file. The role of each of the folders is explained in the *Examples* section. Then, a script named `main_name_of_the_problem.py`
 is built. This script contains the preamble in which the possible variables saved in the environment are deleted and which automatically changes the directory:
@@ -340,7 +340,7 @@ if problem == "new_problem":
                         ampl_flag = ampl_flag) 
 ```
 
-Moreover, the function `run_new_problem` includes the model definition as well as the resolution. We suggest to include 
+Moreover, the function `run_new_problem` includes the model definition as well as the resolution. We suggest including
 in the call to the solver, an `if` statement which varies depending if the Neos server is used or not. The code structure should be similar to this one:
 
 ```
@@ -359,10 +359,10 @@ else:
                                   tee = True)
 ```
 
-In addition, we suggest to save the output results of the multistart in a binary `.pydata` file or similar, as well as to save 
-the objective value and computational times (or any other performance measure) for each of the runs of the multistart. Morever, it will be nice to
+In addition, we suggest saving the output results of the multistart in a binary `.pydata` file or similar, as well as to save 
+the objective value and computational times (or any other performance measure) for each of the runs of the multistart. Moreover, it will be nice to
 have a summary of the results. An example
-of the function which write the results can be seen in the function `write_results_minlp_trigonometric_functions` in the
+of the function which writes the results can be seen in the function `write_results_minlp_trigonometric_functions` in the
  [comparison_utils.py](comparison_utils.py) file.
  
  Finally, it just remains to run the experiments and get conclusions about which solver is the best for the new optimization problem.
