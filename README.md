@@ -214,3 +214,17 @@ is omitted, then it is better to use `knitro`.
 
 
  ## Final Conclusions
+
+As previously mentioned at the beginning of this repo, the conclusions obtained here are not an universal truth, and therefore, they
+have to be use just as a guide. However, we can state that:
+
+* `loqo` is not a good solver due to the unstable results that it provides.
+* `couenne` has more difficulties to find a local optimum solution than other solvers, e.g. `bonmin`.
+* For small-size problems, all the solvers are equivalent in terms of the objective values. However, there exists differences of
+three orders of magnitude when running locally or via Neos.
+* Running a medium-size optimization problem in a local computer is equivalent to run it on the Neos server, in terms of the computational time.
+* For the optimization problems tested, the best solvers are `conopt`, `minos`, `snopt`, `ipopt` and `bonmin` in the first
+case and `bonmin`, `knitro` and `ipopt` in the second case. 
+
+## How to compare a new optimization problem?
+
