@@ -1,7 +1,7 @@
 # Comparison_non_linear_solvers
 
 
-Do you want to solve a non-linear optimization problem? Have you doubts about what solver is the best? Then, you are in 
+Do you want to solve a non-linear optimization problem? Have you doubts about which solver is the best? Then, you are in 
 the correct place! =) Continue reading and have a look at this repo.
 
 ## Goals
@@ -9,8 +9,8 @@ the correct place! =) Continue reading and have a look at this repo.
 This repository aims to perform a comparison of several of the available non linear solvers. Such a comparison is made in 
 terms of the objective value and the computational time.
 
-To do this, some non linear optimization problems of different nature are modelled using Pyomo, and run with different
-solvers. The results are saved and analyse below to get conclusions.
+To do this, some non linear optimization problems of different nature are modelled using [Pyomo](http://www.pyomo.org/), and run with different
+solvers. The results are saved and analysed below to get conclusions.
 
 It is important to note that the conclusions draw here cannot be extended to all the existing optimization problems.
 This repo just serves as a guide for your decisions, but it is not an universal truth. Please take this into account when 
@@ -38,7 +38,7 @@ In this section, we explain the strategy applied to compare the different solver
 between using them with or without calling the [Neos Server](https://neos-server.org/neos/), as well as to compare the 
  efficiency of using them through [AMPL](https://ampl.com/). Hence, three lists of solvers are created from the previous one.
 
-The first list is formed by the solvers whose executable file are included in the [AMPL license](https://ampl.com/try-ampl/request-a-full-trial/#Form):
+The first list is formed by the solvers whose executable files are included in the [AMPL license](https://ampl.com/try-ampl/request-a-full-trial/#Form):
 
 **List solvers AMPL:**
 
@@ -99,7 +99,7 @@ The whole computational experience is executed on a laptop with 8Gb of RAM memor
 This section briefly explains the organization of the examples used here. This repo contains one folder per optimization problem.
 Each folder contains three new folders and a script called `main_name_of_the_problem.py`. Such a script is the only one that should be executed
 when running the experiments. Moreover, the first folder, entitled `model_pdf` contains the document with the model formulation. The second folder, `optimization_problem_utils` is formed
-by the scripts which solves the optimization problem, so *be careful when modifying it*. Do not hesitate to contact the person who has written this code.
+by the scripts which solves the optimization problem, so *be careful when modifying it*. Do not hesitate to contact the person who has written this code if you want to make changes.
 Finally, the third folder entitled `results_name_of_the_problem` includes the results obtained in all the runs of the multistart, and a
 summary of them, called `summary_results.csv`.
 
@@ -153,8 +153,8 @@ m2svm_optimal_weights|yes|no|filmint|15|36|min|-2.77E-13|-2.77E-13|-2.77E-13|17.
   is numerically unstable, since values of order 1E+25 are obtained. Therefore, `loqo` is not a good solver for our problem, but 
   any of the remaining ones can be used.
   
-  With respect to the computational time, we see that there is a difference mean of three order of magnitude between using the solvers through the Neos server
-  or directly using the executable files. The reason of this issue is that solving an optimization problem via Neos not 
+  With respect to the computational time, we see that there is a difference of three order of magnitude between using the solvers through the Neos server
+  or directly using the executable files in a standard laptop. The reason of this issue is that solving an optimization problem via Neos not 
   only includes the computational cost associating to the problem resolution but also the calls to the server which significantly increase the total elapsed time.
   Looking at that solvers that have been used without Neos, we check that `couenne` is the one that spent most time solving the problem, and then is not advisable to use.
   
@@ -200,11 +200,11 @@ table of results, we see that `couenne` and `filmint` cannot be used because of 
 remains `bonmin` for the resolution. Similar results in terms of the objective values are obtained when comparing the average
 obtained with and without Neos. Nevertheless, contrary to what happened in Example 1, the computational time decreases when solving the problem
 through Neos server. In other words, when a medium-size non linear optimization problem (with integer variables)is considered, it is better to run the problem
-in a server than in a standard laptop.
+in a server than in a standard laptop, since the computational time spent in the calls to the server is insignificant when comparing it with the problem resolution itself.
 
-When the numerical numerical experiments of the rest of the solvers are performed, the integrity of the variables is simply ommited. 
+When the numerical numerical experiments with the rest of the solvers are performed, the integrity of the variables is simply ommited. 
 In other words, those solvers which do not handle problems with integer variables just omit this constraint. With respect to
-the average of the objective values, we state that `knitro` is the best choice. Moreover, the results in terms of the computational time
+the average of the objective values using these solvers, we observe that `knitro` is the best choice. Moreover, the results in terms of the computational time
  are acceptable (around 20 seconds). Note that we have ignored the results of `loqo` for the 
 very same reason as in Example 1. Regarding the computational times, the best choice is to use `minos` through AMPL. However, the
 mean of objective values has a very bad performance.
@@ -226,14 +226,12 @@ three orders of magnitude when running locally or via Neos.
 * For the optimization problems tested, the best solvers are `conopt`, `minos`, `snopt`, `ipopt` and `bonmin` in the first
 case and `bonmin`, `knitro` and `ipopt` in the second case. 
 
-## How to compare a new optimization problem?
+## How to perform a solver comparison of a new optimization problem?
 
 This section explains the steps to follow if a comparison of the solvers want to be performed on a new optimization problem.
 First, a folder with the name of the optimization problem should be created. This folder should contain three subfolders and 
 a `main` file. The role of each of the folders is explained in the *Examples* section. Then, a script named `main_name_of_the_problem.py`
-is built. This script should contain the preamble with the following information which delete the possible variables which are saved in the 
-environment and automatically change the directory:
-
+is built. This script contains the preamble in which the possible variables saved in the environment are deleted and which automatically changes the directory:
 ```
 from __future__ import division
 
@@ -254,7 +252,7 @@ os.chdir(directory_path)
 
 ```
 
-Then, the parameters of the new problem should be defined. An example of the values of these parameters is given below:
+Then, the input parameters for the function which executes the comparison should be defined for the new problem. An example of the values of these parameters is given below:
 ```
 problem = 'new_problem'
 number_of_variables = 500
@@ -326,7 +324,7 @@ the list used:
 
 The function `run_optimization_problem_given_solver` is defined in the script `comparison_utils.py`. When a new optimization
 problem is to be compared for different solvers, then an `if` structure should be added, which is `True` if the `problem` parameter is equal
-to the name of the new problem, and which runs the optimization problem which has been previously coded. An example of the
+to the name of the new problem, and which runs the optimization problem. An example of the
 new structure can be seen here:
 ```
 if problem == "new_problem":
@@ -343,7 +341,7 @@ if problem == "new_problem":
 ```
 
 Moreover, the function `run_new_problem` includes the model definition as well as the resolution. We suggest to include 
-in the call to the solver, an `if` structure which varies depending if the Neos server is used or not. The code structure should be similar to this one:
+in the call to the solver, an `if` statement which varies depending if the Neos server is used or not. The code structure should be similar to this one:
 
 ```
 solver_name = 'conopt'
@@ -361,11 +359,13 @@ else:
                                   tee = True)
 ```
 
-Finally, we suggest to save the output results of the multistart in a binary `.pydata` file or similar, as well as to save 
+In addition, we suggest to save the output results of the multistart in a binary `.pydata` file or similar, as well as to save 
 the objective value and computational times (or any other performance measure) for each of the runs of the multistart. Morever, it will be nice to
 have a summary of the results. An example
 of the function which write the results can be seen in the function `write_results_minlp_trigonometric_functions` in the
  [comparison_utils.py](comparison_utils.py) file.
+ 
+ Finally, it just remains to run the experiments and get conclusions about which solver is the best for the new optimization problem.
  
  
  ## Do you want to contribute?
@@ -383,7 +383,7 @@ of the function which write the results can be seen in the function `write_resul
  
  ## License
  
- Copyright 2019 Optimization and Analytics for Sustainable energY Systems (OASYS)
+    Copyright 2019 Optimization and Analytics for Sustainable energY Systems (OASYS)
 
     Licensed under the GNU General Public License, Version 3 (the "License");
     you may not use this file except in compliance with the License.
