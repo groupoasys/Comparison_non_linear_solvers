@@ -15,7 +15,7 @@ To do this, some non linear optimization problems of different nature are modele
 solvers. The results are saved and analyzed below to get conclusions.
 
 It is important to note that the conclusions drawn here cannot be extended to all the existing optimization problems 🌍🌎🌏
-This repo just serves as a guide for your decisions ➡↙↖⬅ but it is not a universal truth. Please take this into account when 
+This repo just serves as a guide for your decisions ➡↖⬅ but it is not a universal truth. Please take this into account when 
 deciding which solver is more suitable in your case.
 
 
@@ -109,7 +109,7 @@ The following table provides the optimization problems which have been used for 
 includes the name of the problem, the problem formulation and the folder with the obtained results.
 
 | # | Name  | Model Formulation | Folder results |
-| - | ----- | ------------------| --------1️⃣1️⃣------ |
+| - | ----- | ------------------| -------------- |
 | 1 | M2SVM_Optimal_Weights | [M2SVM_Optimal_Weights Model Formulation](./M2SVM_Optimal_Weights/model_pdf/M2SVM_Optimal_Weights.pdf)  |[M2SVM_Optimal_Weights Results](./M2SVM_Optimal_Weights/results_m2svm_optimal_weights) |
 | 2 | MINLP_Trigonometric_Functions | [MINLP_Trigonometric_Functions Model Formulation](./MINLP_Trigonometric_Functions/model_pdf/MINLP_Trigonometric_Functions.pdf)  |[MINLP_Trigonometric_Functions Results](./MINLP_Trigonometric_Functions/results_MINLP_Trignometric_Functions) |
 
@@ -372,7 +372,7 @@ of the function which writes the results can be seen in the function `write_resu
  
  ## Do you want to contribute? 🙋‍♂️🙋‍♀️
  
- Please, do it. Any feedback is welcome, so feel free to ask or comment anything you want via a Pull Request in this repo.
+ Please, do it  Any feedback is welcome 🤗 so feel free to ask or comment anything you want via a Pull Request in this repo.
  
  ## Contributors 🌬☀
  
