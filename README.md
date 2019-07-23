@@ -34,11 +34,11 @@ In this section, we explain the strategy applied to compare the different solver
 * [mosek](https://www.mosek.com/)
 * [snopt](https://web.stanford.edu/group/SOL/snopt.htm)
  
- We are interested not only in comparing the performance of the solver but also the differences 
+ We are interested not only in comparing the performance of each solver but also the differences 
 between using them with or without calling the [Neos Server](https://neos-server.org/neos/), as well as to compare the 
  efficiency of using them through [AMPL](https://ampl.com/). Hence, three lists of solvers are created from the previous one.
 
-The first list is formed by the solvers whose executable file are included in the [AMPL license](https://ampl.com/try-ampl/request-a-full-trial/#Form).
+The first list is formed by the solvers whose executable file are included in the [AMPL license](https://ampl.com/try-ampl/request-a-full-trial/#Form):
 
 **List solvers AMPL:**
 
@@ -74,6 +74,24 @@ we run them with the help of the Neos Server:
 * [snopt](https://web.stanford.edu/group/SOL/snopt.htm)
 
  
+The next step consists of running the optimization problem for the different solvers enumerated in the previous three lists.
+Since the optimization problems we are considering in this repo are (highly) non linear, they may stuck at local optimal.
+Hence, a multistart approach is applied in which the same problem is run several times starting from different initial solutions,
+randomly chosen from the feasible region. The number of runs at the multistart is defined by the user.
+
+The objective value and the computational time will be used as measure of performance. Particularly, we provide the average,
+the maximum and minimum of all the objective values obtained after running the multistart, as well as the average, the 
+maximum and minimum value of the computational time. The results of each optimization problem are summarized in a table which,
+apart of the performance values previously mentioned, includes extra information such as the name of the problem, if the Neos Server 
+or AMPL is used or not, the solver utilized, the number of variables and constraints involved, and also 
+the sense of the optimization problem, i.e., if the objective is to minimize or maximize certain objective function. An 
+example of the results is given below:
+
+| problem | neos | ampl | solver | #variables | #constraints | sense | mean obj. val. | max obj. val.| min obj. val. | mean comp. time | max comp. time | min comp. time |
+| ------- | ---- | ---- | ------ | ---------- | ------------ | ----- | -------------- | ------------ | ------------- | --------------- | -------------- | -------------- |
+
+
+
 
 ## Examples
 
