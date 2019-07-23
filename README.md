@@ -87,15 +87,22 @@ or AMPL is used or not, the solver utilized, the number of variables and constra
 the sense of the optimization problem, i.e., if the objective is to minimize or maximize certain objective function. An 
 example of the results is given below:
 
-| problem | neos | ampl | solver | #variables | #constraints | sense | mean obj. val. | max obj. val.| min obj. val. | mean comp. time | max comp. time | min comp. time |
-| ------- | ---- | ---- | ------ | ---------- | ------------ | ----- | -------------- | ------------ | ------------- | --------------- | -------------- | -------------- |
-
+| problem  | neos | ampl | solver | #variables | #constraints | sense | mean obj. val. | max obj. val.| min obj. val. | mean comp. time | max comp. time | min comp. time |
+| -------- | ---- | ---- | ------ | ---------- | ------------ | ----- | -------------- | ------------ | ------------- | --------------- | -------------- | -------------- |
+| Problem 1| yes | no   | conopt |   100      |     200      | min   |  1.2           |     5.7      | 0.23          |    180          | 300            | 50             |         
 
 
 
 ## Examples
 
-The following table summarizes the optimization problems which have been used for the non linear solvers comparison. This table 
+This section briefly explains the organization of the examples used here. This repo contains one folder per optimization problem.
+Each folder contains three new folders and a script called `main_name_of_the_problem.py`. Such a script is the only one that should be executed
+when running the experiments. Moreover, the first folder, entitled `model_pdf` contains the document with the model formulation. The second folder, `optimization_problem_utils` is formed
+by the scripts which solves the optimization problem, so be careful when modifying it. Do not hesitate to contact the person who has written this code.
+Finally, the third folder entitled `results_name_of_the_problem` includes the results obtained in all the runs of the multistart, and a
+summary of them, called `summary_results.csv`.
+
+The following table provides the optimization problems which have been used for the non linear solvers comparison. This table 
 includes the name of the problem, the problem formulation and the folder with the obtained results.
 
 | # | Name  | Model Formulation | Folder results |
@@ -103,7 +110,7 @@ includes the name of the problem, the problem formulation and the folder with th
 | 1 | M2SVM_Optimal_Weights | [M2SVM_Optimal_Weights Model Formulation](./M2SVM_Optimal_Weights/model_pdf/M2SVM_Optimal_Weights.pdf)  |[M2SVM_Optimal_Weights Results](./M2SVM_Optimal_Weights/results_m2svm_optimal_weights) |
 | 2 | MINLP_Trigonometric_Functions | [MINLP_Trigonometric_Functions Model Formulation](./MINLP_Trigonometric_Functions/model_pdf/MINLP_Trigonometric_Functions.pdf)  |[MINLP_Trigonometric_Functions Results](./MINLP_Trigonometric_Functions/results_MINLP_Trignometric_Functions) |
 
-More details about the results obtained in each example are provided in next sections.
+More details about the results obtained in each example are given in next sections.
 
 ### M2SVM Optimal Weights
 
