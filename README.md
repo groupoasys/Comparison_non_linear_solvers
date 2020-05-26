@@ -24,6 +24,13 @@ deciding which solver is more suitable in your case.
 In this section, we explain the strategy applied to compare the different solvers. Let us consider the following list of
  non linear solvers used in our examples to compare their performance:
 
+| Solver  | Open-source  | Run in local  | Run in NEOS  | 
+|---|---|---|---|
+|   |   |   |   |
+|   |   |   |   |
+|   |   |   |   |
+
+
 * [bonmin](https://projects.coin-or.org/Bonmin)
 * [conopt](http://www.conopt.com/)
 * [couenne](https://projects.coin-or.org/Couenne)
