@@ -37,7 +37,7 @@ In this section, we explain the strategy applied to compare the different solver
 | [mosek](https://www.mosek.com/) |   |   | X |
 | [snopt](https://web.stanford.edu/group/SOL/snopt.htm)  |   | X | X |
 
-The next step consists of running the optimization problem for the different solvers enumerated in the previous 3️⃣ lists.
+The next step consists of running the optimization problem for the different solvers enumerated in the previous table.
 Since the optimization problems we are considering in this repo are (highly) non linear, they may be stuck at local optima ➡⬅
 Hence, a multistart approach is applied in which the same problem is run several times starting from different initial solutions,
 randomly chosen from the feasible region. The number of runs at the multistart is defined by the user.
@@ -341,7 +341,8 @@ of the function which writes the results can be seen in the function `write_resu
  
  ## Developed by 👩‍💻👨‍💻
  * [Asunción Jiménez Cordero](https://www.researchgate.net/profile/Asuncion_Jimenez-Cordero/research) - asuncionjc@uma.es
- 
+ * [Salvador Pineda Morente](https://www.researchgate.net/profile/Salvador_Pineda/research) - spinedamorente@gmail.com
+
  (Please add your name here if you have contributed to the repo)
  
  ## License 📝
